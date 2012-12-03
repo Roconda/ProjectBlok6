@@ -1,4 +1,5 @@
 *~
 
 #dynamically generated yii files
-src/protected/runtime/*
+src/protected/runtime/yii*
+src/protected/runtime/*log
