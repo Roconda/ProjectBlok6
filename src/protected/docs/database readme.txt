@@ -1,1 +1,1 @@
-importeer "user.sql" in database na keuzen, en zet dit goed in je config/main.php.
+importeer "ddcd.sql" in database na keuzen, en zet dit goed in je config/main.php.
