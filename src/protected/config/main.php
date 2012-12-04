@@ -10,7 +10,10 @@
 // 	@author Tim Slot
 // 	Added 04-12-2012
 //
-
+if(!is_readable(__DIR__.'/sql.inc.php')) {
+	if(!copy(__DIR__.'/sql.inc.php.sample', __DIR__.'/sql.inc.php'))
+		die("<h1>Kan sql bestand niet wegschrijven</h1>Wees er zeker van dat de webgebruiker schrijfrechten heeft");
+}
 // EO SQL stuff
 
 
@@ -100,15 +103,17 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
+		/*
 		'db'=>array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
+		 */
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=ddcd',
+			'connectionString' => 'mysql:host='.$database[DB_VER]['host'].';dbname='.$database[DB_VER]['db'],
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '4815162342',
+			'username' => $database[DB_VER]['user'],
+			'password' => $database[DB_VER]['passwd'],
 			'charset' => 'utf8',
 			'tablePrefix' => '',
 		),
