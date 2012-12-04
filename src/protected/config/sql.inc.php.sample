@@ -1,0 +1,28 @@
+<?php
+
+	/*
+		!!Copy!! this file to 'sql.inc.php'
+	*/
+	
+	// set this to the appropriate integer
+	define("DB_VER", 'devel');
+
+	
+	// Development settings
+	$database['devel']['host'] = '127.0.0.1';
+	$database['devel']['user'] = 'user';
+	$database['devel']['passwd'] = 'passwd'; 
+	$database['devel']['db'] = 'db'; 
+
+	// Testing settings
+	$database['test']['host'] = '127.0.0.1';
+	$database['test']['user'] = 'user';
+	$database['test']['passwd'] = 'passwd';
+	$database['test']['db'] = 'db';
+	
+	// Production settings
+	$database['prod']['host'] = '127.0.0.1';
+	$database['prod']['user'] = 'user';
+	$database['prod']['passwd'] = 'passwd';
+	$database['prod']['db'] = 'db';
+?>
