@@ -6,6 +6,7 @@ src/protected/runtime/*log
 
 #Eclipse project config
 .project
+.settings/
 
 #User netbeans project config files
 project.*
