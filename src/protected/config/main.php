@@ -10,7 +10,18 @@
 // 	@author Tim Slot
 // 	Added 04-12-2012
 //
-require_once 'sql.inc.php';
+// Look if sql config exists, if not create it.
+try{
+	is_readable('sql.inc.php');
+}catch(E_WARNING $e) {
+	
+	try{
+		copy('sql.inc.php.sample', 'sql.inc.php');
+	}catch(E_WARNING $f) {
+		throw new Exception("sql.inc.php.sample bestaat niet..");
+	}
+	
+}
 // EO SQL stuff
 
 
