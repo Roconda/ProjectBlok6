@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
+	'language' => 'en',
 
 	// preloading 'log' component
 	'preload'=>array(
@@ -19,9 +20,42 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.modules.user.models.*',
 	),
 
 	'modules'=>array(
+		//yum config
+		'user' => array(
+			'debug' => false,
+			'userTable' => 'user',
+			'translationTable' => 'translation',
+			'passwordRequirements' => array(                                        
+				'minLen' => 4,
+				'maxLen' => 16,
+				'maxRepetition' => 2,
+				'minDigits' => 3,
+			),
+		),
+		//yum config
+		'usergroup' => array(
+			'usergroupTable' => 'user_group',
+			'usergroupMessagesTable' => 'user_group_message',
+		),
+		//yum config
+		'profile' => array(
+			'privacySettingTable' => 'privacysetting',
+			'profileFieldTable' => 'profile_field',
+			'profileTable' => 'profile',
+			'profileCommentTable' => 'profile_comment',
+			'profileVisitTable' => 'profile_visit',
+		),
+		//yum config
+		'role' => array(
+			'roleTable' => 'role',
+			'userRoleTable' => 'user_role',
+			'actionTable' => 'action',
+			'permissionTable' => 'permission',
+		),
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
@@ -40,7 +74,11 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+			'class' => 'application.modules.user.components.YumWebUser',
+			'loginUrl' => array('//user/user/login'),
 		),
+		//yum config
+		'cache' => array('class' => 'system.caching.CDummyCache'),
 		'bootstrap'=>array(
 	        'class'=>'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
 	    ),
@@ -57,15 +95,14 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
 		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
+		/*'db'=>array(
+			'connectionString' => 'mysql:host=localhost;dbname=ddcd',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
-		),
-		*/
+			'tablePrefix' => '',
+		),*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
