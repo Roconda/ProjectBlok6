@@ -72,6 +72,7 @@ return array(
 			'username' => $database[DB_VER]['user'],
 			'password' => $database[DB_VER]['passwd'],
 			'charset' => 'utf8',
+			'tablePrefix' => '',
 		),
 		
 		'errorHandler'=>array(
