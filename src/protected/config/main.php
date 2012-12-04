@@ -11,17 +11,10 @@
 // 	Added 04-12-2012
 //
 // Look if sql config exists, if not create it.
-try{
-	is_readable('sql.inc.php');
-}catch(E_WARNING $e) {
-	
-	try{
-		copy('sql.inc.php.sample', 'sql.inc.php');
-	}catch(E_WARNING $f) {
-		throw new Exception("sql.inc.php.sample bestaat niet..");
+	if(!is_readable('sql.inc.php')) {
+		if(!copy('sql.inc.php.sample', 'sql.inc.php'))
+			die("<h1>Kan sql bestand niet wegschrijven</h1>Wees er zeker van dat de webgebruiker schrijfrechten heeft");
 	}
-	
-}
 // EO SQL stuff
 
 
