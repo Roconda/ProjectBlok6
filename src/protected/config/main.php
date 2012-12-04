@@ -11,8 +11,8 @@
 // 	Added 04-12-2012
 //
 // Look if sql config exists, if not create it.
-	if(!is_readable('sql.inc.php')) {
-		if(!copy('sql.inc.php.sample', 'sql.inc.php'))
+	if(!is_readable(__DIR__.'/sql.inc.php')) {
+		if(!copy(__DIR__.'/sql.inc.php.sample', __DIR__.'/sql.inc.php'))
 			die("<h1>Kan sql bestand niet wegschrijven</h1>Wees er zeker van dat de webgebruiker schrijfrechten heeft");
 	}
 // EO SQL stuff
