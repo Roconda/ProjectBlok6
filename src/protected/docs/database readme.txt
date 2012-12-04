@@ -1,1 +1,1 @@
-importeer "ddcd.sql" in database na keuzen, en zet dit goed in je config/main.php.
+importeer "data/create.sql" en "data/yum_translation.sql" (voor vertalingen, willen we nog veranderen) in database na keuzen, en zet dit goed in je config/main.php.

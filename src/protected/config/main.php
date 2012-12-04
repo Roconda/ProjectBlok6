@@ -10,7 +10,7 @@
 // 	@author Tim Slot
 // 	Added 04-12-2012
 //
-require_once 'sql.inc.php';
+
 // EO SQL stuff
 
 
@@ -105,10 +105,10 @@ return array(
 		),
 		// uncomment the following to use a MySQL database
 		'db'=>array(
-			'connectionString' => 'mysql:host='.$database[DB_VER]['host'].';dbname='.$database[DB_VER]['db'],
+			'connectionString' => 'mysql:host=localhost;dbname=ddcd',
 			'emulatePrepare' => true,
-			'username' => $database[DB_VER]['user'],
-			'password' => $database[DB_VER]['passwd'],
+			'username' => 'root',
+			'password' => '4815162342',
 			'charset' => 'utf8',
 			'tablePrefix' => '',
 		),
