@@ -12,4 +12,3 @@ project.*
 
 #User sqlconfig
 src/protected/config/sql.inc.php
-
