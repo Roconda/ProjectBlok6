@@ -5,9 +5,18 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
+
+// 	@author Tim Slot
+// 	Added 04-12-2012
+//
+require_once 'sql.inc.php';
+// EO SQL stuff
+
+
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'DDCD',
 	'language' => 'en',
 
 	// preloading 'log' component
@@ -61,7 +70,7 @@ return array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'foobar',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
+			'ipFilters'=>array('127.0.0.1','::1', '192.168.56.1'),
 			
 			'generatorPaths'=>array(
             	'bootstrap.gii',
@@ -95,14 +104,15 @@ return array(
 			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
 		),
 		// uncomment the following to use a MySQL database
-		/*'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=ddcd',
+		'db'=>array(
+			'connectionString' => 'mysql:host='.$database[DB_VER]['host'].';dbname='.$database[DB_VER]['db'],
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
+			'username' => $database[DB_VER]['user'],
+			'password' => $database[DB_VER]['passwd'],
 			'charset' => 'utf8',
 			'tablePrefix' => '',
-		),*/
+		),
+		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
