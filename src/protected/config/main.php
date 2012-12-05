@@ -20,7 +20,7 @@ if(!is_readable(__DIR__.'/sql.inc.php')) {
 
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'DDCD',
+	'name'=>'Avans DDCD',
 	'language' => 'en',
 
 	// preloading 'log' component
