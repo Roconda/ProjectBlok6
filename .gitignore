@@ -13,3 +13,6 @@ project.*
 
 #User sqlconfig
 src/protected/config/sql.inc.php
+
+#SASS
+src/assets/*/
