@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+          <a class="brand avans-text" href="#"><?php echo CHtml::encode(Yii::app()->name); ?></a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               Logged in as <a href="#" class="navbar-link">Username</a>

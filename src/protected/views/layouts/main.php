@@ -28,6 +28,9 @@
     	#paddingContent{
     		margin-top: 60px;
     	}
+    	.avans-text{
+    		color: #C6002A;
+    	}
     </style>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>

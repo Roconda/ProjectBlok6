@@ -10,6 +10,7 @@ src/protected/runtime/*log
 
 #User netbeans project config files
 project.*
+nbproject/
 
 #User sqlconfig
 src/protected/config/sql.inc.php
