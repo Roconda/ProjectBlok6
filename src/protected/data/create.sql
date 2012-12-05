@@ -15,7 +15,7 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`traject` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   `duration` INT NOT NULL ,
-  `nrtrainings` INT NOT NULL ,
+  `nrcourses` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
