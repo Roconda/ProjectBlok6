@@ -13,7 +13,8 @@
 if(!is_readable(__DIR__.'/sql.inc.php')) {
 	if(!copy(__DIR__.'/sql.inc.php.sample', __DIR__.'/sql.inc.php'))
 		die("<h1>Kan sql bestand niet wegschrijven</h1>Wees er zeker van dat de webgebruiker schrijfrechten heeft");
-}
+}else
+	require_once 'sql.inc.php';
 // EO SQL stuff
 
 
