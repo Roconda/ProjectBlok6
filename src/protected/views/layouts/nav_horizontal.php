@@ -26,6 +26,7 @@
               </li>
             </ul>
             <form class="navbar-form pull-right">
+              <span class="muted small">Logged in as <?php echo Yii::app()->user->name; ?></span> <a href="#" class="navbar-link">Logout</a>
               <input class="span2" type="text" placeholder="Email">
               <input class="span2" type="password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>

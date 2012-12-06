@@ -1,6 +1,6 @@
-SET FOREIGN_KEY_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET @OLD_SQL_MODE=@@SQL_MODE, time_zone = "+00:00";
 
 INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
   ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
@@ -2288,3 +2288,6 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('{attribute} must not contain whitespace.', '{attribute} no debe contener espacios.', 'es', 'yum'),
 ('{attribute} must not contain whitespace.', '{attribute} non deve contenere spazi.', 'it', 'yum'),
 ('{attribute} must not contain whitespace.', '{attribute} nie moÅ¼e zawieraÄ‡ biaÅ‚ych znakÃ³w.', 'pl', 'yum');
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
