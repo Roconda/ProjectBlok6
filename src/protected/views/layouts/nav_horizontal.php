@@ -19,7 +19,7 @@
               <button type="submit" class="btn">Sign in</button>
             </form>
             <ul class="nav pull-right">
-              <li><a disabled class="disabled">Logged in as <?php echo Yii::app()->user->name; ?></a></li>
+              <li><a class="disabled">Logged in as <?php echo Yii::app()->user->name; ?></a></li>
               <li class="active"><a href="#">Log out</a></li>
             </ul>
             
