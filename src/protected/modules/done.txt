@@ -1,0 +1,8 @@
+modules geinstalleerd:
+-user
+
+todo:
+-profile
+-registration
+-role?
+-usergroup?
