@@ -8,7 +8,7 @@
           </a>
           <a class="brand" href="#"><span class="avans-text"><?php echo CHtml::encode(Yii::app()->name); ?></span></a>
           <div class="nav-collapse collapse">
-              <p class="navbar-text pull-right"><span class="muted small">Logged in as ...</span> <a href="#" class="navbar-link">Logout</a></p>
+              <p class="navbar-text pull-right"><span class="muted small">Logged in as <?php echo Yii::app()->user->name; ?></span> <a href="#" class="navbar-link">Logout</a></p>
           </div><!--/.nav-collapse -->
         </div>
       </div>
