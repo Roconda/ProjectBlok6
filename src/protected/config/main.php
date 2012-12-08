@@ -39,7 +39,7 @@ return array(
 	'modules'=>array(
 		//yum config
 		'user' => array(
-			'debug' => true,
+			'debug' => false,
 			'userTable' => 'user',
 			'translationTable' => 'translation'
 		),
