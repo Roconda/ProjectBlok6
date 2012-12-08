@@ -21,7 +21,7 @@ if(!is_readable(__DIR__.'/sql.inc.php')) {
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
-	'language' => 'en',
+	'language' => 'en_us',
 
 	// preloading 'log' component
 	'preload'=>array(
@@ -42,6 +42,10 @@ return array(
 			'debug' => false,
 			'userTable' => 'user',
 			'translationTable' => 'translation'
+		),
+		//yum config
+		'registration' => array(
+			
 		),
 		//yum config
 		'usergroup' => array(

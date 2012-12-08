@@ -1,9 +1,0 @@
-modules geinstalleerd:
--user
-
-todo:
--profile
--registration
--role?
--usergroup?
--membership (tijdelijke rol/toegang tot)
