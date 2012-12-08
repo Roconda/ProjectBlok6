@@ -41,13 +41,7 @@ return array(
 		'user' => array(
 			'debug' => true,
 			'userTable' => 'user',
-			'translationTable' => 'translation',
-			'passwordRequirements' => array(                                        
-				'minLen' => 4,
-				'maxLen' => 16,
-				'maxRepetition' => 2,
-				'minDigits' => 3,
-			),
+			'translationTable' => 'translation'
 		),
 		//yum config
 		'usergroup' => array(
