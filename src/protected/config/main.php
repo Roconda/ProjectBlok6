@@ -25,8 +25,8 @@ return array(
 
 	// preloading 'log' component
 	'preload'=>array(
-	'log',
-	'bootstrap'
+		'log',
+		'bootstrap'
 	),
 
 	// autoloading model and component classes
@@ -39,7 +39,7 @@ return array(
 	'modules'=>array(
 		//yum config
 		'user' => array(
-			'debug' => false,
+			'debug' => true,
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'passwordRequirements' => array(                                        

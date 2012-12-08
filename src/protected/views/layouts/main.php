@@ -26,11 +26,12 @@
 
 	<div class="container" id="page">
 
-		<div class="row">
-			<?php require_once('nav_horizontal.php'); ?>
-		</div>
 
 		<div class="row" id="paddingContent">
+
+			<?php require_once('nav_horizontal.php'); ?>
+
+
 	
 			<div class="span3">
 				<?php require_once('nav_vertical.php'); ?>

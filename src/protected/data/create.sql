@@ -2,16 +2,12 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `ddcd` ;
-CREATE SCHEMA IF NOT EXISTS `ddcd` DEFAULT CHARACTER SET latin1 ;
-USE `ddcd` ;
-
 -- -----------------------------------------------------
--- Table `ddcd`.`traject`
+-- Table `traject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`traject` ;
+DROP TABLE IF EXISTS `traject` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`traject` (
+CREATE  TABLE IF NOT EXISTS `traject` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   `duration` INT NOT NULL ,
@@ -21,11 +17,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user`
+-- Table `user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user` ;
+DROP TABLE IF EXISTS `user` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user` (
+CREATE  TABLE IF NOT EXISTS `user` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(20) NOT NULL ,
   `password` VARCHAR(128) NOT NULL ,
@@ -48,11 +44,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`assign`
+-- Table `assign`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`assign` ;
+DROP TABLE IF EXISTS `assign` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`assign` (
+CREATE  TABLE IF NOT EXISTS `assign` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `course_id` INT NOT NULL ,
   `completed` ENUM('undone','failed','completed') NOT NULL ,
@@ -62,23 +58,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`assign` (
   INDEX `fk_assign_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_Course_Course1`
     FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`traject` (`id` )
+    REFERENCES `traject` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_assign_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ddcd`.`user` (`id` )
+    REFERENCES `user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`course`
+-- Table `course`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`course` ;
+DROP TABLE IF EXISTS `course` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`course` (
+CREATE  TABLE IF NOT EXISTS `course` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   `required` TINYINT(1) NOT NULL ,
@@ -87,11 +83,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`location`
+-- Table `location`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`location` ;
+DROP TABLE IF EXISTS `location` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`location` (
+CREATE  TABLE IF NOT EXISTS `location` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -99,11 +95,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`course_has_traject`
+-- Table `course_has_traject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`course_has_traject` ;
+DROP TABLE IF EXISTS `course_has_traject` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`course_has_traject` (
+CREATE  TABLE IF NOT EXISTS `course_has_traject` (
   `course_id` INT NOT NULL ,
   `traject_id` INT NOT NULL ,
   PRIMARY KEY (`course_id`, `traject_id`) ,
@@ -111,23 +107,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`course_has_traject` (
   INDEX `fk_Course_has_Traject_Course1_idx` (`course_id` ASC) ,
   CONSTRAINT `fk_Course_has_Traject_Course1`
     FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`course` (`id` )
+    REFERENCES `course` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Course_has_Traject_Traject1`
     FOREIGN KEY (`traject_id` )
-    REFERENCES `ddcd`.`traject` (`id` )
+    REFERENCES `traject` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`courseoffer`
+-- Table `courseoffer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`courseoffer` ;
+DROP TABLE IF EXISTS `courseoffer` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`courseoffer` (
+CREATE  TABLE IF NOT EXISTS `courseoffer` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `course_id` INT NOT NULL ,
   `location_id` INT NULL ,
@@ -140,23 +136,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`courseoffer` (
   INDEX `fk_CourseOffer_Location1_idx` (`location_id` ASC) ,
   CONSTRAINT `fk_CourseOffer_Course1`
     FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`course` (`id` )
+    REFERENCES `course` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CourseOffer_Location1`
     FOREIGN KEY (`location_id` )
-    REFERENCES `ddcd`.`location` (`id` )
+    REFERENCES `location` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`enroll`
+-- Table `enroll`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`enroll` ;
+DROP TABLE IF EXISTS `enroll` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`enroll` (
+CREATE  TABLE IF NOT EXISTS `enroll` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `courseoffer_id` INT NOT NULL ,
   `completed` ENUM('undone','failed','completed') NOT NULL ,
@@ -166,23 +162,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`enroll` (
   INDEX `fk_enroll_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_CourseOffer_CourseOffer1`
     FOREIGN KEY (`courseoffer_id` )
-    REFERENCES `ddcd`.`courseoffer` (`id` )
+    REFERENCES `courseoffer` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_enroll_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ddcd`.`user` (`id` )
+    REFERENCES `user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`action`
+-- Table `action`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`action` ;
+DROP TABLE IF EXISTS `action` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`action` (
+CREATE  TABLE IF NOT EXISTS `action` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
   `comment` TEXT NULL DEFAULT NULL ,
@@ -194,11 +190,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`permission`
+-- Table `permission`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`permission` ;
+DROP TABLE IF EXISTS `permission` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`permission` (
+CREATE  TABLE IF NOT EXISTS `permission` (
   `principal_id` INT(11) NOT NULL ,
   `subordinate_id` INT(11) NOT NULL DEFAULT '0' ,
   `type` ENUM('user','role') NOT NULL ,
@@ -211,11 +207,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`privacysetting`
+-- Table `privacysetting`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`privacysetting` ;
+DROP TABLE IF EXISTS `privacysetting` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`privacysetting` (
+CREATE  TABLE IF NOT EXISTS `privacysetting` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `message_new_friendship` TINYINT(1) NOT NULL DEFAULT '1' ,
   `message_new_message` TINYINT(1) NOT NULL DEFAULT '1' ,
@@ -231,11 +227,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile`
+-- Table `profile`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile` ;
+DROP TABLE IF EXISTS `profile` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile` (
+CREATE  TABLE IF NOT EXISTS `profile` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
@@ -255,11 +251,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_comment`
+-- Table `profile_comment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_comment` ;
+DROP TABLE IF EXISTS `profile_comment` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_comment` (
+CREATE  TABLE IF NOT EXISTS `profile_comment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `user_id` INT(11) NOT NULL ,
   `profile_id` INT(11) NOT NULL ,
@@ -272,11 +268,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_field`
+-- Table `profile_field`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_field` ;
+DROP TABLE IF EXISTS `profile_field` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_field` (
+CREATE  TABLE IF NOT EXISTS `profile_field` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `varname` VARCHAR(50) NOT NULL DEFAULT '' ,
   `title` VARCHAR(255) NOT NULL DEFAULT '' ,
@@ -301,11 +297,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_visit`
+-- Table `profile_visit`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_visit` ;
+DROP TABLE IF EXISTS `profile_visit` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_visit` (
+CREATE  TABLE IF NOT EXISTS `profile_visit` (
   `visitor_id` INT(11) NOT NULL ,
   `visited_id` INT(11) NOT NULL ,
   `timestamp_first_visit` INT(11) NOT NULL ,
@@ -317,11 +313,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`role`
+-- Table `role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`role` ;
+DROP TABLE IF EXISTS `role` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`role` (
+CREATE  TABLE IF NOT EXISTS `role` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
   `description` VARCHAR(255) NULL DEFAULT NULL ,
@@ -335,11 +331,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`translation`
+-- Table `translation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`translation` ;
+DROP TABLE IF EXISTS `translation` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`translation` (
+CREATE  TABLE IF NOT EXISTS `translation` (
   `message` VARBINARY(255) NOT NULL ,
   `translation` VARCHAR(255) NOT NULL ,
   `language` VARCHAR(5) NOT NULL ,
@@ -350,11 +346,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_group`
+-- Table `user_group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_group` ;
+DROP TABLE IF EXISTS `user_group` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_group` (
+CREATE  TABLE IF NOT EXISTS `user_group` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `owner_id` INT(11) NOT NULL ,
   `participants` TEXT NULL DEFAULT NULL ,
@@ -367,11 +363,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_group_message`
+-- Table `user_group_message`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_group_message` ;
+DROP TABLE IF EXISTS `user_group_message` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_group_message` (
+CREATE  TABLE IF NOT EXISTS `user_group_message` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `author_id` INT(11) UNSIGNED NOT NULL ,
   `group_id` INT(11) UNSIGNED NOT NULL ,
@@ -385,11 +381,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_role`
+-- Table `user_role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_role` ;
+DROP TABLE IF EXISTS `user_role` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_role` (
+CREATE  TABLE IF NOT EXISTS `user_role` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `role_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`user_id`, `role_id`) )
