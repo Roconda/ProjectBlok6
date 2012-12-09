@@ -67,7 +67,7 @@ class Traject extends CActiveRecord
 			'id' => 'ID',
 			'description' => 'Description',
 			'duration' => 'Duration',
-			'nrcourses' => 'nrcourses',
+			'nrcourses' => 'Number of Courses',
 		);
 	}
 
