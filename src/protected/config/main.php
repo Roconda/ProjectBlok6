@@ -41,11 +41,14 @@ return array(
 		'user' => array(
 			'debug' => false,
 			'userTable' => 'user',
-			'translationTable' => 'translation'
+			'translationTable' => 'translation',
 		),
 		//yum config
 		'registration' => array(
 			
+		),
+		'profile' => array(
+		
 		),
 		//yum config
 		'usergroup' => array(

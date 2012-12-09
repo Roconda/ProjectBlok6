@@ -55,14 +55,14 @@ DROP TABLE IF EXISTS `assign` ;
 
 CREATE  TABLE IF NOT EXISTS `assign` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
-  `course_id` INT NOT NULL ,
+  `traject_id` INT NOT NULL ,
   `completed` ENUM('undone','failed','completed') NOT NULL ,
   `notes` TEXT NULL ,
-  PRIMARY KEY (`user_id`, `course_id`) ,
-  INDEX `fk_User_has_Course_Course1_idx` (`course_id` ASC) ,
+  PRIMARY KEY (`user_id`, `traject_id`) ,
+  INDEX `fk_User_has_Course_Course1_idx` (`traject_id` ASC) ,
   INDEX `fk_assign_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_Course_Course1`
-    FOREIGN KEY (`course_id` )
+    FOREIGN KEY (`traject_id` )
     REFERENCES `traject` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
