@@ -24,6 +24,7 @@ $this->widget('zii.widgets.CListView', array(
 	'itemView'=>'_view',
 ));
  */
+ 
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
