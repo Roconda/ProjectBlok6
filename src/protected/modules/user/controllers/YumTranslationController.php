@@ -118,7 +118,7 @@ class YumTranslationController extends YumController
 		return $model;
 	}
 
-	protected function performAjaxValidation($model)
+	protected function performAjaxValidation($model, $form)
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='translation-form')
 		{
@@ -126,4 +126,5 @@ class YumTranslationController extends YumController
 			Yii::app()->end();
 		}
 	}
+
 }

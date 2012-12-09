@@ -21,7 +21,7 @@ if(!is_readable(__DIR__.'/sql.inc.php')) {
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
-	'language' => 'en',
+	'language' => 'en_us',
 
 	// preloading 'log' component
 	'preload'=>array(
@@ -39,15 +39,16 @@ return array(
 	'modules'=>array(
 		//yum config
 		'user' => array(
-			'debug' => true,
+			'debug' => false,
 			'userTable' => 'user',
 			'translationTable' => 'translation',
-			'passwordRequirements' => array(                                        
-				'minLen' => 4,
-				'maxLen' => 16,
-				'maxRepetition' => 2,
-				'minDigits' => 3,
-			),
+		),
+		//yum config
+		'registration' => array(
+			
+		),
+		'profile' => array(
+		
 		),
 		//yum config
 		'usergroup' => array(
@@ -128,7 +129,7 @@ return array(
 			'routes'=>array(
 				array(
 					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'levels'=>'error, warning, info',
 				),
 				// uncomment the following to show log messages on web pages
 				/*

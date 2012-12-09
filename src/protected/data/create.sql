@@ -1,17 +1,18 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-DROP SCHEMA IF EXISTS `ddcd` ;
-CREATE SCHEMA IF NOT EXISTS `ddcd` DEFAULT CHARACTER SET latin1 ;
-USE `ddcd` ;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 -- -----------------------------------------------------
--- Table `ddcd`.`traject`
+-- Table `traject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`traject` ;
+DROP TABLE IF EXISTS `traject` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`traject` (
+CREATE  TABLE IF NOT EXISTS `traject` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   `duration` INT NOT NULL ,
@@ -21,11 +22,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user`
+-- Table `user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user` ;
+DROP TABLE IF EXISTS `user` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user` (
+CREATE  TABLE IF NOT EXISTS `user` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(20) NOT NULL ,
   `password` VARCHAR(128) NOT NULL ,
@@ -48,37 +49,37 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`assign`
+-- Table `assign`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`assign` ;
+DROP TABLE IF EXISTS `assign` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`assign` (
+CREATE  TABLE IF NOT EXISTS `assign` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
-  `course_id` INT NOT NULL ,
+  `traject_id` INT NOT NULL ,
   `completed` ENUM('undone','failed','completed') NOT NULL ,
   `notes` TEXT NULL ,
-  PRIMARY KEY (`user_id`, `course_id`) ,
-  INDEX `fk_User_has_Course_Course1_idx` (`course_id` ASC) ,
+  PRIMARY KEY (`user_id`, `traject_id`) ,
+  INDEX `fk_User_has_Course_Course1_idx` (`traject_id` ASC) ,
   INDEX `fk_assign_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_Course_Course1`
-    FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`traject` (`id` )
+    FOREIGN KEY (`traject_id` )
+    REFERENCES `traject` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_assign_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ddcd`.`user` (`id` )
+    REFERENCES `user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`course`
+-- Table `course`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`course` ;
+DROP TABLE IF EXISTS `course` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`course` (
+CREATE  TABLE IF NOT EXISTS `course` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   `required` TINYINT(1) NOT NULL ,
@@ -87,11 +88,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`location`
+-- Table `location`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`location` ;
+DROP TABLE IF EXISTS `location` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`location` (
+CREATE  TABLE IF NOT EXISTS `location` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `description` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -99,11 +100,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`course_has_traject`
+-- Table `course_has_traject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`course_has_traject` ;
+DROP TABLE IF EXISTS `course_has_traject` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`course_has_traject` (
+CREATE  TABLE IF NOT EXISTS `course_has_traject` (
   `course_id` INT NOT NULL ,
   `traject_id` INT NOT NULL ,
   PRIMARY KEY (`course_id`, `traject_id`) ,
@@ -111,23 +112,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`course_has_traject` (
   INDEX `fk_Course_has_Traject_Course1_idx` (`course_id` ASC) ,
   CONSTRAINT `fk_Course_has_Traject_Course1`
     FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`course` (`id` )
+    REFERENCES `course` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Course_has_Traject_Traject1`
     FOREIGN KEY (`traject_id` )
-    REFERENCES `ddcd`.`traject` (`id` )
+    REFERENCES `traject` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`courseoffer`
+-- Table `courseoffer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`courseoffer` ;
+DROP TABLE IF EXISTS `courseoffer` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`courseoffer` (
+CREATE  TABLE IF NOT EXISTS `courseoffer` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `course_id` INT NOT NULL ,
   `location_id` INT NULL ,
@@ -140,23 +141,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`courseoffer` (
   INDEX `fk_CourseOffer_Location1_idx` (`location_id` ASC) ,
   CONSTRAINT `fk_CourseOffer_Course1`
     FOREIGN KEY (`course_id` )
-    REFERENCES `ddcd`.`course` (`id` )
+    REFERENCES `course` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CourseOffer_Location1`
     FOREIGN KEY (`location_id` )
-    REFERENCES `ddcd`.`location` (`id` )
+    REFERENCES `location` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`enroll`
+-- Table `enroll`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`enroll` ;
+DROP TABLE IF EXISTS `enroll` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`enroll` (
+CREATE  TABLE IF NOT EXISTS `enroll` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `courseoffer_id` INT NOT NULL ,
   `completed` ENUM('undone','failed','completed') NOT NULL ,
@@ -166,23 +167,23 @@ CREATE  TABLE IF NOT EXISTS `ddcd`.`enroll` (
   INDEX `fk_enroll_user1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_User_has_CourseOffer_CourseOffer1`
     FOREIGN KEY (`courseoffer_id` )
-    REFERENCES `ddcd`.`courseoffer` (`id` )
+    REFERENCES `courseoffer` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_enroll_user1`
     FOREIGN KEY (`user_id` )
-    REFERENCES `ddcd`.`user` (`id` )
+    REFERENCES `user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`action`
+-- Table `action`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`action` ;
+DROP TABLE IF EXISTS `action` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`action` (
+CREATE  TABLE IF NOT EXISTS `action` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
   `comment` TEXT NULL DEFAULT NULL ,
@@ -194,11 +195,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`permission`
+-- Table `permission`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`permission` ;
+DROP TABLE IF EXISTS `permission` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`permission` (
+CREATE  TABLE IF NOT EXISTS `permission` (
   `principal_id` INT(11) NOT NULL ,
   `subordinate_id` INT(11) NOT NULL DEFAULT '0' ,
   `type` ENUM('user','role') NOT NULL ,
@@ -211,11 +212,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`privacysetting`
+-- Table `privacysetting`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`privacysetting` ;
+DROP TABLE IF EXISTS `privacysetting` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`privacysetting` (
+CREATE  TABLE IF NOT EXISTS `privacysetting` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `message_new_friendship` TINYINT(1) NOT NULL DEFAULT '1' ,
   `message_new_message` TINYINT(1) NOT NULL DEFAULT '1' ,
@@ -231,11 +232,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile`
+-- Table `profile`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile` ;
+DROP TABLE IF EXISTS `profile` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile` (
+CREATE  TABLE IF NOT EXISTS `profile` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
@@ -255,11 +256,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_comment`
+-- Table `profile_comment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_comment` ;
+DROP TABLE IF EXISTS `profile_comment` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_comment` (
+CREATE  TABLE IF NOT EXISTS `profile_comment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `user_id` INT(11) NOT NULL ,
   `profile_id` INT(11) NOT NULL ,
@@ -272,11 +273,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_field`
+-- Table `profile_field`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_field` ;
+DROP TABLE IF EXISTS `profile_field` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_field` (
+CREATE  TABLE IF NOT EXISTS `profile_field` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `varname` VARCHAR(50) NOT NULL DEFAULT '' ,
   `title` VARCHAR(255) NOT NULL DEFAULT '' ,
@@ -301,11 +302,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`profile_visit`
+-- Table `profile_visit`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`profile_visit` ;
+DROP TABLE IF EXISTS `profile_visit` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`profile_visit` (
+CREATE  TABLE IF NOT EXISTS `profile_visit` (
   `visitor_id` INT(11) NOT NULL ,
   `visited_id` INT(11) NOT NULL ,
   `timestamp_first_visit` INT(11) NOT NULL ,
@@ -317,11 +318,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`role`
+-- Table `role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`role` ;
+DROP TABLE IF EXISTS `role` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`role` (
+CREATE  TABLE IF NOT EXISTS `role` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(255) NOT NULL ,
   `description` VARCHAR(255) NULL DEFAULT NULL ,
@@ -335,11 +336,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`translation`
+-- Table `translation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`translation` ;
+DROP TABLE IF EXISTS `translation` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`translation` (
+CREATE  TABLE IF NOT EXISTS `translation` (
   `message` VARBINARY(255) NOT NULL ,
   `translation` VARCHAR(255) NOT NULL ,
   `language` VARCHAR(5) NOT NULL ,
@@ -350,11 +351,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_group`
+-- Table `user_group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_group` ;
+DROP TABLE IF EXISTS `user_group` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_group` (
+CREATE  TABLE IF NOT EXISTS `user_group` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `owner_id` INT(11) NOT NULL ,
   `participants` TEXT NULL DEFAULT NULL ,
@@ -367,11 +368,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_group_message`
+-- Table `user_group_message`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_group_message` ;
+DROP TABLE IF EXISTS `user_group_message` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_group_message` (
+CREATE  TABLE IF NOT EXISTS `user_group_message` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `author_id` INT(11) UNSIGNED NOT NULL ,
   `group_id` INT(11) UNSIGNED NOT NULL ,
@@ -385,11 +386,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `ddcd`.`user_role`
+-- Table `user_role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ddcd`.`user_role` ;
+DROP TABLE IF EXISTS `user_role` ;
 
-CREATE  TABLE IF NOT EXISTS `ddcd`.`user_role` (
+CREATE  TABLE IF NOT EXISTS `user_role` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `role_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`user_id`, `role_id`) )
@@ -443,6 +444,31 @@ INSERT INTO `user` (`id`, `username`, `password`, `activationKey`, `createtime`,
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (2, 3);
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+DROP TABLE IF EXISTS `yumtextsettings`;
+CREATE TABLE IF NOT EXISTS `yumtextsettings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `language` enum('en_us','de','fr','pl','ru','es','ro') NOT NULL DEFAULT 'en_us',
+  `text_email_registration` text,
+  `subject_email_registration` text,
+  `text_email_recovery` text,
+  `text_email_activation` text,
+  `text_friendship_new` text,
+  `text_friendship_confirmed` text,
+  `text_profilecomment_new` text,
+  `text_message_new` text,
+  `text_membership_ordered` text,
+  `text_payment_arrived` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+INSERT INTO `yumtextsettings` (`id`, `language`, `text_email_registration`, `subject_email_registration`, `text_email_recovery`, `text_email_activation`, `text_friendship_new`, `text_friendship_confirmed`, `text_profilecomment_new`, `text_message_new`, `text_membership_ordered`, `text_payment_arrived`) VALUES
+(1, 'en_us', 'You have registered for this Application. To confirm your E-Mail address, please visit {activation_url}', 'You have registered for an application', 'You have requested a new Password. To set your new Password,\n										please go to {activation_url}', 'Your account has been activated. Thank you for your registration.', 'New friendship Request from {username}: {message}. To accept or ignore this request, go to your friendship page: {link_friends} or go to your profile: {link_profile}', 'The User {username} has accepted your friendship request', 'You have a new profile comment from {username}: {message} visit your profile: {link_profile}', 'You have received a new message from {username}: {message}', 'Your order of membership {membership} on {order_date} has been taken. Your order Number is {id}. You have choosen the payment style {payment}.', 'Your payment has been received on {payment_date} and your Membership {id} is now active'),
+(2, 'de', 'Sie haben sich für unsere Applikation registriert. Bitte bestätigen Sie ihre E-Mail adresse mit diesem Link: {activation_url}', 'Sie haben sich für eine Applikation registriert.', 'Sie haben ein neues Passwort angefordert. Bitte klicken Sie diesen link: {activation_url}', 'Ihr Konto wurde freigeschaltet.', 'Der Benutzer {username} hat Ihnen eine Freundschaftsanfrage gesendet. \n\n							 Nachricht: {message}\n\n							 Klicken sie <a href="{link_friends}">hier</a>, um diese Anfrage zu bestätigen oder zu ignorieren. Alternativ können sie <a href="{link_profile}">hier</a> auf ihre Profilseite zugreifen.', 'Der Benutzer {username} hat ihre Freundschaftsanfrage bestätigt.', '\n							 Benutzer {username} hat Ihnen eine Nachricht auf Ihrer Pinnwand hinterlassen: \n\n							 {message}\n\n							 <a href="{link}">hier</a> geht es direkt zu Ihrer Pinnwand!', 'Sie haben eine neue Nachricht von {username} bekommen: {message}', 'Ihre Bestellung der Mitgliedschaft {membership} wurde am {order_date} entgegen genommen. Die gewählte Zahlungsart ist {payment}. Die Auftragsnummer lautet {id}.', 'Ihre Zahlung wurde am {payment_date} entgegen genommen. Ihre Mitgliedschaft mit der Nummer {id} ist nun Aktiv.'),
+(3, 'es', 'Te has registrado en esta aplicación. Para confirmar tu dirección de correo electrónico, por favor, visita {activation_url}.', 'Te has registrado en esta aplicación.', 'Has solicitado una nueva contraseña. Para establecer una nueva contraseña, por favor ve a {activation_url}', 'Tu cuenta ha sido activada. Gracias por registrarte.', 'Has recibido una nueva solicitud de amistad de {user_from}: {message} Ve a tus contactos: {link}', 'Tienes un nuevo comentario en tu perfil de {username}: {message} visita tu perfil: {link}', 'Please translatore thisse hiere toh tha espagnola langsch {username}', 'Has recibido un mensaje de {username}: {message}', 'Tu orden de membresía {membership} de fecha {order_date} fué tomada. Tu número de orden es {id}. Escogiste como modo de pago {payment}.', 'Tu pago fué recibido en fecha {payment_date}. Ahora tu Membresía {id} ya está activa'),
+(4, 'fr', '', '', '', '', '', '', '', '', '', ''),
+(5, 'ro', '', '', '', '', '', '', '', '', '', '');
+SET FOREIGN_KEY_CHECKS=1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
