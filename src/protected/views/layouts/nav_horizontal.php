@@ -6,22 +6,32 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?php echo Yii::app()->getBaseUrl(); ?>"><span class="avans-text"><?php echo CHtml::encode(Yii::app()->name); ?></span></a>
+          <a class="brand" href="<?php echo Yii::app()->getHomeUrl(); ?>"><span class="avans-text"><?php echo CHtml::encode(Yii::app()->name); ?></span></a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#contact">Settings</a></li>
-            </ul>
-            
-            <form class="navbar-form pull-right" action="<?php echo Yii::app()->getBaseUrl(); ?>/index.php/user/auth/login" method="post">
-              <input class="span2" type="text" placeholder="Username" name="YumUserLogin[username]">
-              <input class="span2" type="password" placeholder="Password" name="YumUserLogin[password]">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
-            <ul class="nav pull-right">
-              <li><a class="disabled">Logged in as <?php echo Yii::app()->user->name; ?></a></li>
-              <li class="active"><a href="#">Log out</a></li>
-            </ul>
+
+			<?php if(Yii::app()->user->isGuest) { ?>
+                       
+	            <form class="navbar-form pull-right" action="<?php echo Yii::app()->getHomeUrl(); ?>/user/auth/login" method="post">
+	              <input class="span2" type="text" placeholder="Username" name="YumUserLogin[username]">
+	              <input class="span2" type="password" placeholder="Password" name="YumUserLogin[password]">
+	              <button type="submit" class="btn">Sign in</button>
+	            </form>
+	 		<?php }else{ ?>
+	 			
+	            <ul class="nav">							 
+	              <li class="active"><a href="<?php echo Yii::app()->getHomeUrl(); ?>">Home</a></li>
+	              <!--
+	              	@TODO maak settings view (passwd change, language change)
+	              <li><a href="#contact">Settings</a></li>
+	              -->
+	            </ul>
+
+	 			
+	            <ul class="nav pull-right">
+	              <li><a class="disabled">Logged in as <?php echo Yii::app()->user->name; ?></a></li>
+	              <li class="active"><a href="<?php echo Yii::app()->getHomeUrl(); ?>/user/user/logout">Log out</a></li>
+	            </ul>
+	   		<?php } ?>
             
           </div><!--/.nav-collapse -->
         </div>
