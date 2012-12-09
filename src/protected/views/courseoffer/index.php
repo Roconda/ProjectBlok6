@@ -12,7 +12,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crusus aanbod</h1>
+<h1>Cursus aanbod</h1>
 
 <?php
 /* 
