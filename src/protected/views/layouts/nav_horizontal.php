@@ -13,7 +13,7 @@
               <li><a href="#contact">Settings</a></li>
             </ul>
             
-            <form class="navbar-form pull-right" action="/src/index.php/user/auth/login" method="post">
+            <form class="navbar-form pull-right" action="<?php Yii::app()->request->baseurl; ?>/index.php/user/auth/login" method="post">
               <input class="span2" type="text" placeholder="Username" name="YumUserLogin[username]">
               <input class="span2" type="password" placeholder="Password" name="YumUserLogin[password]">
               <button type="submit" class="btn">Sign in</button>
