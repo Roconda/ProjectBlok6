@@ -16,6 +16,9 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('required')); ?>:</b>
 	<?php echo CHtml::encode($data->required); ?>
 	<br />
+        <b><?php echo CHtml::encode($data->getAttributeLabel('traject')); ?></b>
+            <?php echo $this->actionTestManyToMany(); ?>
+        <br>
 
 
 </div>

@@ -168,4 +168,30 @@ class CourseController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionTestManyToMany()
+        {
+                $course = Course::model()->findAll();
+                $traject = Traject::model()->findAll();
+                $coursehastraject = CourseHasTraject::model()->findAll();
+                
+
+                    foreach($course as $co)
+                    {
+                    foreach($traject as $ta)
+                    {
+                                        foreach($coursehastraject as $cht)
+                {
+                            if($cht->traject_id == $ta->id && $cht->course_id == $co->id)
+                            {
+                                echo $cht->traject_id . '<br>';
+                            }
+                    }
+                    }
+                }
+                
+                echo "<hr />";
+                
+                
+        }
 }
