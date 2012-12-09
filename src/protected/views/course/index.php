@@ -14,6 +14,9 @@ $this->menu=array(
 
 <h1>Courses</h1>
 
+    <?php echo $this->actionTestManyToMany(); ?>
+<br>
+
 <?php 
 /*
 $this->widget('zii.widgets.CListView', array(

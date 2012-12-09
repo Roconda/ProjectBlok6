@@ -178,17 +178,15 @@ class CourseController extends Controller
 
                     foreach($course as $co)
                     {
-                    foreach($traject as $ta)
-                    {
-                                        foreach($coursehastraject as $cht)
-                {
-                            if($cht->traject_id == $ta->id && $cht->course_id == $co->id)
+                        foreach($coursehastraject as $cht)
+                        {
+                            if($co->id == $cht->course_id)
                             {
-                                echo $cht->traject_id . '<br>';
+                                $traject = Traject::model()->findByPk($cht->traject_id);
+                                echo $cht->traject_id ." : " . $co->description . " has " . $traject->description . "<br>";
                             }
+                        }
                     }
-                    }
-                }
                 
                 echo "<hr />";
                 
