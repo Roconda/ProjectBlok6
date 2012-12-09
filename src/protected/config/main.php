@@ -22,13 +22,12 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
 	'language' => 'en_us',
-
+	
 	// preloading 'log' component
 	'preload'=>array(
 		'log',
 		'bootstrap'
 	),
-
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
@@ -42,6 +41,7 @@ return array(
 			'debug' => false,
 			'userTable' => 'user',
 			'translationTable' => 'translation',
+			'mailer' => 'swift',
 		),
 		//yum config
 		'registration' => array(
@@ -139,12 +139,25 @@ return array(
 				*/
 			),
 		),
+		//SwiftMailer extention
+		'swiftMailer' => array(
+			'class' => 'ext.swiftMailer.SwiftMailer',
+			// For SMTP
+			'mailer' => 'smtp',
+			'host'=>'smtp.gmail.com',
+			'port'=>465,
+			'From'=>'min06sog@gmail.com',
+			'username'=>'min06sog@gmail.com',
+			'password'=>'ditiseenwachtwoord',
+			// For sendmail:
+			'mailer'=>'sendmail',
+		),
 	),
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'min06sog@gmail.com',
 	),
 );
