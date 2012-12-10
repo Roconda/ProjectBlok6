@@ -22,6 +22,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
 	'language' => 'en_us',
+	'defaultController' => 'user/auth',
 	
 	// preloading 'log' component
 	'preload'=>array(
