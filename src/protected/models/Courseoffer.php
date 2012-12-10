@@ -55,7 +55,14 @@ class Courseoffer extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
+		return array('location' => array(self::BELONGS_TO, 'Location',
+                    'location_id'),
+                    
+                    'course' => array(self::BELONGS_TO, 'Course',
+                        'course_id'),
+                    
+                    'user' => array(self::MANY_MANY, 'User',
+                        'enroll(courseoffer_id, user_id)'),
 		);
 	}
 

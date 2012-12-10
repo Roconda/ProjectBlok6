@@ -54,7 +54,10 @@ class Traject extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array('course' => array(self::MANY_MANY, 'Course', 
-                    'course_has_traject(course_id, traject_id)'),
+                    'course_has_traject(traject_id, course_id)'),
+                    
+                    'user' => array(self::MANY_MANY, 'User',
+                        'assign(traject_id, user_id)'),
 		);
 	}
 
