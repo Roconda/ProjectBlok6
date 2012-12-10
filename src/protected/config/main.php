@@ -43,6 +43,7 @@ return array(
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'mailer' => 'swift',
+			'returnUrl' => 'index.php/site/index',
 		),
 		//yum config
 		'registration' => array(
