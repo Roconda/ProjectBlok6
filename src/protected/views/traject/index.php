@@ -5,27 +5,48 @@
 $this->breadcrumbs=array(
 	'Traject',
 );
-
-$this->menu=array(
-	array('label'=>'Create Traject', 'url'=>array('create')),
-	array('label'=>'Manage Traject', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Trajecten</h1>
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
+<div class="row">
+<?php
+/* 
+$this->widget('zii.widgets.CListView', array(
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
+)); 
+
+ * 
+ */
+$this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
 	//'itemView'=>'_view',
 )); 
 
-/*
-$this->widget('bootstrap.widgets.TbDetailView', array(
-    'data'=>array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
-    'attributes'=>array(
-        array('name'=>'firstName', 'label'=>'First name'),
-        array('name'=>'lastName', 'label'=>'Last name'),
-        array('name'=>'language', 'label'=>'Language'),
- */
 ?>
+</div>
+
+<div class="row">
+	<div class="pull-right">
+		<?php
+		
+		$this->widget('bootstrap.widgets.TbButton', array(
+		    'label'=>'Create',
+		    'type'=>'null',
+		    'url' => array('create')
+		));
+		?>
+		 
+		&nbsp;
+		
+		<?php
+		$this->widget('bootstrap.widgets.TbButton', array(
+		    'label'=>'Manage',
+		    'type'=>'null',
+		    'url' => array('admin')
+		));
+		?>
+	</div>
+</div>
