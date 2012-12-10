@@ -33,7 +33,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		<?php
 		
 		$this->widget('bootstrap.widgets.TbButton', array(
-		    'label'=>'Create Offer',
+		    'label'=>'Create',
 		    'type'=>'null',
 		    'url' => array('create')
 		));
@@ -43,7 +43,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 		
 		<?php
 		$this->widget('bootstrap.widgets.TbButton', array(
-		    'label'=>'Manage Offer',
+		    'label'=>'Manage',
 		    'type'=>'null',
 		    'url' => array('admin')
 		));
