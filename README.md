@@ -10,7 +10,11 @@ De source bestaat uit een aantal mappen met doordachte structuur.
 
 ## Installatie ##
 
-....
+### Minimale eisen ###
+Yii heeft een aantal minimale eisen waaraan je moet voldoen wil Yii kunnen werken.
+
+* PHP-5.1 of hoger
+* PHP met MYSQL-PDO
 
 ## Configuratie ##
 
