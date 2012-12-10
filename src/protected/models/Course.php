@@ -63,9 +63,9 @@ class Course extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'description' => 'Description',
-			'required' => 'Required',
+			'id' => '#',
+			'description' => 'Omschrijving',
+			'required' => 'Verplicht',
 		);
 	}
 

@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Courses',
+	'Cursus',
 );
 
 $this->menu=array(
@@ -14,7 +14,18 @@ $this->menu=array(
 
 <h1>Courses</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php 
+/*
+$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-)); ?>
+));
+ */
+ 
+$this->widget('bootstrap.widgets.TbGridView', array(
+	'dataProvider'=>$dataProvider,
+	'type' => 'striped',
+	//'itemView'=>'_view',
+)); 
+
+?>

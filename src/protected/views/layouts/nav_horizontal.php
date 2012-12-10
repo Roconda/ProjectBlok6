@@ -19,7 +19,7 @@
 	 		<?php }else{ ?>
 	 			
 	            <ul class="nav">							 
-	              <li class="active"><a href="<?php echo Yii::app()->getHomeUrl(); ?>">Home</a></li>
+	              <li><a href="<?php echo Yii::app()->getHomeUrl(); ?>">Home</a></li>
 	              <!--
 	              	@TODO maak settings view (passwd change, language change)
 	              <li><a href="#contact">Settings</a></li>
@@ -29,7 +29,7 @@
 	 			
 	            <ul class="nav pull-right">
 	              <li><a class="disabled">Logged in as <?php echo Yii::app()->user->name; ?></a></li>
-	              <li class="active"><a href="<?php echo Yii::app()->getHomeUrl(); ?>/user/user/logout">Log out</a></li>
+	              <li><a href="<?php echo Yii::app()->getHomeUrl(); ?>/user/user/logout">Log out</a></li>
 	            </ul>
 	   		<?php } ?>
             

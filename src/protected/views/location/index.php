@@ -12,9 +12,22 @@ $this->menu=array(
 );
 ?>
 
-<h1>Locations</h1>
+<h1>Locaties</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php 
+/*
+$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-)); ?>
+));
+ * 
+ */ 
+
+$this->widget('bootstrap.widgets.TbGridView', array(
+	'dataProvider'=>$dataProvider,
+	'type' => 'striped',
+	//'itemView'=>'_view',
+)); 
+
+ 
+ ?>

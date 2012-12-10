@@ -64,10 +64,10 @@ class Traject extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'description' => 'Description',
-			'duration' => 'Duration',
-			'nrcourses' => 'Number of Courses',
+			'id' => '#',
+			'description' => 'Omschrijving',
+			'duration' => 'Aantal jaar',
+			'nrcourses' => 'Aantal cursussen',
 		);
 	}
 

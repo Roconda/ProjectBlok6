@@ -65,13 +65,13 @@ class Courseoffer extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'course_id' => 'Course',
-			'location_id' => 'Location',
-			'year' => 'Year',
-			'block' => 'Block',
+			'id' => '#',
+			'course_id' => 'Cursus',
+			'location_id' => 'Locatie',
+			'year' => 'Jaar',
+			'block' => 'Blok',
 			'fysiek' => 'Fysiek',
-			'blocked' => 'Blocked',
+			'blocked' => 'Bevroren',
 		);
 	}
 

@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Trajects',
+	'Traject',
 );
 
 $this->menu=array(
@@ -12,9 +12,20 @@ $this->menu=array(
 );
 ?>
 
-<h1>Trajects</h1>
+<h1>Trajecten</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+	'type' => 'striped',
+	//'itemView'=>'_view',
+)); 
+
+/*
+$this->widget('bootstrap.widgets.TbDetailView', array(
+    'data'=>array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
+    'attributes'=>array(
+        array('name'=>'firstName', 'label'=>'First name'),
+        array('name'=>'lastName', 'label'=>'Last name'),
+        array('name'=>'language', 'label'=>'Language'),
+ */
+?>

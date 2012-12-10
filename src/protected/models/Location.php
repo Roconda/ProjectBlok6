@@ -60,8 +60,8 @@ class Location extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'description' => 'Description',
+			'id' => '#',
+			'description' => 'Omschrijving',
 		);
 	}
 
