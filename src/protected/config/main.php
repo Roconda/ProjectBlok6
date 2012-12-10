@@ -47,7 +47,8 @@ return array(
 		),
 		//yum config
 		'registration' => array(
-			
+			'registrationEmail' => 'min06sog@gmail.com',
+			'recoveryEmail' => 'min06sog@gmail.com',
 		),
 		'profile' => array(
 		
