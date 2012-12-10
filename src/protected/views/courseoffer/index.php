@@ -5,15 +5,12 @@
 $this->breadcrumbs=array(
 	'Courseoffers',
 );
-
-$this->menu=array(
-	array('label'=>'Create Courseoffer', 'url'=>array('create')),
-	array('label'=>'Manage Courseoffer', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Cursus aanbod</h1>
 
+
+<div class="row">
 <?php
 /* 
 $this->widget('zii.widgets.CListView', array(
@@ -30,3 +27,27 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 )); 
 
 ?>
+</div>
+
+<div class="row">
+	<div class="pull-right">
+		<?php
+		
+		$this->widget('bootstrap.widgets.TbButton', array(
+		    'label'=>'Create Offer',
+		    'type'=>'null',
+		    'url' => array('create')
+		));
+		?>
+		 
+		&nbsp;
+		
+		<?php
+		$this->widget('bootstrap.widgets.TbButton', array(
+		    'label'=>'Manage Offer',
+		    'type'=>'null',
+		    'url' => array('admin')
+		));
+		?>
+	</div>
+</div>
