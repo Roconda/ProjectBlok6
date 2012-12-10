@@ -168,4 +168,31 @@ class CourseofferController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function testCourseOfferFullPrint()
+        {
+            $courseoffer = Courseoffer::model()->with('course', 'location')->findAll();
+            
+            foreach($courseoffer as $co) {
+                $fysiek = 'false';
+                $blocked = 'false';
+                $course = $co->course->description;
+                if(isset($co->location->description))
+                $location = $co->location->description;
+                else {
+                    $location = 'unknown';
+                }
+                    echo "Courseoffer : " . $co->id . "<br>";
+                    echo " from " . $co->year . " in Block " . $co->block . "<br>";
+                    if($co->fysiek == 1) 
+                        $fysiek = 'true';
+                    if($co->blocked == 1)
+                        $blocked = 'true';
+                    echo " fysiek : " . $fysiek . "<br>";
+                    echo " blocked : " . $blocked . "<br>";
+                echo " for course : " . $course . "<br>";   
+                echo " on location : " . $location . "<br><br>";
+                
+            }
+        }
 }

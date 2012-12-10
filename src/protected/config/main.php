@@ -89,7 +89,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'class' => 'application.modules.user.components.YumWebUser',
+			'class' => 'application.models.User',
 			'loginUrl' => array('//user/user/login'),
 		),
 		//yum config

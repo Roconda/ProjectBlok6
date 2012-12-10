@@ -171,11 +171,32 @@ class CourseController extends Controller
         
         public function actionTestManyToMany()
         {
-                $course = Course::model()->findAll();
-                $traject = Traject::model()->findAll();
+                $course = Course::model()->with(
+                    'traject'
+                   
+                )->findAll();
+                
                 $coursehastraject = CourseHasTraject::model()->findAll();
                 
-
+                foreach($course as $co)
+                {
+                    $traject = $co->traject;
+                    echo $co->description . " has <br>";
+                    foreach($traject as $ta)
+                    {
+                        echo " - " .$ta->description . "<br>";
+                    }
+                    
+                    
+                }
+                /*
+                foreach($traject as $ta)
+                {
+                    echo $course->description . " has " . $ta->description . "<br>";
+                }
+                 
+                 */
+/*
                     foreach($course as $co)
                     {
                         foreach($coursehastraject as $cht)
@@ -189,6 +210,7 @@ class CourseController extends Controller
                     }
                 
                 echo "<hr />";
+ */
                 
                 
         }
