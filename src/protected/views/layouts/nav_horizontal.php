@@ -19,10 +19,12 @@ if(Yii::app()->user->isGuest)
 							<input type="password" class="span2" name="YumUserLogin[password]" placeholder="Password">
 							<button type="submit" class="btn">Sign in</button>
 						</form>');
-else
+else {
 	array_push($items, '<ul class="nav pull-right">
+	              			<li><a href="#">Settings</a></li>
 	              			<li><a class="disabled">Logged in as '. Yii::app()->user->name .'</a></li>
 	              		</ul>');
+}
 
 $items[] = array(
 	'class' =>'ext.LanguagePicker.ELangPick',

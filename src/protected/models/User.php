@@ -1,5 +1,5 @@
 <?php
-Yii::import('application.modules.user.components.YumWebUser');
+Yii::import('application.modules.user.models.YumUser');
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +10,7 @@ Yii::import('application.modules.user.components.YumWebUser');
  *
  * @author Remi
  */
-class User extends YumWebUser{
+class User extends YumUser{
     
     public function relations()
     {
