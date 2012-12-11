@@ -24,6 +24,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
 	//'itemView'=>'_view',
+	'columns' => array(
+		array('name' => 'id'),
+		array('name' => 'location.description', 'header' => 'Locatie'),
+		array('name' => 'year'),
+		array('name' => 'block'),
+		array('name' => 'fysiek'),
+		array('name' => 'blocked'),
+	)
 )); 
 
 ?>
