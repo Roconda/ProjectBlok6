@@ -30,7 +30,13 @@ class YumTranslationController extends YumController
 	{
 		$models = array();
 			foreach(Yum::getAvailableLanguages() as $language) {
-				$models[] = $this->loadModel($category, $message, $language);
+				$tmpModel = new YumTranslation();  // added
+				$tmpModel->category = $category; // added
+				$tmpModel->message = $message;  // added
+				$tmpModel->language = $language; // added
+				
+				//$models[] = $this->loadModel($category, $message, $language); // changed
+				$models[] = $this->loadModel($tmpModel);
 			}
 
 		if(isset($_POST['YumTranslation']))
@@ -101,12 +107,12 @@ class YumTranslationController extends YumController
 					));
 	}
 
-	public function loadModel($category, $message, $language = null)
+	public function loadModel($model = false)
 	{
 		$model=YumTranslation::model()->find('category = :category and message = :message and language = :language', array(
-					':category' => $category,
-					':message' => $message,
-					':language' => $language));
+					':category' => $model->category,
+					':message' => $model->message,
+					':language' => $model->language));
 
 		if($model===null) {
 			$translation = new YumTranslation;
@@ -120,7 +126,8 @@ class YumTranslationController extends YumController
 
 	protected function performAjaxValidation($model, $form)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='translation-form')
+		//if(isset($_POST['ajax']) && $_POST['ajax']==='translation-form')
+		if(isset($_POST['ajax']) && $_POST['ajax'] == $form)
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
