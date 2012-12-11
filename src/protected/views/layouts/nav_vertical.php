@@ -16,7 +16,7 @@
 		
 	if(!Yii::app()->user->isGuest) {
 		array_push($items, '<hr>');
-		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout')));
+		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout', 'class' => 'muted')));
 	}
 	
 	// @TODO dingen die niet visible zijn gemaakt kunnen nog wel benaderd worden.
