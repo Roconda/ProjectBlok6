@@ -21,12 +21,13 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 	
+	//TODO: dit ook werkend maken voor de Yum-controllers
 	//voor language-picker zo instellen, alleen dit werkt niet voor de extentie controllers, daarom heb ik voor nu de import en setLanguage geplaatst in de nav_horizontal.php
 	//http://www.yiiframework.com/extension/language-picker
-/*	public function init()
+	public function init()
 	{
 		Yii::import('ext.LangPick.ELangPick'); 
 		ELangPick::setLanguage();
 		parent::init();
-	}*/
+	}
 }
