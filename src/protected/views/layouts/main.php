@@ -17,6 +17,9 @@
     		color: #C6002A;
     		font-weight: bold;
     	}
+    	.nav-list > li > a {
+    		color: #81001C;
+    	}
     </style>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
