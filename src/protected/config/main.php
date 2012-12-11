@@ -44,6 +44,8 @@ return array(
 			'translationTable' => 'translation',
 			'mailer' => 'swift',
 			'returnUrl' => 'index.php/site/index',
+			'usergroupTable' => 'user_group',
+			'usergroupMessagesTable' => 'user_group_message',
 		),
 		//yum config
 		'registration' => array(
@@ -55,8 +57,7 @@ return array(
 		),
 		//yum config
 		'usergroup' => array(
-			'usergroupTable' => 'user_group',
-			'usergroupMessagesTable' => 'user_group_message',
+			
 		),
 		//yum config
 		'profile' => array(
