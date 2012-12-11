@@ -22,6 +22,8 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
 	'language' => 'en_us',
+	'sourceLanguage'=>'en',
+	'defaultController' => 'user/auth',
 	
 	// preloading 'log' component
 	'preload'=>array(
@@ -42,18 +44,21 @@ return array(
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'mailer' => 'swift',
+			'returnUrl' => 'index.php/site/index',
+			'usergroupTable' => 'user_group',
+			'usergroupMessagesTable' => 'user_group_message',
 		),
 		//yum config
 		'registration' => array(
-			
+			'registrationEmail' => 'min06sog@gmail.com',
+			'recoveryEmail' => 'min06sog@gmail.com',
 		),
 		'profile' => array(
 		
 		),
 		//yum config
 		'usergroup' => array(
-			'usergroupTable' => 'user_group',
-			'usergroupMessagesTable' => 'user_group_message',
+			
 		),
 		//yum config
 		'profile' => array(
@@ -88,7 +93,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-			'class' => 'application.modules.user.components.YumWebUser',
+			'class' => 'application.models.User',
 			'loginUrl' => array('//user/user/login'),
 		),
 		//yum config

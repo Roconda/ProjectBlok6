@@ -5,27 +5,27 @@
 $this->breadcrumbs=array(
 	'Traject',
 );
-
-$this->menu=array(
-	array('label'=>'Create Traject', 'url'=>array('create')),
-	array('label'=>'Manage Traject', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Trajecten</h1>
 
-<?php $this->widget('bootstrap.widgets.TbGridView', array(
+<div class="row">
+<?php
+/* 
+$this->widget('zii.widgets.CListView', array(
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
+)); 
+
+ * 
+ */
+$this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
 	//'itemView'=>'_view',
 )); 
 
-/*
-$this->widget('bootstrap.widgets.TbDetailView', array(
-    'data'=>array('id'=>1, 'firstName'=>'Mark', 'lastName'=>'Otto', 'language'=>'CSS'),
-    'attributes'=>array(
-        array('name'=>'firstName', 'label'=>'First name'),
-        array('name'=>'lastName', 'label'=>'Last name'),
-        array('name'=>'language', 'label'=>'Language'),
- */
 ?>
+</div>
+
+<?php require_once(__DIR__.'/../components/button/create_manage.php'); ?>

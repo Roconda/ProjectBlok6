@@ -54,7 +54,10 @@ class Traject extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array('course' => array(self::MANY_MANY, 'Course', 
-                    'course_has_traject(course_id, traject_id)'),
+                    'course_has_traject(traject_id, course_id)'),
+                    
+                    'user' => array(self::MANY_MANY, 'User',
+                        'assign(traject_id, user_id)'),
 		);
 	}
 
@@ -65,9 +68,9 @@ class Traject extends CActiveRecord
 	{
 		return array(
 			'id' => '#',
-			'description' => 'Omschrijving',
-			'duration' => 'Aantal jaar',
-			'nrcourses' => 'Aantal cursussen',
+			'description' => Yii::t('traject', 'Description'),
+			'duration' => Yii::t('traject', 'Duration'),
+			'nrcourses' => Yii::t('traject', 'Number of courses'),
 		);
 	}
 

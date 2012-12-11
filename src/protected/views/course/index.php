@@ -5,23 +5,20 @@
 $this->breadcrumbs=array(
 	'Cursus',
 );
-
-$this->menu=array(
-	array('label'=>'Create Course', 'url'=>array('create')),
-	array('label'=>'Manage Course', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Courses</h1>
 
-<?php 
-/*
+<div class="row">
+<?php
+/* 
 $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
-));
+)); 
+
+ * 
  */
- 
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
@@ -29,3 +26,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 )); 
 
 ?>
+</div>
+
+<?php require_once(__DIR__.'/../components/button/create_manage.php'); ?>
+
