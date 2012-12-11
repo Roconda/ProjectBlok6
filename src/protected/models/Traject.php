@@ -68,9 +68,9 @@ class Traject extends CActiveRecord
 	{
 		return array(
 			'id' => '#',
-			'description' => 'Omschrijving',
-			'duration' => 'Aantal jaar',
-			'nrcourses' => 'Aantal cursussen',
+			'description' => Yii::t('traject', 'Description'),
+			'duration' => Yii::t('traject', 'Duration'),
+			'nrcourses' => Yii::t('traject', 'Number of courses'),
 		);
 	}
 
