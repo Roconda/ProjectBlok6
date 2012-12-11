@@ -167,7 +167,7 @@ class CourseofferController extends Controller
         
         public function testCourseOfferFullPrint()
         {
-            $courseoffer = Courseoffer::model()->with('course', 'location')->findAll();
+            $courseoffer = Courseoffer::model()->with('course', 'location', 'user')->findAll();
             
             foreach($courseoffer as $co) {
                 $fysiek = 'false';
@@ -187,7 +187,13 @@ class CourseofferController extends Controller
                     echo " fysiek : " . $fysiek . "<br>";
                     echo " blocked : " . $blocked . "<br>";
                 echo " for course : " . $course . "<br>";   
-                echo " on location : " . $location . "<br><br>";
+                echo " on location : " . $location . "<br>";
+                $user = $co->user;
+                foreach($user as $us)
+                {
+                    echo "Username : " . $us->username . "<br>";
+                }
+                echo "<br>";
                 
             }
         }
