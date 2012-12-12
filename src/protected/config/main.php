@@ -55,7 +55,7 @@ return array(
 				'install'=>array('class'=>'YumModule.controllers.YumInstallController'),
 				'statistics'=>array('class'=>'YumModule.controllers.YumStatisticsController'),
 				'translation'=>array('class'=>'YumModule.controllers.YumTranslationController'),
-				'user'=>array('class'=>'application.controllers.yum.UserController'),
+				'user'=>array('class'=>'application.controllers.modules.user.UserController'),
 				// workaround to allow the url application/user/login:
 				'login'=>array('class'=>'YumModule.controllers.YumUserController')
 			),
