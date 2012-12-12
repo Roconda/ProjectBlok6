@@ -47,6 +47,18 @@ return array(
 			'returnUrl' => 'index.php/site/index',
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
+			'controllerMap' => array(
+				'default'=>array('class'=>'YumModule.controllers.YumDefaultController'),
+				'rest'=>array('class'=>'YumModule.controllers.YumRestController'),
+				'csv'=>array('class'=>'YumModule.controllers.YumCsvController'),
+				'auth'=>array('class'=>'YumModule.controllers.YumAuthController'),
+				'install'=>array('class'=>'YumModule.controllers.YumInstallController'),
+				'statistics'=>array('class'=>'YumModule.controllers.YumStatisticsController'),
+				'translation'=>array('class'=>'YumModule.controllers.YumTranslationController'),
+				'user'=>array('class'=>'application.controllers.yum.UserController'),
+				// workaround to allow the url application/user/login:
+				'login'=>array('class'=>'YumModule.controllers.YumUserController')
+			),
 		),
 		//yum config
 		'registration' => array(
