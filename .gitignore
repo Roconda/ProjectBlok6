@@ -2,7 +2,9 @@
 
 #dynamically generated yii files
 src/protected/runtime/yii*
+src/protected/runtime/gii*
 src/protected/runtime/*log
+src/protected/runtime/state.bin
 
 #Eclipse project config
 .project
