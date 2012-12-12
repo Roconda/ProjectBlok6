@@ -43,9 +43,9 @@
 
 			<div class="span8 offset1">
 				<?php if(isset($this->breadcrumbs)):?>
-					<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
+					<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 						 'links'=>$this->breadcrumbs,
-					)); */ ?><!-- breadcrumbs -->
+					)); ?><!-- breadcrumbs -->
 				<?php endif?>
 			
 				<?php echo $content; ?>
