@@ -44,7 +44,7 @@ return array(
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'mailer' => 'swift',
-			'returnUrl' => 'index.php/dashboard/index',
+			'returnUrl' => 'index.php/site/index',
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
 		),
