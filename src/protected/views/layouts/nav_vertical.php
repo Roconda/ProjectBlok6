@@ -6,7 +6,7 @@
 
 		
 	if(!Yii::app()->user->isGuest) {
-		array_push($items, array('label'=>'Dashboard', 'icon' => 'home', 'url'=>array('/dashboard')));
+		array_push($items, array('label'=>'Home', 'icon' => 'home', 'url'=>array('/site/index')));
 		array_push($items, array('label'=>'Traject', 'icon' => 'random', 'url'=>array('/traject')));
 		array_push($items, array('label'=>'Course', 'icon' => 'tag', 'url'=>array('/course')));
 		array_push($items, array('label'=>'Course offer', 'icon' => 'hand-right', 'url'=>array('/courseoffer')));
