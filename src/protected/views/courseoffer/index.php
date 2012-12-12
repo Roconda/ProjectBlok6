@@ -26,7 +26,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	//'itemView'=>'_view',
 	'columns' => array(
 		array('name' => 'id'),
-		array('name' => 'location.description', 'header' => 'Locatie'),
+		array('name' => 'location.description', 'header' => Yii::t('location', 'Location')),
 		array('name' => 'year'),
 		array('name' => 'block'),
 		array('name' => 'fysiek'),
