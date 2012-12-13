@@ -8,7 +8,7 @@ class YumUsergroupMessage extends CActiveRecord{
 
 	public function tableName()
 	{
-		return '{{usergroup_messages}}';
+		return '{{user_group_messages}}';
 	}
 
 	public function beforeValidate() {

@@ -1,5 +1,6 @@
 <?php
-Yii:import('application.modules.usergroup.controllers.YumUsergroupController');
+//import gaf een error
+//Yii:import('application.modules.usergroup.controllers.YumUsergroupController');
 /**
 * Override YumUsergroupController for calling the Controller::initELangPick() and overriding the #accessRules().
 */

@@ -58,6 +58,9 @@ class Traject extends CActiveRecord
                     
                     'user' => array(self::MANY_MANY, 'User',
                         'assign(traject_id, user_id)'),
+                    
+                    'assign' => array(self::HAS_MANY, 'Assign',
+                        'traject_id'),
 		);
 	}
 

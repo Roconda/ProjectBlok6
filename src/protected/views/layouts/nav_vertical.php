@@ -10,6 +10,8 @@
 		array_push($items, array('label'=>'Course', 'icon' => 'tag', 'url'=>array('/course'), 'visible' => yii::app()->user->can('course_read') || (yii::app()->user->getName() == 'admin')));
 		array_push($items, array('label'=>'Course offer', 'icon' => 'hand-right', 'url'=>array('/courseoffer'), 'visible' => yii::app()->user->can('courseoffer_read') || (yii::app()->user->getName() == 'admin')));
 		array_push($items, array('label'=>'Location', 'icon' => 'globe', 'url'=>array('/location'), 'visible' => yii::app()->user->can('location_read') || (yii::app()->user->getName() == 'admin')));
+                array_push($items, array('label'=>'Enroll', 'icon' => 'globe', 'url'=>array('/enroll')));
+                array_push($items, array('label'=>'Assign', 'icon' => 'globe', 'url'=>array('/assign')));
 		//array_push($items, array('label'=>'Profile', 'url'=>array('/user/user/profile')));
 		array_push($items, '<hr>');
 		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout', 'class' => 'muted')));	
