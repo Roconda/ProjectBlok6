@@ -48,29 +48,34 @@ return array(
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
 			'controllerMap' => array(
-				'default'=>array('class'=>'YumModule.controllers.YumDefaultController'),
-				'rest'=>array('class'=>'YumModule.controllers.YumRestController'),
-				'csv'=>array('class'=>'YumModule.controllers.YumCsvController'),
-				'auth'=>array('class'=>'YumModule.controllers.YumAuthController'),
-				'install'=>array('class'=>'YumModule.controllers.YumInstallController'),
-				'statistics'=>array('class'=>'YumModule.controllers.YumStatisticsController'),
-				'translation'=>array('class'=>'YumModule.controllers.YumTranslationController'),
+				//'default'=>array('class'=>'YumModule.controllers.YumDefaultController'),
+				'rest'=>array('class'=>'application.controllers.modules.user.RestController'),
+				'csv'=>array('class'=>'application.controllers.modules.user.CsvController'),
+				'auth'=>array('class'=>'application.controllers.modules.user.AuthController'),
+				//'install'=>array('class'=>'YumModule.controllers.YumInstallController'),
+				'statistics'=>array('class'=>'application.controllers.modules.user.StatisticsController'),
+				'translation'=>array('class'=>'application.controllers.modules.user.TranslationController'),
 				'user'=>array('class'=>'application.controllers.modules.user.UserController'),
 				// workaround to allow the url application/user/login:
-				'login'=>array('class'=>'YumModule.controllers.YumUserController')
+				'login'=>array('class'=>'application.controllers.modules.user.UserController')
 			),
 		),
 		//yum config
 		'registration' => array(
 			'registrationEmail' => 'min06sog@gmail.com',
 			'recoveryEmail' => 'min06sog@gmail.com',
+			'controllerMap' => array(
+				'registration'=>array('class'=>'application.controllers.modules.registration.RegistrationController'),
+			),
 		),
 		'profile' => array(
 		
 		),
 		//yum config
 		'usergroup' => array(
-			
+			'controllerMap' => array(
+				'groups'=>array('class'=>'application.controllers.modules.usergroup.UsergroupController'),
+			),
 		),
 		//yum config
 		'profile' => array(
@@ -86,6 +91,11 @@ return array(
 			'userRoleTable' => 'user_role',
 			'actionTable' => 'action',
 			'permissionTable' => 'permission',
+			'controllerMap' => array(
+				'action'=>array('class'=>'application.controllers.modules.role.ActionController'),
+				'permission'=>array('class'=>'application.controllers.modules.role.PermissionController'),
+				'role'=>array('class'=>'application.controllers.modules.role.RoleController'),
+			),
 		),
 		// uncomment the following to enable the Gii tool
 		'gii'=>array(

@@ -1,9 +1,4 @@
 <?php
-//staat hier eigenlijk niet goed en hoord in de Controller te staan, maar dit werkt niet als een Controller van de extentie word geopend
-//http://www.yiiframework.com/extension/language-picker
-Yii::import('ext.LangPick.ELangPick'); 
-ELangPick::setLanguage();
-
 $items = array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
