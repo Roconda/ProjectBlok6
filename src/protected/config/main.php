@@ -84,6 +84,14 @@ return array(
 			'profileTable' => 'profile',
 			'profileCommentTable' => 'profile_comment',
 			'profileVisitTable' => 'profile_visit',
+			'controllerMap' => array(
+				'comments'=>array('class'=>'application.controllers.modules.profile.rofileCommentController'),
+				'privacy'=>array('class'=>'application.controllers.modules.profile.PrivacysettingController'),
+				//'groups'=>array('class'=>'ProfileModule.controllers.YumUsergroupController'),
+				'profile'=>array('class'=>'application.controllers.modules.profile.ProfileController'),
+				'fields'=>array('class'=>'application.controllers.modules.profile.FieldsController'),
+				//'fieldsgroup'=>array('class'=>'ProfileModule.controllers.YumFieldsGroupController'),
+			)
 		),
 		//yum config
 		'role' => array(
