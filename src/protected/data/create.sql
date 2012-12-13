@@ -371,18 +371,24 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `user_group_message`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user_group_message` ;
-
-CREATE  TABLE IF NOT EXISTS `user_group_message` (
-  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `author_id` INT(11) UNSIGNED NOT NULL ,
-  `group_id` INT(11) UNSIGNED NOT NULL ,
-  `createtime` INT(11) UNSIGNED NOT NULL ,
-  `title` VARCHAR(255) NOT NULL ,
-  `message` TEXT NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE IF NOT EXISTS `usergroup_messages` (
+  
+	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  
+	`author_id` int(11) unsigned NOT NULL,
+  
+	`group_id` int(11) unsigned NOT NULL,
+  
+	`createtime` int(11) unsigned NOT NULL,
+  
+	`title` varchar(255) NOT NULL,
+  
+	`message` text NOT NULL,
+  PRIMARY KEY (`id`) 
+) 
+ENGINE=InnoDB 
+DEFAULT CHARSET=utf8 
+AUTO_INCREMENT=1 ;
 
 
 -- -----------------------------------------------------
