@@ -28,11 +28,23 @@ class TrajectController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view', 'create','update'),
-				'users'=>array('@'),
+				'actions'=>array('create'),
+				'expression'=> "yii::app()->user->can('traject_create')",
+			),
+			array('allow', // allow authenticated user to perform the following
+				'actions'=>array('index','view'),
+				'expression'=> "yii::app()->user->can('traject_read')",
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','update'),
+				'expression'=> "yii::app()->user->can('traject_update')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
+				'expression'=> "yii::app()->user->can('traject_delete')",
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','create','view','index','update','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users

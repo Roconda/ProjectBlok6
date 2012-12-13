@@ -4,13 +4,12 @@
 	
 	$items =array();
 
-		
 	if(!Yii::app()->user->isGuest) {
 		array_push($items, array('label'=>'Home', 'icon' => 'home', 'url'=>array('/site/index')));
-		array_push($items, array('label'=>'Traject', 'icon' => 'random', 'url'=>array('/traject')));
-		array_push($items, array('label'=>'Course', 'icon' => 'tag', 'url'=>array('/course')));
-		array_push($items, array('label'=>'Course offer', 'icon' => 'hand-right', 'url'=>array('/courseoffer')));
-		array_push($items, array('label'=>'Location', 'icon' => 'globe', 'url'=>array('/location')));
+		array_push($items, array('label'=>'Traject', 'icon' => 'random', 'url'=>array('/traject'), 'visible' => (yii::app()->user->can('traject_read') || (yii::app()->user->getName() == 'admin'))));
+		array_push($items, array('label'=>'Course', 'icon' => 'tag', 'url'=>array('/course'), 'visible' => yii::app()->user->can('course_read') || (yii::app()->user->getName() == 'admin')));
+		array_push($items, array('label'=>'Course offer', 'icon' => 'hand-right', 'url'=>array('/courseoffer'), 'visible' => yii::app()->user->can('courseoffer_read') || (yii::app()->user->getName() == 'admin')));
+		array_push($items, array('label'=>'Location', 'icon' => 'globe', 'url'=>array('/location'), 'visible' => yii::app()->user->can('location_read') || (yii::app()->user->getName() == 'admin')));
 		//array_push($items, array('label'=>'Profile', 'url'=>array('/user/user/profile')));
 		array_push($items, '<hr>');
 		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout', 'class' => 'muted')));	
