@@ -26,8 +26,16 @@ class Controller extends CController
 	//http://www.yiiframework.com/extension/language-picker
 	public function init()
 	{
+		self::initELangPick();
+		parent::init();
+	}
+	
+	/**
+	* Function for loading the extention.ELangPick. This method must be called (by every controller) when the widget is shown.
+	*/
+	public static function initELangPick()
+	{
 		Yii::import('ext.LangPick.ELangPick'); 
 		ELangPick::setLanguage();
-		parent::init();
 	}
 }

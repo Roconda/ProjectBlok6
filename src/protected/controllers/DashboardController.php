@@ -1,16 +1,13 @@
 <?php
 
-class DashboardController extends CController {
-	
-	
-	
+class DashboardController extends Controller {
 	
 	public function actionIndex()
 	{
 		$this->render('index');
 	}
-
-
+	
+	
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
@@ -21,7 +18,6 @@ class DashboardController extends CController {
 				$this->render('error', $error);
 		}
 	}
-	
 }
 
 ?>
