@@ -67,8 +67,8 @@ class Course extends CActiveRecord
 	{
 		return array(
 			'id' => '#',
-			'description' => 'Omschrijving',
-			'required' => 'Verplicht',
+			'description' => Yii::t('course', 'Description'),
+			'required' => Yii::t('course', 'Required'),
 		);
 	}
 

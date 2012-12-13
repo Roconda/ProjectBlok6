@@ -62,7 +62,7 @@ class Location extends CActiveRecord
 	{
 		return array(
 			'id' => '#',
-			'description' => 'Omschrijving',
+			'description' => Yii::t('location', 'Description'),
 		);
 	}
 

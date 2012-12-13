@@ -73,12 +73,12 @@ class Courseoffer extends CActiveRecord
 	{
 		return array(
 			'id' => '#',
-			'course_id' => 'Cursus',
-			'location_id' => 'Locatie',
-			'year' => 'Jaar',
-			'block' => 'Blok',
-			'fysiek' => 'Fysiek',
-			'blocked' => 'Bevroren',
+			'course_id' => Yii::t ('courseOffer', 'Course'),
+			'location_id' => Yii::t ('courseOffer', 'Location'),
+			'year' => Yii::t ('courseOffer', 'Year'),
+			'block' => Yii::t ('courseOffer', 'Block'),
+			'fysiek' => Yii::t ('courseOffer', 'Physical'),
+			'blocked' => Yii::t ('courseOffer', 'Frozen'),
 		);
 	}
 
