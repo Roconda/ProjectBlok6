@@ -259,12 +259,12 @@ UNLOCK TABLES;
 LOCK TABLES `assign` WRITE;
 /*!40000 ALTER TABLE `assign` DISABLE KEYS */;
 DELETE FROM `assign` ;
-INSERT INTO `assign` VALUES (3,1,'completed',NULL);
-INSERT INTO `assign` VALUES (4,1,'undone',NULL);
-INSERT INTO `assign` VALUES (5,1,'undone',NULL);
-INSERT INTO `assign` VALUES (6,2,'completed',NULL);
-INSERT INTO `assign` VALUES (7,2,'completed',NULL);
-INSERT INTO `assign` VALUES (8,2,'undone',NULL);
+INSERT INTO `assign` VALUES (3,1,'2010-11-11','completed',NULL);
+INSERT INTO `assign` VALUES (4,1,'2011-08-21','undone',NULL);
+INSERT INTO `assign` VALUES (5,1,'2012-01-07','undone',NULL);
+INSERT INTO `assign` VALUES (6,2,'2009-05-05','completed',NULL);
+INSERT INTO `assign` VALUES (7,2,'2008-11-12','completed',NULL);
+INSERT INTO `assign` VALUES (8,2,'2010-11-11','undone',NULL);
 /*!40000 ALTER TABLE `assign` ENABLE KEYS */;
 UNLOCK TABLES;
 
