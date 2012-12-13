@@ -19,6 +19,8 @@ class User extends YumUser{
             'assign(user_id, traject_id)');
         $relations['courseoffer'] = array(self::MANY_MANY, 'Courseoffer',
             'enroll(user_id, courseoffer_id');
+        $relations['assign'] = array(self::HAS_MANY, 'Assign',
+                        'user_id');
         return $relations;
     }
 }

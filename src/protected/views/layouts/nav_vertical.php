@@ -11,6 +11,8 @@
 		array_push($items, array('label'=>'Course', 'icon' => 'tag', 'url'=>array('/course')));
 		array_push($items, array('label'=>'Course offer', 'icon' => 'hand-right', 'url'=>array('/courseoffer')));
 		array_push($items, array('label'=>'Location', 'icon' => 'globe', 'url'=>array('/location')));
+                array_push($items, array('label'=>'Enroll', 'icon' => 'globe', 'url'=>array('/enroll')));
+                array_push($items, array('label'=>'Assign', 'icon' => 'globe', 'url'=>array('/assign')));
 		//array_push($items, array('label'=>'Profile', 'url'=>array('/user/user/profile')));
 		array_push($items, '<hr>');
 		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout', 'class' => 'muted')));	

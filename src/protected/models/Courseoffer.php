@@ -63,6 +63,9 @@ class Courseoffer extends CActiveRecord
                     
                     'user' => array(self::MANY_MANY, 'User',
                         'enroll(courseoffer_id, user_id)'),
+                    
+                    'enroll' => array(self::HAS_MANY, 'Enroll',
+                        'courseoffer_id'),
 		);
 	}
 

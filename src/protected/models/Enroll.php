@@ -18,7 +18,7 @@ class Enroll extends CActiveRecord
 	 */
 	public static function model($className=__CLASS__)
 	{
-		return parent::model($className);
+		return parent::model($className)->with('courseoffer', 'user');
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Enroll extends CActiveRecord
 			array('notes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, courseoffer_id, completed, notes', 'safe', 'on'=>'search'),
+			array('user_id, courseoffer_id, completed, notes, courseoffer.course_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +55,10 @@ class Enroll extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		return array(
+		return array('courseoffer' => array(self::BELONGS_TO, 'Courseoffer',
+                        'courseoffer_id'),
+                    'user' => array(self::BELONGS_TO, 'User',
+                        'user_id'),
 		);
 	}
 
@@ -64,6 +67,7 @@ class Enroll extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
+            
 		return array(
 			'user_id' => 'User',
 			'courseoffer_id' => 'Courseoffer',
@@ -87,7 +91,7 @@ class Enroll extends CActiveRecord
 		$criteria->compare('courseoffer_id',$this->courseoffer_id);
 		$criteria->compare('completed',$this->completed,true);
 		$criteria->compare('notes',$this->notes,true);
-
+                
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
