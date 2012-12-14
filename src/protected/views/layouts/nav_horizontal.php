@@ -8,13 +8,7 @@ $items = array(
         ),
     );
 
-if(Yii::app()->user->isGuest)
-	array_push($items, '<form class="navbar-form pull-right" action="'.Yii::app()->getHomeUrl().'/user/auth/login" method="post">
-							<input type="text" class="span2" name="YumUserLogin[username]" placeholder="Username">
-							<input type="password" class="span2" name="YumUserLogin[password]" placeholder="Password">
-							<button type="submit" class="btn">Sign in</button>
-						</form>');
-else {
+if(!Yii::app()->user->isGuest) {
 	array_push($items, '<ul class="nav pull-right">');
 	array_push($items, '<li><a href="#">Settings</a></li>');
 	array_push($items, '<li><a class="disabled">Logged in as '. Yii::app()->user->name .'</a></li>');
