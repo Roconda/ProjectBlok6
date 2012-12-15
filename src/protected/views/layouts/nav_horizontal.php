@@ -1,4 +1,5 @@
 <?php
+
 $items = array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
@@ -10,7 +11,7 @@ $items = array(
 
 if(!Yii::app()->user->isGuest) {
 	array_push($items, '<ul class="nav pull-right">');
-	array_push($items, '<li><a href="#">Settings</a></li>');
+	array_push($items, '<li><a href="'.$this->createUrl('profile/profile/view').'">Settings</a></li>');//TODO: verander deze url naar dynamisch
 	array_push($items, '<li><a class="disabled">Logged in as '. Yii::app()->user->name .'</a></li>');
 	array_push($items, '</ul>');
 }
@@ -34,6 +35,4 @@ $this->widget('bootstrap.widgets.TbNavbar', array(
     'collapse'=>true, // requires bootstrap-responsive.css
     'items'=> $items
 ));
-
-
 ?>
