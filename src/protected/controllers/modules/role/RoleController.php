@@ -7,12 +7,12 @@ class RoleController extends YumRoleController {
 	public function accessRules() {
 		//add these rules before the parent::accessRules, becouse deny must be at the end.
 		return array(
-				array('allow',
+			/*	array('allow',
 					'actions'=>array('create'),
 					'expression' => 'Yii::app()->user->can("role_create")'
-				),
+				),*/
 				array('allow',
-					'actions'=>array('index', 'admin', 'view'),
+					'actions'=>array('index', 'view'),
 					'expression' => 'Yii::app()->user->can("role_read")'
 				),
 				array('allow',
