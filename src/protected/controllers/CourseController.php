@@ -196,10 +196,7 @@ class CourseController extends Controller
                     echo $arr["$x"] . "<br>";
                     $x++;
                 }
-                $user = yii::app()->user->getName();
-                $x = $dataProvider->getCriteria();
-                $x->addCondition("user.username='gsaris'");
-                $dataProvider->setCriteria($x);
+                
                 /*
                 foreach($traject as $ta)
                 {

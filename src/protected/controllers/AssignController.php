@@ -29,19 +29,23 @@ class AssignController extends Controller
 		return array(
 			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('create'),
-				'expression'=> "yii::app()->user->can('assign_create')",
+				'expression'=> "Yii::app()->user->can('assign_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('index','view'),
-				'expression'=> "yii::app()->user->can('assign_read')",
+				'expression'=> "Yii::app()->user->can('assign_read')",
+			),
+                        array('allow', // allow authenticated user to perform the following
+				'actions'=>array('ownindex','view'),
+				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
-				'expression'=> "yii::app()->user->can('assign_update')",
+				'expression'=> "Yii::app()->user->can('assign_update')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'expression'=> "yii::app()->user->can('assign_delete')",
+				'expression'=> "Yii::app()->user->can('assign_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','create','view','index','update','delete'),
@@ -176,6 +180,19 @@ class AssignController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionOwnIndex()
+        {
+            $assign = Assign::model()->with('user', 'traject');
+            $dataProvider=new CActiveDataProvider($assign);
+            $user = yii::app()->user->getName();
+            $x = $dataProvider->getCriteria();
+            $x->addCondition("user.username='gsaris'");
+            $dataProvider->setCriteria($x);
+		$this->render('teacher/index',array(
+			'dataProvider'=>$dataProvider,
+		));
+        }
         
         public function testCourseOfferFullPrint()
         {

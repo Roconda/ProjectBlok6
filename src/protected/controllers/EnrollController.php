@@ -35,6 +35,10 @@ class EnrollController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
+                        array('allow', // allow authenticated user to perform the following
+				'actions'=>array('ownindex','view'),
+				'expression'=> "yii::app()->user->can('enroll_read_own')",
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
 				'expression'=> "yii::app()->user->can('enroll_update')",
@@ -178,9 +182,23 @@ class EnrollController extends Controller
 		}
 	}
         
+        public function actionOwnIndex()
+        {
+            $enroll = Enroll::model()->with('courseoffer', 'user');
+            $dataProvider=new CActiveDataProvider($enroll);
+            $user = yii::app()->user->getName();
+            $x = $dataProvider->getCriteria();
+            $x->addCondition("user.username='gsaris'");
+            $dataProvider->setCriteria($x);
+            
+		$this->render('teacher/index',array(
+			'dataProvider'=>$dataProvider,
+		));
+        }
+        
         public function testCourseOfferFullPrint()
         {
-            $courseoffer = Courseoffer::model()->with('course', 'location', 'user')->findAll();
+            $courseoffer = Courseoffer::model()->findAll();
             
             foreach($courseoffer as $co) {
                 $fysiek = 'false';
