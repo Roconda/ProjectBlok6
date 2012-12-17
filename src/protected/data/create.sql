@@ -57,7 +57,7 @@ CREATE  TABLE IF NOT EXISTS `assign` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `traject_id` INT NOT NULL ,
   `startdate` date NOT NULL,
-  `completed` ENUM('undone','failed','completed') NOT NULL ,
+  `completed` ENUM('uncompleted','failed','completed') NOT NULL ,
   `notes` TEXT NULL ,
   PRIMARY KEY (`user_id`, `traject_id`) ,
   INDEX `fk_User_has_Course_Course1_idx` (`traject_id` ASC) ,
@@ -161,7 +161,7 @@ DROP TABLE IF EXISTS `enroll` ;
 CREATE  TABLE IF NOT EXISTS `enroll` (
   `user_id` INT(10) UNSIGNED NOT NULL ,
   `courseoffer_id` INT NOT NULL ,
-  `completed` ENUM('undone','failed','completed') NOT NULL ,
+  `completed` ENUM('uncompleted','failed','completed') NOT NULL ,
   `notes` TEXT NULL ,
   PRIMARY KEY (`user_id`, `courseoffer_id`) ,
   INDEX `fk_User_has_CourseOffer_CourseOffer1_idx` (`courseoffer_id` ASC) ,
