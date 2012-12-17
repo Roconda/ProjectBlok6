@@ -31,7 +31,7 @@ $items[] = array(
 $this->widget('bootstrap.widgets.TbNavbar', array(
     'type'=>'null', // null or 'inverse'
     'brand'=> '<span class="avans-text">'.CHtml::encode(Yii::app()->name).'</span>',
-    'brandUrl'=>'#',
+    'brandUrl'=> Yii::app()->baseUrl,
     'collapse'=>true, // requires bootstrap-responsive.css
     'items'=> $items
 ));
