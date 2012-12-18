@@ -25,12 +25,13 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'type' => 'striped',
 	//'itemView'=>'_view',
 	'columns' => array(
-		array('name' => 'id'),
+		array('name' => 'course.description'),
 		array('name' => 'location.description', 'header' => 'Locatie'),
 		array('name' => 'year'),
 		array('name' => 'block'),
 		array('name' => 'fysiek'),
 		array('name' => 'blocked'),
+                array('name' => 'course.required'),
 	)
 )); 
 
