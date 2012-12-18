@@ -43,7 +43,26 @@ return array(
 			'debug' => false,
 			'userTable' => 'user',
 			'translationTable' => 'translation',
-			'mailer' => 'swift',
+			'registrationEmail' => 'min06sog@gmail.com',
+			'mailer' => 'PHPMailer',
+			'phpmailer' => array(
+				'transport' => 'smtp',
+				'html' => true,
+				'msgOptions' => array(
+					'fromName' => 'DDCD avans',
+					'toName' => '',
+				),
+				'properties' => array
+				(
+					'Host' => 'smtp.gmail.com',
+					'SMTPSecure' => 'ssl',
+					'Port' => 465,
+					//'SMTPKeepAlive' => true,
+					'SMTPAuth' => true,
+					'Username' => 'min06sog@gmail.com',
+					'Password' => 'ditiseenwachtwoord',
+				)
+			),
 			'returnUrl' => 'index.php/site/index',
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
@@ -173,19 +192,6 @@ return array(
 				),
 				*/
 			),
-		),
-		//SwiftMailer extention
-		'swiftMailer' => array(
-			'class' => 'ext.swiftMailer.SwiftMailer',
-			// For SMTP
-			'mailer' => 'smtp',
-			'host'=>'smtp.gmail.com',
-			'port'=>465,
-			'From'=>'min06sog@gmail.com',
-			'username'=>'min06sog@gmail.com',
-			'password'=>'ditiseenwachtwoord',
-			// For sendmail:
-			'mailer'=>'sendmail',
 		),
 	),
 
