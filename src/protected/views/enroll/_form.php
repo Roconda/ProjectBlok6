@@ -20,11 +20,15 @@
             $bob = array();
             foreach($courseoffer as $cs){
                 $course= $cs->course->description;
+                $loc = "";
+                if(isset($cs->location->description)){
+                    $loc = $cs->location->description;
+                }
                 $fysiek = 'digitaal';
                 if($cs->fysiek == 1){
                     $fysiek = 'fysiek';
                 }
-                $polis = "$course, $fysiek";
+                $polis = "$course: $fysiek,  $loc";
                 $bob[$cs->id] = $polis;
             }
         ?>
