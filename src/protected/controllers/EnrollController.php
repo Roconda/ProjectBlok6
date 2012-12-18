@@ -35,6 +35,10 @@ class EnrollController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
+                        array('allow', // allow authenticated user to perform the following
+				'actions'=>array('ownindex','view'),
+				'expression'=> "yii::app()->user->can('enroll_read_own')",
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
 				'expression'=> "yii::app()->user->can('enroll_update')",
@@ -99,11 +103,11 @@ class EnrollController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Courseoffer']))
+		if(isset($_POST['Enroll']))
 		{
-			$model->attributes=$_POST['Courseoffer'];
+			$model->attributes=$_POST['Enroll'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('update',array(
@@ -130,7 +134,8 @@ class EnrollController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('enroll');
+            $enroll = Enroll::model();
+		$dataProvider=new CActiveDataProvider($enroll);
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -143,8 +148,8 @@ class EnrollController extends Controller
 	{
 		$model=new Courseoffer('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Courseoffer']))
-			$model->attributes=$_GET['Courseoffer'];
+		if(isset($_GET['Enroll']))
+			$model->attributes=$_GET['Enroll'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -177,9 +182,23 @@ class EnrollController extends Controller
 		}
 	}
         
+        public function actionOwnIndex()
+        {
+            $enroll = Enroll::model()->with('courseoffer', 'user');
+            $dataProvider=new CActiveDataProvider($enroll);
+            $user = yii::app()->user->getName();
+            $x = $dataProvider->getCriteria();
+            $x->addCondition("user.username='gsaris'");
+            $dataProvider->setCriteria($x);
+            
+		$this->render('teacher/index',array(
+			'dataProvider'=>$dataProvider,
+		));
+        }
+        
         public function testCourseOfferFullPrint()
         {
-            $courseoffer = Courseoffer::model()->with('course', 'location', 'user')->findAll();
+            $courseoffer = Courseoffer::model()->findAll();
             
             foreach($courseoffer as $co) {
                 $fysiek = 'false';

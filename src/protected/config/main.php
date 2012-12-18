@@ -21,7 +21,7 @@ if(!is_readable(__DIR__.'/sql.inc.php')) {
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Avans DDCD',
-	'language' => 'en_us',
+	'language' => 'en',
 	'sourceLanguage'=>'en',
 	'defaultController' => 'user/auth',
 	
@@ -179,11 +179,9 @@ return array(
 			'class' => 'ext.swiftMailer.SwiftMailer',
 			// For SMTP
 			'mailer' => 'smtp',
-			'host'=>'smtp.gmail.com',
-			'port'=>465,
-			'From'=>'min06sog@gmail.com',
-			'username'=>'min06sog@gmail.com',
-			'password'=>'ditiseenwachtwoord',
+			'host'=>'localhost',
+			'port'=>25,
+			'From'=>'ddcd@avans-project.nl',
 			// For sendmail:
 			'mailer'=>'sendmail',
 		),

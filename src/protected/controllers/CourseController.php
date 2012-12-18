@@ -179,24 +179,24 @@ class CourseController extends Controller
         
         public function actionTestManyToMany()
         {
-                $course = Course::model()->with(
-                    'traject'
-                   
-                )->findAll();
+                $course = Traject::model()->findAll();
                 
                 $coursehastraject = CourseHasTraject::model()->findAll();
-                
+                $arr = array();
+                $i=1;
                 foreach($course as $co)
                 {
-                    $traject = $co->traject;
-                    echo $co->description . " has <br>";
-                    foreach($traject as $ta)
-                    {
-                        echo " - " .$ta->description . "<br>";
-                    }
-                    
-                    
+                    echo $co->description . "<br>";
+                    $arr["$i"] = $co->description;
+                    $i++;
                 }
+                $x=1;
+                foreach($arr as $a)
+                {
+                    echo $arr["$x"] . "<br>";
+                    $x++;
+                }
+                
                 /*
                 foreach($traject as $ta)
                 {
