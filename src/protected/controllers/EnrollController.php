@@ -83,7 +83,7 @@ class EnrollController extends Controller
 		{
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index','id'=>$model->user_id));
 		}
 
 		$this->render('create',array(

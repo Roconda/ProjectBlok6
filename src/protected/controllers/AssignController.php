@@ -83,7 +83,7 @@ class AssignController extends Controller
 		{
 			$model->attributes=$_POST['Assign'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index','id'=>$model->user_id));
 		}
 
 		$this->render('create',array(
