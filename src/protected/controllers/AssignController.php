@@ -2,6 +2,23 @@
 
 class AssignController extends Controller
 {
+    private $sort=array(
+                            'attributes'=>array(
+                                'user.username'=>array(
+                                    'asc'=>'user.username',
+                                    'desc'=>'user.username DESC',
+                                ),
+                                'traject.description'=>array(
+                                    'asc'=>'traject.description',
+                                    'desc'=>'traject.description DESC',
+                                ),
+                                'traject.duration'=>array(
+                                    'asc'=>'traject.duration',
+                                    'desc'=>'traject.duration DESC',
+                                ),
+                                '*',
+                             ),
+                          ); 
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -157,7 +174,10 @@ class AssignController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('assign');
+                $assign=Assign::model()->with('traject', 'user');
+		$dataProvider=new CActiveDataProvider($assign, array(
+                    'sort'=>$this->sort,
+                ));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -207,7 +227,9 @@ class AssignController extends Controller
         public function actionOwnIndex()
         {
             $assign = Assign::model()->with('user', 'traject');
-            $dataProvider=new CActiveDataProvider($assign);
+            $dataProvider=new CActiveDataProvider($assign, array(
+                'sort'=>$this->sort,
+            ));
             $user = yii::app()->user->getName();
             $x = $dataProvider->getCriteria();
             $x->addCondition("user.username='$user'");

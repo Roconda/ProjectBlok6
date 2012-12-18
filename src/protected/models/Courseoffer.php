@@ -13,7 +13,7 @@
  * @property integer $blocked
  */
 class Courseoffer extends CActiveRecord
-{
+{ 
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -95,7 +95,7 @@ class Courseoffer extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                
 		$criteria->compare('id',$this->id);
 		$criteria->compare('course_id',$this->course_id);
 		$criteria->compare('location_id',$this->location_id);

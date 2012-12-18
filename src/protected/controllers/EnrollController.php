@@ -2,6 +2,53 @@
 
 class EnrollController extends Controller
 {
+    private $sort=array(
+                            'attributes'=>array(
+                                'user.profile.firstname'=>array(
+                                    'asc'=>'user.profile.firstname',
+                                    'desc'=>'user.profile.firstname DESC',
+                                ),
+                                'user.profile.lastname'=>array(
+                                    'asc'=>'user.profile.lastname',
+                                    'desc'=>'user.profile.lastname DESC',
+                                ),
+                                'courseoffer.course.description'=>array(
+                                    'asc'=>'courseoffer.course.description',
+                                    'desc'=>'courseoffer.course.description DESC',
+                                ),
+                                'courseoffer.location.description'=>array(
+                                    'asc'=>'courseoffer.location.description',
+                                    'desc'=>'courseoffer.location.description DESC',
+                                ),
+                                '*',
+                             ),
+                          );
+    
+        private $teachersort=array(
+                            'attributes'=>array(
+                                'courseoffer.course.description'=>array(
+                                    'asc'=>'courseoffer.course.description',
+                                    'desc'=>'courseoffer.course.description DESC',
+                                ),
+                                'courseoffer.location.description'=>array(
+                                    'asc'=>'courseoffer.location.description',
+                                    'desc'=>'courseoffer.location.description DESC',
+                                ),
+                                'courseoffer.year'=>array(
+                                    'asc'=>'courseoffer.year',
+                                    'desc'=>'courseoffer.year DESC',
+                                ),
+                                'courseoffer.block'=>array(
+                                    'asc'=>'courseoffer.block',
+                                    'desc'=>'courseoffer.block DESC',
+                                ),
+                                'courseoffer.course.required'=>array(
+                                    'asc'=>'courseoffer.course.required',
+                                    'desc'=>'courseoffer.course.required DESC',
+                                ),
+                                '*',
+                             ),
+                          );
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -157,8 +204,10 @@ class EnrollController extends Controller
 	 */
 	public function actionIndex()
 	{
-            $enroll = Enroll::model();
-		$dataProvider=new CActiveDataProvider($enroll);
+            $enroll = Enroll::model()->with('user', 'courseoffer');
+		$dataProvider=new CActiveDataProvider($enroll, array(
+                    'sort'=>$this->sort,
+                ));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -208,7 +257,9 @@ class EnrollController extends Controller
         public function actionOwnIndex()
         {
             $enroll = Enroll::model()->with('courseoffer', 'user');
-            $dataProvider=new CActiveDataProvider($enroll);
+            $dataProvider=new CActiveDataProvider($enroll, array(
+                'sort'=>$this->teachersort,
+            ));
             $user = yii::app()->user->getName();
             $x = $dataProvider->getCriteria();
             $x->addCondition("user.username='$user'");

@@ -130,7 +130,26 @@ class CourseofferController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Courseoffer');
+                $courseoffer=Courseoffer::model()->with('course', 'location');
+		$dataProvider=new CActiveDataProvider($courseoffer, array(
+                            'sort'=>array(
+                            'attributes'=>array(
+                                'course.description'=>array(
+                                    'asc'=>'course.description',
+                                    'desc'=>'course.description DESC',
+                                ),
+                                'location.description'=>array(
+                                    'asc'=>'location.description',
+                                    'desc'=>'location.description DESC',
+                                ),
+                                'course.required'=>array(
+                                    'asc'=>'course.required',
+                                    'desc'=>'course.required DESC',
+                                ),
+                                '*',
+                             ),
+                          ),                  
+    ));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

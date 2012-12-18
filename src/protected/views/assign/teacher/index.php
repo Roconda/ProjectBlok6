@@ -28,6 +28,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'columns' => array(
                 array('name' => 'traject.description', 'header' => 'Traject'),
                 array('name' => 'traject.duration', 'header' => 'Duration'),
+                array('name' => 'startdate'),
                 array('name' => 'completed'),
                 array('name' => 'notes'),
 	)
