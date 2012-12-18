@@ -39,5 +39,5 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 
 ?>
     
-<?php require_once(__DIR__.'/../../components/button/enroll.php'); ?>
+<?php require_once(__DIR__.'/../../components/button/teacher/enroll.php'); ?>
 </div>

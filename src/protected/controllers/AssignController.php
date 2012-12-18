@@ -39,6 +39,10 @@ class AssignController extends Controller
 				'actions'=>array('ownindex','view'),
 				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
+                        array('allow', // allow authenticated user to perform the following
+				'actions'=>array('owncreate','create'),
+				'expression'=> "Yii::app()->user->can('assign_read_own')",
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
 				'expression'=> "Yii::app()->user->can('assign_update')",
@@ -90,6 +94,25 @@ class AssignController extends Controller
 			'model'=>$model,
 		));
 	}
+        
+        public function actionOwnCreate()
+        {
+            $model=new Assign();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Assign']))
+		{
+			$model->attributes=$_POST['Assign'];
+			if($model->save())
+				$this->redirect(array('index','id'=>$model->user_id));
+		}
+
+		$this->render('teacher/create',array(
+			'model'=>$model,
+		));
+        }
 
 	/**
 	 * Updates a particular model.
@@ -187,7 +210,7 @@ class AssignController extends Controller
             $dataProvider=new CActiveDataProvider($assign);
             $user = yii::app()->user->getName();
             $x = $dataProvider->getCriteria();
-            $x->addCondition("user.username='gsaris'");
+            $x->addCondition("user.username='$user'");
             $dataProvider->setCriteria($x);
 		$this->render('teacher/index',array(
 			'dataProvider'=>$dataProvider,

@@ -7,7 +7,7 @@
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'courseoffer-form',
+	'id'=>'enroll-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Enroll' : 'Save'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
