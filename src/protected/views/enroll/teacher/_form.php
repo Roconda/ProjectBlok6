@@ -24,9 +24,9 @@
                 if(isset($cs->location->description)){
                     $loc = $cs->location->description;
                 }
-                $fysiek = 'digitaal';
+                $fysiek = 'Digitaal';
                 if($cs->fysiek == 1){
-                    $fysiek = 'fysiek';
+                    $fysiek = 'Fysiek';
                 }
                 $polis = "$course: $fysiek,  $loc";
                 $bob[$cs->id] = $polis;
