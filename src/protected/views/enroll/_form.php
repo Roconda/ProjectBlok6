@@ -17,10 +17,15 @@
         
         <?php
             $courseoffer = Courseoffer::model()->findAll();
-            $course = Course::model()->findAll();
-            $dick = array();
+            $bob = array();
             foreach($courseoffer as $cs){
-                $dick[$cs->id] = $cs->id;
+                $course= $cs->course->description;
+                $fysiek = 'digitaal';
+                if($cs->fysiek == 1){
+                    $fysiek = 'fysiek';
+                }
+                $polis = "$course, $fysiek";
+                $bob[$cs->id] = $polis;
             }
         ?>
 
@@ -31,7 +36,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'courseoffer_id'); ?>
-		<?php echo $form->dropDownList($model,'courseoffer_id',$dick); ?>
+		<?php echo $form->dropDownList($model,'courseoffer_id',$bob); ?>
 		<?php echo $form->error($model,'courseoffer_id'); ?>
 	</div>
         
