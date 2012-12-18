@@ -37,7 +37,7 @@ class Enroll extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, courseoffer_id, completed', 'required'),
+			array('courseoffer_id, user_id, completed', 'required'),
 			array('courseoffer_id', 'numerical', 'integerOnly'=>true),
 			array('user_id', 'length', 'max'=>10),
 			array('completed', 'length', 'max'=>9),

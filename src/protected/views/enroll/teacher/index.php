@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Enroll</h1>
+<h1>Teacher Enrollment</h1>
 
 
 
@@ -26,16 +26,16 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'type' => 'striped',
 	//'itemView'=>'_view',
     'columns' => array(
-                array('name' => 'user.profile.firstname', 'header' => 'Firstname'),
-                array('name' => 'user.profile.lastname', 'header' => 'Lastname'),
                 array('name' => 'courseoffer.course.description', 'header' => 'Course'),
 		array('name' => 'courseoffer.location.description', 'header' => 'Location'),
+                array('name' => 'courseoffer.year', 'header' => 'Year'),
+                array('name' => 'courseoffer.block', 'header' => 'block'),
+                array('name' => 'courseoffer.course.required', 'header' => 'Required'),
                 array('name' => 'completed'),
+                array('name' => 'notes'),
 	)
 
 )); 
 
 ?>
 </div>
-
-<?php require_once(__DIR__.'/../components/button/enroll.php'); ?>

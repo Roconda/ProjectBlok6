@@ -37,14 +37,14 @@ class Assign extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, course_id, completed', 'required'),
-			array('course_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, traject_id, startdate, completed', 'required'),
+			array('traject_id', 'numerical', 'integerOnly'=>true),
 			array('user_id', 'length', 'max'=>10),
 			array('completed', 'length', 'max'=>9),
 			array('notes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, course_id, completed, notes', 'safe', 'on'=>'search'),
+			array('user_id, traject_id, completed, notes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,8 +69,9 @@ class Assign extends CActiveRecord
 	{
 		return array(
 			'user_id' => 'User',
-			'course_id' => 'Course',
-			'completed' => 'Completed',
+			'traject_id' => 'Traject',
+                        'startdate' => 'Startdate',
+                    	'completed' => 'Completed',
 			'notes' => 'Notes',
 		);
 	}

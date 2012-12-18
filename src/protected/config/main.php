@@ -193,6 +193,17 @@ return array(
 				*/
 			),
 		),
+		//SwiftMailer extention
+		'swiftMailer' => array(
+			'class' => 'ext.swiftMailer.SwiftMailer',
+			// For SMTP
+			'mailer' => 'smtp',
+			'host'=>'localhost',
+			'port'=>25,
+			'From'=>'ddcd@avans-project.nl',
+			// For sendmail:
+			'mailer'=>'sendmail',
+		),
 	),
 
 	// application-level parameters that can be accessed
