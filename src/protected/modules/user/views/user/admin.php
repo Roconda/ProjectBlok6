@@ -47,6 +47,9 @@ $this->widget('application.modules.user.components.CsvGridView', array(
 				'filter' => false,
 				'value'=>'$data->getRoles()',
 			),
+                        array(
+                            'name'=>'profile.email',
+                        ),
 			array(
 				'class'=>'CButtonColumn',
 			),

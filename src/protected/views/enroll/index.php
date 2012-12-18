@@ -26,12 +26,11 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'type' => 'striped',
 	//'itemView'=>'_view',
     'columns' => array(
-                array('name' => 'courseoffer_id'),
-                array('name' => 'user.username', 'header' => 'Username'),
+                array('name' => 'user.profile.firstname', 'header' => 'Firstname'),
+                array('name' => 'user.profile.lastname', 'header' => 'Lastname'),
                 array('name' => 'courseoffer.course.description', 'header' => 'Course'),
 		array('name' => 'courseoffer.location.description', 'header' => 'Location'),
                 array('name' => 'completed'),
-                array('name' => 'notes'),
 	)
 
 )); 

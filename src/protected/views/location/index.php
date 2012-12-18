@@ -23,6 +23,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
 	//'itemView'=>'_view',
+    'columns' => array(
+                array('name' => 'description'),
+	)
 )); 
 
 ?>
