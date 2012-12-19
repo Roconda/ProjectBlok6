@@ -39,5 +39,15 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 
 ?>
     
-<?php require_once(__DIR__.'/../../components/button/teacher/enroll.php'); ?>
+<?php 
+$id = Yii::app()->user->getId();
+$assign = $assignModel->findAll("user_id=$id");
+foreach($assign as $as) {
+      $hasTraject = $as->user_id;
+}
+if(isset($hasTraject))
+{
+    require_once(__DIR__.'/../../components/button/teacher/enroll.php');
+}
+?>
 </div>

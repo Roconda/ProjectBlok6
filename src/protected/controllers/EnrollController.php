@@ -256,6 +256,7 @@ class EnrollController extends Controller
         
         public function actionOwnIndex()
         {
+            $assign = Assign::model();
             $enroll = Enroll::model()->with('courseoffer', 'user');
             $dataProvider=new CActiveDataProvider($enroll, array(
                 'sort'=>$this->teachersort,
@@ -266,6 +267,7 @@ class EnrollController extends Controller
             $dataProvider->setCriteria($x);
             
 		$this->render('teacher/index',array(
+                        'assignModel' => $assign,
 			'dataProvider'=>$dataProvider,
 		));
         }
