@@ -22,6 +22,7 @@ $this->widget('zii.widgets.CListView', array(
  * 
  */
 $this->widget('bootstrap.widgets.TbGridView', array(
+        'id'=>'assign-tabel',
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
 	//'itemView'=>'_view',
@@ -39,3 +40,4 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 </div>
 
 <?php require_once(__DIR__.'/../components/button/assign.php'); ?>
+<?php require_once(__DIR__.'/../components/button/completed.php'); ?>

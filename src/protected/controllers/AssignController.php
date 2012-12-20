@@ -139,15 +139,23 @@ class AssignController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+                
+                $assignment = array();
+                foreach($model as $value)
+                    {
+                        $assignment['completed'] = $value->completed;
+                        
+                    }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Assign']))
 		{
-			$model->attributes=$_POST['Assign'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->user_id));
+                    echo $_POST['Assign']['user_id'];
+			$assignment['completed']=$_POST['Assign']['completed'];
+                        Assign::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id");
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
