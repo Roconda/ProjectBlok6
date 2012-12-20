@@ -143,11 +143,11 @@ class AssignController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Courseoffer']))
+		if(isset($_POST['Assign']))
 		{
-			$model->attributes=$_POST['Courseoffer'];
+			$model->attributes=$_POST['Assign'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('update',array(
@@ -212,7 +212,7 @@ class AssignController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Assign::model()->findByPk($id);
+		$model=Assign::model()->findAll("user_id=$id");
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

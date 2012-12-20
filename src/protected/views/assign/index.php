@@ -32,7 +32,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'startdate'),
                 array('name' => 'completed'),
 	)
-
+    
 )); 
 
 ?>
