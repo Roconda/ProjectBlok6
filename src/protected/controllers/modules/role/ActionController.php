@@ -10,5 +10,21 @@ class ActionController extends YumActionController {
 		Controller::initELangPick();
 		parent::init();
 	}
+	
+	public function accessRules() {
+		return array(
+			array('allow',  
+				'actions'=>array('index','view','admin'),
+				'users'=>array('*'),
+			),
+			array('allow', 
+				'actions'=>array('create','update', 'delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  
+				'users'=>array('*'),
+			),
+		);
+	}
 }
 ?>

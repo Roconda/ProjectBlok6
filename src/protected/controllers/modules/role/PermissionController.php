@@ -5,31 +5,17 @@ Yii::import('application.modules.role.controllers.YumPermissionController');
 */
 class PermissionController extends YumPermissionController
 {
-	public function accessRules() {
-		//add these rules before the parent::accessRules, becouse deny must be at the end.
+	public function accessRules()
+	{
 		return array(
 				array('allow',
-					'actions'=>array('index', 'admin','delete','create'),
+					'actions'=>array('admin', 'create', 'index', 'delete'),
 					'expression' => 'Yii::app()->user->isAdmin()'
-				),
-				array('allow',
-					'actions'=>array('create'),
-					'expression' => 'Yii::app()->user->can("role_create")'
-				),
-				array('allow',
-					'actions'=>array('index', 'admin'),
-					'expression' => 'Yii::app()->user->can("role_read")'
-				),
-				array('allow',
-					'actions'=>array('update'),
-					'expression' => 'Yii::app()->user->can("role_update")'
-				),
-				array('allow',
-					'actions'=>array('delete'),
-					'expression' => 'Yii::app()->user->can("role_delete")'
-				),
-			)
-			+ (array) parent::accessRules();
+					),
+				array('deny',  // deny all other users
+					'users'=>array('*'),
+					),
+				);
 	}
 
 	public function init()
