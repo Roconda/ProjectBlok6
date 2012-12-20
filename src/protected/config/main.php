@@ -41,6 +41,8 @@ return array(
 		//yum config
 		'user' => array(
 			'debug' => false,
+			'activationPasswordSet' => true,
+			'salt' => '',
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'registrationEmail' => 'min06sog@gmail.com',
