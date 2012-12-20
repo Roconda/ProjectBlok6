@@ -168,16 +168,25 @@ class EnrollController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+            if(isset($_GET['cid']))
+            {
+                $cid=$_GET['cid'];
+            }
 		$model=$this->loadModel($id);
 
+                $enrollment = array();
+                foreach($model as $value)
+                    {
+                        $enrollment['completed'] = $value->completed;
+                    }
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Enroll']))
 		{
-			$model->attributes=$_POST['Enroll'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->user_id));
+			$assignment['completed']=$_POST['Enroll']['completed'];
+			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id AND courseoffer_id=$cid");
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -242,7 +251,7 @@ class EnrollController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Enroll::model()->findByPk($id);
+		$model=Enroll::model()->findAll("user_id=$id");
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

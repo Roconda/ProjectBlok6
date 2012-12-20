@@ -22,11 +22,6 @@ foreach($model as $value)
 ?>
 
 <h1>Update Assign <?php echo $name; ?></h1>
-<script language="JavaScript">
-document.writeln("row: ");
-var row = $.fn.yiiGridView.getSelection('assign-tabel');
-document.writeln(row);
-</script>
 
 <?php echo $this->renderPartial('_completed', array('model'=>Assign::model(),
                                                     'assignment'=>$assignment,)); ?>

@@ -4,18 +4,23 @@
 
 $this->breadcrumbs=array(
 	'Courseoffers'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 
 $this->menu=array(
 	array('label'=>'List Courseoffer', 'url'=>array('index')),
-	array('label'=>'Create Courseoffer', 'url'=>array('create')),
-	array('label'=>'View Courseoffer', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Courseoffer', 'url'=>array('admin')),
 );
+$enrollment = array();
+foreach($model as $value)
+{
+    $name = $value->user->username;
+    $enrollment['user_id'] = $value->user_id;
+    $enrollment['courseoffer_id'] = $value->courseoffer_id;
+    $enrollment['completed'] = $value->completed;
+}
 ?>
 
-<h1>Update Courseoffer <?php echo $model->id; ?></h1>
+<h1>Update Courseoffer <?php echo $name; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_completed', array('model'=>Enroll::model(),
+                                                'enrollment'=>$enrollment)); ?>

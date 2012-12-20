@@ -31,6 +31,16 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
 		array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
                 array('name' => 'completed'),
+                array(
+                        'class'=>'CButtonColumn',
+                        'template'=>'{update}',
+                        'buttons'=>array(
+                            'update'=>array(
+                            'url'=>'Yii::app()->createUrl("enroll/update", 
+                                array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+                                )
+                            )
+                )
 	)
 
 )); 

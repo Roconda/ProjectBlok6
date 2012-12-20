@@ -144,7 +144,6 @@ class AssignController extends Controller
                 foreach($model as $value)
                     {
                         $assignment['completed'] = $value->completed;
-                        
                     }
 
 		// Uncomment the following line if AJAX validation is needed
@@ -152,7 +151,6 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-                    echo $_POST['Assign']['user_id'];
 			$assignment['completed']=$_POST['Assign']['completed'];
                         Assign::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id");
 				$this->redirect(array('index'));
