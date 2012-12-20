@@ -41,6 +41,8 @@ return array(
 		//yum config
 		'user' => array(
 			'debug' => false,
+			'activationPasswordSet' => true,
+			'salt' => '',
 			'userTable' => 'user',
 			'translationTable' => 'translation',
 			'registrationEmail' => 'min06sog@gmail.com',
@@ -88,7 +90,20 @@ return array(
 			),
 		),
 		'profile' => array(
-		
+			'enableProfileComments' => false,
+			'controllerMap' => array(
+			'comments'=>array('class'=>'application.controllers.modules.profile.ProfileCommentController'),
+			'privacy'=>array('class'=>'application.controllers.modules.profile.PrivacysettingController'),
+			'groups'=>array('class'=>'application.controllers.modules.profile.UsergroupController'),
+			'profile'=>array('class'=>'application.controllers.modules.profile.ProfileController'),
+			'fields'=>array('class'=>'application.controllers.modules.profile.FieldsController'),
+			'fieldsgroup'=>array('class'=>'Papplication.controllers.modules.profile.FieldsGroupController'),
+			),
+		),
+		'avatar' => array(
+			'controllerMap' => array(
+				'avatar'=>array('class'=>'application.controllers.modules.avatar.AvatarController'),
+			),
 		),
 		//yum config
 		'usergroup' => array(
@@ -192,17 +207,6 @@ return array(
 				),
 				*/
 			),
-		),
-		//SwiftMailer extention
-		'swiftMailer' => array(
-			'class' => 'ext.swiftMailer.SwiftMailer',
-			// For SMTP
-			'mailer' => 'smtp',
-			'host'=>'localhost',
-			'port'=>25,
-			'From'=>'ddcd@avans-project.nl',
-			// For sendmail:
-			'mailer'=>'sendmail',
 		),
 	),
 

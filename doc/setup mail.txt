@@ -1,0 +1,3 @@
+in php.ini verwijder de ";" voor de "extension=php_openssl.dll" zodat openssl word gebruikt.
+Vergeet daarna de (apache) service niet te herstarten.
+Let op de mail kan in de ongewenste mail komen.
