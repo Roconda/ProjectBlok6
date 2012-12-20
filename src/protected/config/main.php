@@ -101,6 +101,9 @@ return array(
 			),
 		),
 		'avatar' => array(
+			'controllerMap' => array(
+				'avatar'=>array('class'=>'application.controllers.modules.avatar.AvatarController'),
+			),
 		),
 		//yum config
 		'usergroup' => array(
