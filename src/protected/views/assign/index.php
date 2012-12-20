@@ -49,4 +49,3 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 </div>
 
 <?php require_once(__DIR__.'/../components/button/assign.php'); ?>
-<?php require_once(__DIR__.'/../components/button/completed.php'); ?>
