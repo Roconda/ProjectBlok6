@@ -22,5 +22,14 @@ foreach($model as $value)
 
 <h1>Update Courseoffer <?php echo $name; ?></h1>
 
-<?php echo $this->renderPartial('_completed', array('model'=>Enroll::model(),
-                                                'enrollment'=>$enrollment)); ?>
+<?php 
+if(yii::app()->user->can('enroll_update_completed')) {
+    echo $this->renderPartial('_completed', array('model'=>Enroll::model(),
+                                                    'enrollment'=>$enrollment,));
+}
+else if(yii::app()->user->can('assign_update_completed')
+        || (yii::app()->user->getName() == 'admin')) {
+    echo $this->renderPartial('_update', array('model'=>Enroll::model(),
+                                                    'enrollment'=>$enrollment,));
+}
+?>

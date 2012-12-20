@@ -60,6 +60,10 @@ class AssignController extends Controller
 				'actions'=>array('owncreate'),
 				'expression'=> "Yii::app()->user->can('assign_create_own')",
 			),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('update'),
+				'expression'=> "Yii::app()->user->can('assign_update_completed')",
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
 				'expression'=> "Yii::app()->user->can('assign_update')",
@@ -138,6 +142,52 @@ class AssignController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+            if(yii::app()->user->can('assign_update_completed'))
+            {
+                $this->actionUpdateCompleted($id);
+            }
+            else if(yii::app()->user->can('assign_update') 
+                    || (yii::app()->user->getName() == 'admin'))
+            {
+		$model=$this->loadModel($id);
+                
+                $assignment = array();
+                foreach($model as $value)
+                    {
+                        $assignment['user_id'] = $value->user_id;
+                        $assignment['traject_id'] = $value->traject_id;
+                        $assignment['startdate'] = $value->startdate;
+                        $assignment['completed'] = $value->completed;
+                    }
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Assign']))
+		{
+			$assignment=$_POST['Assign'];
+                        Assign::model()->updateAll(array(
+                            'user_id'=>$assignment['user_id'],
+                            'traject_id'=>$assignment['traject_id'],
+                            'startdate'=>$assignment['startdate'],
+                            'completed'=>$assignment['completed'])
+                                ,"user_id=$id");
+                        $this->redirect(array('index'));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+            }
+	}
+        
+        /**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdateCompleted($id)
+	{
 		$model=$this->loadModel($id);
                 
                 $assignment = array();
@@ -168,7 +218,7 @@ class AssignController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		Assign::model()->deleteAll("user_id=$id");
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
