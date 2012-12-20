@@ -70,9 +70,9 @@ class Assign extends CActiveRecord
 		return array(
 			'user_id' => 'User',
 			'traject_id' => 'Traject',
-                        'startdate' => 'Startdate',
-                    	'completed' => 'Completed',
-			'notes' => 'Notes',
+                        'startdate' => Yii::t('assign', 'Startdate'),
+                    	'completed' => Yii::t('assign', 'Completed'),
+			'notes' => Yii::t('assign', 'Notes'),
 		);
 	}
 

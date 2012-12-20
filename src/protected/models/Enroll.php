@@ -71,8 +71,8 @@ class Enroll extends CActiveRecord
 		return array(
 			'user_id' => 'User',
 			'courseoffer_id' => 'Courseoffer',
-			'completed' => 'Completed',
-			'notes' => 'Notes',
+			'completed' => Yii::t('enroll', 'Completed'),
+			'notes' => Yii::t('enroll', 'Notes'),
 		);
 	}
 
