@@ -26,10 +26,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'type' => 'striped',
 	//'itemView'=>'_view',
     'columns' => array(
-                array('name' => 'user.profile.firstname', 'header' => 'Firstname'),
-                array('name' => 'user.profile.lastname', 'header' => 'Lastname'),
-                array('name' => 'courseoffer.course.description', 'header' => 'Course'),
-		array('name' => 'courseoffer.location.description', 'header' => 'Location'),
+                array('name' => 'user.profile.firstname', 'header' => Yii::t('enroll', 'Firstname')),
+                array('name' => 'user.profile.lastname', 'header' => Yii::t('enroll', 'Lastname')),
+                array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
+		array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
                 array('name' => 'completed'),
 	)
 
