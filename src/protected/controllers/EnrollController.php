@@ -90,6 +90,10 @@ class EnrollController extends Controller
 				'actions'=>array('owncreate'),
 				'expression'=> "yii::app()->user->can('enroll_create_own')",
 			),
+                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('update'),
+				'expression'=> "yii::app()->user->can('enroll_update_completed')",
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
 				'expression'=> "yii::app()->user->can('enroll_update')",
@@ -160,25 +164,68 @@ class EnrollController extends Controller
 			'model'=>$model,
 		));
         }
-
-	/**
+        /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
 	{
+            if(yii::app()->user->can('enroll_update_completed'))
+            {
+                $this->actionUpdateCompleted($id);
+            }
+            else if(yii::app()->user->can('enroll_update') 
+                    || (yii::app()->user->getName() == 'admin'))
+            {
+                if(isset($_GET['cid']))
+                {
+                    $cid=$_GET['cid'];
+                    $model=$this->loadModel($id, $cid);
+                
+                    $enrollment = array();
+                    foreach($model as $value)
+                    {
+                        $enrollment['completed'] = $value->completed;
+                    }
+                }
+		
+
+                
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Enroll']))
+		{
+			$assignment=$_POST['Enroll'];
+			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id AND courseoffer_id=$cid");
+				$this->redirect(array('index'));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+            }
+	}
+        
+        /**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+        public function actionUpdateCompleted($id)
+	{
             if(isset($_GET['cid']))
             {
                 $cid=$_GET['cid'];
-            }
-		$model=$this->loadModel($id);
-
+                $model=$this->loadModel($id, $cid);
+                
                 $enrollment = array();
                 foreach($model as $value)
                     {
                         $enrollment['completed'] = $value->completed;
                     }
+            }
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -201,7 +248,11 @@ class EnrollController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+            if(isset($_GET['cid']))
+            {
+                $cid=$_GET['cid'];
+		Enroll::model()->deleteAll("user_id=$id AND courseoffer_id=$cid");
+            }
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -276,9 +327,9 @@ class EnrollController extends Controller
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the ID of the model to be loaded
 	 */
-	public function loadModel($id)
+	public function loadModel($id, $cid)
 	{
-		$model=Enroll::model()->findAll("user_id=$id");
+		$model=Enroll::model()->findAll("user_id=$id AND courseoffer_id=$cid");
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
