@@ -32,6 +32,15 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'traject.duration', 'header' => Yii::t('assign', 'Duration')),
                 array('name' => 'startdate'),
                 array('name' => 'completed'),
+                array(
+                        'class'=>'CButtonColumn',
+                        'template'=>'{update}',
+                        'buttons'=>array(
+                            'update'=>array(
+                            'url'=>'Yii::app()->createUrl("assign/update", array("id"=>$data->user_id))',
+                                )
+                            )
+                )
 	)
     
 )); 
