@@ -90,7 +90,17 @@ return array(
 			),
 		),
 		'profile' => array(
-		
+			'enableProfileComments' => false,
+			'controllerMap' => array(
+			'comments'=>array('class'=>'application.controllers.modules.profile.ProfileCommentController'),
+			'privacy'=>array('class'=>'application.controllers.modules.profile.PrivacysettingController'),
+			'groups'=>array('class'=>'application.controllers.modules.profile.UsergroupController'),
+			'profile'=>array('class'=>'application.controllers.modules.profile.ProfileController'),
+			'fields'=>array('class'=>'application.controllers.modules.profile.FieldsController'),
+			'fieldsgroup'=>array('class'=>'Papplication.controllers.modules.profile.FieldsGroupController'),
+			),
+		),
+		'avatar' => array(
 		),
 		//yum config
 		'usergroup' => array(

@@ -5,6 +5,19 @@ Yii::import('application.modules.user.controllers.YumTranslationController');
 */
 class TranslationController extends YumTranslationController
 {
+	public function accessRules()
+	{
+		return array(
+				array('allow', 
+					'actions'=>array('create','update', 'admin', 'delete'),
+					'users' => array('admin')
+					),
+				array('deny',  // deny all users
+					'users'=>array('*'),
+					),
+				);
+	}
+
 	public function init()
 	{
 		Yii::import('application.components.Controller');

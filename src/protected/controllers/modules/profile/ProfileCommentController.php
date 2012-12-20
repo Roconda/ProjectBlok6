@@ -5,6 +5,19 @@ Yii::import('application.modules.profile.controllers.YumProfileCommentController
 */
 class ProfileCommentController extends YumProfileCommentController
 {
+	public function accessRules()
+	{
+		return array(
+				array('allow', 
+					'actions'=>array('admin', 'create', 'index', 'delete'),
+					'users'=>array('admin'),
+					),
+				array('deny', 
+					'users'=>array('*'),
+					),
+				);
+	}
+
 	public function init()
 	{
 		Yii::import('application.components.Controller');
