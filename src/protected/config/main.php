@@ -28,7 +28,7 @@ return array(
 	// preloading 'log' component
 	'preload'=>array(
 		'log',
-		'bootstrap'
+		'bootstrap',
 	),
 	// autoloading model and component classes
 	'import'=>array(
@@ -65,7 +65,7 @@ return array(
 					'Password' => 'ditiseenwachtwoord',
 				)
 			),
-			'returnUrl' => 'index.php/site/index',
+			'returnUrl' => 'index.php/dashboard/index',
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
 			'controllerMap' => array(
