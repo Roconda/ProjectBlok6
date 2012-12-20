@@ -82,13 +82,13 @@ class EnrollController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
-                        array('allow', // allow authenticated user to perform the following
-				'actions'=>array('ownindex','view'),
+            array('allow', // allow authenticated user to perform the following
+				'actions'=>array('ownindex','index'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
-                        array('allow', // allow authenticated user to perform the following
-				'actions'=>array('owncreate','view'),
-				'expression'=> "yii::app()->user->can('enroll_read_own')",
+            array('allow', // allow authenticated user to perform the following
+				'actions'=>array('owncreate'),
+				'expression'=> "yii::app()->user->can('enroll_create_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
@@ -99,7 +99,7 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','create','view','index','update','delete'),
+				'actions'=>array('admin','create','view','index','update','delete','owncreate','ownindex'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -204,13 +204,20 @@ class EnrollController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if(yii::app()->user->can('enroll_read_own'))
+		{
+			$this->actionOwnIndex();
+		}
+		else
+		{
             $enroll = Enroll::model()->with('user', 'courseoffer');
-		$dataProvider=new CActiveDataProvider($enroll, array(
-                    'sort'=>$this->sort,
-                ));
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+			$dataProvider=new CActiveDataProvider($enroll, array(
+                'sort'=>$this->sort,
+            ));
+			$this->render('index',array(
+				'dataProvider'=>$dataProvider,
+			));
+		}
 	}
 
 	/**
@@ -256,6 +263,7 @@ class EnrollController extends Controller
         
         public function actionOwnIndex()
         {
+            $assign = Assign::model();
             $enroll = Enroll::model()->with('courseoffer', 'user');
             $dataProvider=new CActiveDataProvider($enroll, array(
                 'sort'=>$this->teachersort,
@@ -266,40 +274,41 @@ class EnrollController extends Controller
             $dataProvider->setCriteria($x);
             
 		$this->render('teacher/index',array(
+                        'assignModel' => $assign,
 			'dataProvider'=>$dataProvider,
 		));
-        }
+    }
         
-        public function testCourseOfferFullPrint()
-        {
-            $courseoffer = Courseoffer::model()->findAll();
-            
-            foreach($courseoffer as $co) {
-                $fysiek = 'false';
-                $blocked = 'false';
-                $course = $co->course->description;
-                if(isset($co->location->description))
-                $location = $co->location->description;
-                else {
-                    $location = 'unknown';
-                }
-                    echo "Courseoffer : " . $co->id . "<br>";
-                    echo " from " . $co->year . " in Block " . $co->block . "<br>";
-                    if($co->fysiek == 1) 
-                        $fysiek = 'true';
-                    if($co->blocked == 1)
-                        $blocked = 'true';
-                    echo " fysiek : " . $fysiek . "<br>";
-                    echo " blocked : " . $blocked . "<br>";
-                echo " for course : " . $course . "<br>";   
-                echo " on location : " . $location . "<br>";
-                $user = $co->user;
-                foreach($user as $us)
-                {
-                    echo "Username : " . $us->username . "<br>";
-                }
-                echo "<br>";
-                
+    public function testCourseOfferFullPrint()
+    {
+        $courseoffer = Courseoffer::model()->findAll();
+        
+        foreach($courseoffer as $co) {
+            $fysiek = 'false';
+            $blocked = 'false';
+            $course = $co->course->description;
+            if(isset($co->location->description))
+            $location = $co->location->description;
+            else {
+                $location = 'unknown';
             }
+            echo "Courseoffer : " . $co->id . "<br>";
+            echo " from " . $co->year . " in Block " . $co->block . "<br>";
+            if($co->fysiek == 1) 
+                $fysiek = 'true';
+            if($co->blocked == 1)
+                $blocked = 'true';
+            echo " fysiek : " . $fysiek . "<br>";
+            echo " blocked : " . $blocked . "<br>";
+            echo " for course : " . $course . "<br>";   
+            echo " on location : " . $location . "<br>";
+            $user = $co->user;
+            foreach($user as $us)
+            {
+                echo "Username : " . $us->username . "<br>";
+            }
+            echo "<br>";
+                
         }
+    }
 }

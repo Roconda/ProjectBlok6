@@ -26,8 +26,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 	'type' => 'striped',
 	//'itemView'=>'_view',
     'columns' => array(
-                array('name' => 'traject.description', 'header' => 'Traject'),
-                array('name' => 'traject.duration', 'header' => 'Duration'),
+                array('name' => 'traject.description', 'header' => Yii::t('assign', 'Trail')),
+                array('name' => 'traject.duration', 'header' => Yii::t('assign', 'Duration')),
                 array('name' => 'startdate'),
                 array('name' => 'completed'),
                 array('name' => 'notes'),
@@ -37,7 +37,10 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 
 ?>
     
-<?php require_once(__DIR__.'/../../components/button/teacher/assign.php'); ?>
+<?php 
+if(!$dataProvider->totalItemCount > 0)
+    require_once(__DIR__.'/../../components/button/teacher/assign.php'); 
+?>
     
 </div>
 

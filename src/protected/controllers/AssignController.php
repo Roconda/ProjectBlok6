@@ -52,13 +52,13 @@ class AssignController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "Yii::app()->user->can('assign_read')",
 			),
-                        array('allow', // allow authenticated user to perform the following
-				'actions'=>array('ownindex','view'),
+            array('allow', // allow authenticated user to perform the following
+				'actions'=>array('ownindex','index'),
 				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
-                        array('allow', // allow authenticated user to perform the following
-				'actions'=>array('owncreate','create'),
-				'expression'=> "Yii::app()->user->can('assign_read_own')",
+            array('allow', // allow authenticated user to perform the following
+				'actions'=>array('owncreate'),
+				'expression'=> "Yii::app()->user->can('assign_create_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
@@ -143,11 +143,11 @@ class AssignController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Courseoffer']))
+		if(isset($_POST['Assign']))
 		{
-			$model->attributes=$_POST['Courseoffer'];
+			$model->attributes=$_POST['Assign'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('update',array(
@@ -174,13 +174,20 @@ class AssignController extends Controller
 	 */
 	public function actionIndex()
 	{
-                $assign=Assign::model()->with('traject', 'user');
-		$dataProvider=new CActiveDataProvider($assign, array(
+		if(yii::app()->user->can('assign_read_own'))
+		{
+			$this->actionOwnIndex();
+		}
+		else
+		{
+            $assign=Assign::model()->with('traject', 'user');
+			$dataProvider=new CActiveDataProvider($assign, array(
                     'sort'=>$this->sort,
-                ));
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
+            ));
+			$this->render('index',array(
+				'dataProvider'=>$dataProvider,
+			));
+		}
 	}
 
 	/**
@@ -205,7 +212,7 @@ class AssignController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Assign::model()->findByPk($id);
+		$model=Assign::model()->findAll("user_id=$id");
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -224,51 +231,51 @@ class AssignController extends Controller
 		}
 	}
         
-        public function actionOwnIndex()
-        {
-            $assign = Assign::model()->with('user', 'traject');
-            $dataProvider=new CActiveDataProvider($assign, array(
-                'sort'=>$this->sort,
-            ));
-            $user = yii::app()->user->getName();
-            $x = $dataProvider->getCriteria();
-            $x->addCondition("user.username='$user'");
-            $dataProvider->setCriteria($x);
+    public function actionOwnIndex()
+    {
+        $assign = Assign::model()->with('user', 'traject');
+        $dataProvider=new CActiveDataProvider($assign, array(
+            'sort'=>$this->sort,
+        ));
+        $user = yii::app()->user->getName();
+        $x = $dataProvider->getCriteria();
+        $x->addCondition("user.username='$user'");
+        $dataProvider->setCriteria($x);
 		$this->render('teacher/index',array(
 			'dataProvider'=>$dataProvider,
 		));
-        }
+    }
         
-        public function testCourseOfferFullPrint()
-        {
-            $courseoffer = Courseoffer::model()->with('course', 'location', 'user')->findAll();
-            
-            foreach($courseoffer as $co) {
-                $fysiek = 'false';
-                $blocked = 'false';
-                $course = $co->course->description;
-                if(isset($co->location->description))
-                $location = $co->location->description;
-                else {
-                    $location = 'unknown';
-                }
-                    echo "Courseoffer : " . $co->id . "<br>";
-                    echo " from " . $co->year . " in Block " . $co->block . "<br>";
-                    if($co->fysiek == 1) 
-                        $fysiek = 'true';
-                    if($co->blocked == 1)
-                        $blocked = 'true';
-                    echo " fysiek : " . $fysiek . "<br>";
-                    echo " blocked : " . $blocked . "<br>";
-                echo " for course : " . $course . "<br>";   
-                echo " on location : " . $location . "<br>";
-                $user = $co->user;
-                foreach($user as $us)
-                {
-                    echo "Username : " . $us->username . "<br>";
-                }
-                echo "<br>";
-                
+    public function testCourseOfferFullPrint()
+    {
+        $courseoffer = Courseoffer::model()->with('course', 'location', 'user')->findAll();
+        
+        foreach($courseoffer as $co) {
+            $fysiek = 'false';
+            $blocked = 'false';
+            $course = $co->course->description;
+            if(isset($co->location->description))
+            $location = $co->location->description;
+            else {
+                $location = 'unknown';
             }
+            echo "Courseoffer : " . $co->id . "<br>";
+            echo " from " . $co->year . " in Block " . $co->block . "<br>";
+            if($co->fysiek == 1) 
+                $fysiek = 'true';
+            if($co->blocked == 1)
+                $blocked = 'true';
+            echo " fysiek : " . $fysiek . "<br>";
+            echo " blocked : " . $blocked . "<br>";
+            echo " for course : " . $course . "<br>";   
+            echo " on location : " . $location . "<br>";
+            $user = $co->user;
+            foreach($user as $us)
+            {
+                echo "Username : " . $us->username . "<br>";
+            }
+            echo "<br>";
+                
         }
+    }
 }
