@@ -160,13 +160,45 @@ class EnrollController extends Controller
 			'model'=>$model,
 		));
         }
+        /**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+            if(isset($_GET['cid']))
+            {
+                $cid=$_GET['cid'];
+            }
+		$model=$this->loadModel($id);
+
+                $enrollment = array();
+                foreach($model as $value)
+                    {
+                        $enrollment['completed'] = $value->completed;
+                    }
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Enroll']))
+		{
+			$assignment['completed']=$_POST['Enroll']['completed'];
+			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id AND courseoffer_id=$cid");
+				$this->redirect(array('index'));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdateCompleted($id)
 	{
             if(isset($_GET['cid']))
             {
