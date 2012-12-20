@@ -12,9 +12,10 @@
 		array_push($items, array('label'=>'Location', 'icon' => 'globe', 'url'=>array('/location'), 'visible' => yii::app()->user->can('location_read') || (yii::app()->user->getName() == 'admin')));
         array_push($items, array('label'=>'Enrolled', 'icon' => 'globe', 'url'=>array('/enroll'), 'visible' => yii::app()->user->can('enroll_read') || (yii::app()->user->getName() == 'admin')));
         array_push($items, array('label'=>'Assigned', 'icon' => 'globe', 'url'=>array('/assign') ,'visible' => yii::app()->user->can('assign_read') || (yii::app()->user->getName() == 'admin')));
-         array_push($items, array('label'=>'My Enrolls', 'icon' => 'globe', 'url'=>array('/enroll'), 'visible' => yii::app()->user->can('enroll_read_own')));
+        array_push($items, array('label'=>'My Enrolls', 'icon' => 'globe', 'url'=>array('/enroll'), 'visible' => yii::app()->user->can('enroll_read_own')));
         array_push($items, array('label'=>'My Assigns', 'icon' => 'globe', 'url'=>array('/assign') ,'visible' => yii::app()->user->can('assign_read_own')));
-		array_push($items, array('label'=>'User Management', 'url'=>array('/user/user/admin'), 'visable' => yii::app()->user->can('user_admin') ));
+		array_push($items, array('label' => 'GebruikersAdministratie', 'visible' => yii::app()->user->can('user_admin') ));
+		array_push($items, array('label'=>'User Management', 'url'=>array('/user/user/admin'), 'visible' => yii::app()->user->can('user_admin') ));
 		array_push($items, '<hr>');
 		array_push($items, array('label'=>'Logout', 'icon' => 'icon-off', 'url'=>array('/user/user/logout', 'class' => 'muted')));	
 	}else
