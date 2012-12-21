@@ -28,7 +28,7 @@ if(yii::app()->user->can('assign_update_completed')) {
     echo $this->renderPartial('_completed', array('model'=>Assign::model(),
                                                     'assignment'=>$assignment,));
 }
-else if(yii::app()->user->can('assign_update_completed')
+else if(yii::app()->user->can('assign_update')
         || (yii::app()->user->getName() == 'admin')) {
     echo $this->renderPartial('_update', array('model'=>Assign::model(),
                                                     'assignment'=>$assignment,));

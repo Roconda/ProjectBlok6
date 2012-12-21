@@ -186,6 +186,8 @@ class EnrollController extends Controller
                     $enrollment = array();
                     foreach($model as $value)
                     {
+                        $enrollment['user_id'] = $value->user_id;
+                        $enrollment['courseoffer_id'] = $value->courseoffer_id;
                         $enrollment['completed'] = $value->completed;
                     }
                 }
@@ -197,9 +199,13 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-			$assignment=$_POST['Enroll'];
-			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id AND courseoffer_id=$cid");
-				$this->redirect(array('index'));
+			$enrollment=$_POST['Enroll'];
+			Enroll::model()->updateAll(array(
+                            'user_id'=>$enrollment['user_id'],
+                            'courseoffer_id'=>$enrollment['courseoffer_id'],
+                            'completed'=>$enrollment['completed']),
+                                "user_id=$id AND courseoffer_id=$cid");
+                        $this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
