@@ -1,21 +1,30 @@
 <?php
-/* @var $this LocationController */
-/* @var $model Location */
-
 $this->breadcrumbs=array(
 	'Locations'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
 	'Update',
 );
 
-$this->menu=array(
-	array('label'=>'List Location', 'url'=>array('index')),
-	array('label'=>'Create Location', 'url'=>array('create')),
-	array('label'=>'View Location', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Location', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Update Location <?php echo $model->id; ?></h1>
+<hr/>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php 
+$this->beginWidget('zii.widgets.CPortlet', array(
+	'htmlOptions'=>array(
+		'class'=>''
+	)
+));
+$this->widget('bootstrap.widgets.TbMenu', array(
+	'type'=>'pills',
+	'items'=>array(
+		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array()),
+                array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'), 'linkOptions'=>array()),
+                array('label'=>'Update', 'icon'=>'icon-edit', 'url'=>Yii::app()->controller->createUrl('update',array('id'=>$model->id)),'active'=>true, 'linkOptions'=>array()),
+	),
+));
+$this->endWidget();
+?>
+
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

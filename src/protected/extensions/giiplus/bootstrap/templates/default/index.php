@@ -97,7 +97,7 @@ if($count>=7)
 					)
 				)
 			),
-            'htmlOptions'=>array('style'=>'width: 115px'),
+            'htmlOptions'=>array('style'=>'width: 125px'),
            )
 	),
 )); ?>
