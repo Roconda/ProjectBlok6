@@ -290,7 +290,7 @@ class EnrollController extends Controller
 		{
 			$result = $this->actionOwnIndex();
 			
-			$this->renderPartial('teacher/_index_dashboard',array(
+			$this->renderPartial('teacher/_index_table',array(
             	'assignModel' => $result['assign'],
 				'dataProvider'=>$result['dataProvider'],
 			));

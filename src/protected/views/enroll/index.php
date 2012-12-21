@@ -21,6 +21,13 @@ $this->widget('zii.widgets.CListView', array(
 
  * 
  */
+if(yii::app()->user->can('assign_update_completed')) {
+   $templateField = '{update}';
+}
+else if(yii::app()->user->can('assign_update_completed')
+        || (yii::app()->user->getName() == 'admin')) {
+    $templateField = '{update}{delete}';
+}
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
@@ -32,12 +39,16 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'completed'),
                 array(
                         'class'=>'CButtonColumn',
-                        'template'=>'{update}',
+                        'template'=>$templateField,
                         'buttons'=>array(
                             'update'=>array(
                             'url'=>'Yii::app()->createUrl("enroll/update", 
                                 array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
-                                )
+                                ),
+                            'delete'=>array(
+                            'url'=>'Yii::app()->createUrl("enroll/delete",
+                                array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+                                ),
                             )
                 )
 	)
