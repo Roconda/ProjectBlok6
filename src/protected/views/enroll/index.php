@@ -21,10 +21,10 @@ $this->widget('zii.widgets.CListView', array(
 
  * 
  */
-if(yii::app()->user->can('assign_update_completed')) {
+if(yii::app()->user->can('enroll_update_completed')) {
    $templateField = '{update}';
 }
-else if(yii::app()->user->can('assign_update_completed')
+else if(yii::app()->user->can('enroll_update')
         || (yii::app()->user->getName() == 'admin')) {
     $templateField = '{update}{delete}';
 }
