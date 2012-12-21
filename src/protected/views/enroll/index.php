@@ -24,7 +24,6 @@ $this->widget('zii.widgets.CListView', array(
 $this->widget('bootstrap.widgets.TbGridView', array(
 	'dataProvider'=>$dataProvider,
 	'type' => 'striped',
-	//'itemView'=>'_view',
     'columns' => array(
                 array('name' => 'user.profile.firstname', 'header' => Yii::t('enroll', 'Firstname')),
                 array('name' => 'user.profile.lastname', 'header' => Yii::t('enroll', 'Lastname')),
