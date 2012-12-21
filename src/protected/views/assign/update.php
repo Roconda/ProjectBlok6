@@ -23,15 +23,5 @@ foreach($model as $value)
 
 <h1>Update Assign <?php echo $name; ?></h1>
 
-<?php 
-if(yii::app()->user->can('assign_update_completed')) {
-    echo $this->renderPartial('_completed', array('model'=>Assign::model(),
-                                                    'assignment'=>$assignment,));
-}
-else if(yii::app()->user->can('assign_update_completed')
-        || (yii::app()->user->getName() == 'admin')) {
-    echo $this->renderPartial('_update', array('model'=>Assign::model(),
-                                                    'assignment'=>$assignment,));
-}
-
-?>
+<?php echo $this->renderPartial('_completed', array('model'=>Assign::model(),
+                                                    'assignment'=>$assignment,)); ?>
