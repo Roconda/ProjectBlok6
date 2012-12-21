@@ -158,7 +158,7 @@ class <?php echo $this->controllerClass; ?> extends <?php echo $this->baseContro
                     ?>
 			
 		}
-                 $session['<?php echo $this->modelClass; ?>_records']=Test::model()->findAll($criteria); 
+                 $session['<?php echo $this->modelClass; ?>_records']=<?php echo $this->modelClass; ?>::model()->findAll($criteria); 
 
                 $this->render('index',array(
 			'model'=>$model,
