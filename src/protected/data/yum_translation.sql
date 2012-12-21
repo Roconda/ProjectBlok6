@@ -2289,7 +2289,6 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('{attribute} must not contain whitespace.', '{attribute} non deve contenere spazi.', 'it', 'yum'),
 ('{attribute} must not contain whitespace.', '{attribute} nie moÅ¼e zawieraÄ‡ biaÅ‚ych znakÃ³w.', 'pl', 'yum');
 
-<!-- nederalndse vertaling -->
 INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
 ('About', 'Over', 'nl', 'yum'),
 ('Action', 'Actie', 'nl', 'yum'),
