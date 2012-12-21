@@ -83,7 +83,7 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
             array('allow', // allow authenticated user to perform the following
-				'actions'=>array('ownindex','index'),
+				'actions'=>array('ownindex','index', 'indexajax'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
             array('allow', // allow authenticated user to perform the following
@@ -272,7 +272,12 @@ class EnrollController extends Controller
 	{
 		if(yii::app()->user->can('enroll_read_own'))
 		{
-			$this->actionOwnIndex();
+			$result = $this->actionOwnIndex();
+			
+			$this->render('teacher/index',array(
+            	'assignModel' => $result['assign'],
+				'dataProvider'=>$result['dataProvider'],
+			));
 		}
 		else
 		{
@@ -284,6 +289,28 @@ class EnrollController extends Controller
 				'dataProvider'=>$dataProvider,
 			));
 		}
+	}
+	
+	public function actionIndexAjax() {
+		if(yii::app()->user->can('enroll_read_own'))
+		{
+			$result = $this->actionOwnIndex();
+			
+			$this->renderPartial('teacher/_index_table',array(
+            	'assignModel' => $result['assign'],
+				'dataProvider'=>$result['dataProvider'],
+			));
+		}
+		else
+		{
+            $enroll = Enroll::model()->with('user', 'courseoffer');
+			$dataProvider=new CActiveDataProvider($enroll, array(
+                'sort'=>$this->sort,
+            ));
+			$this->renderPartial('index',array(
+				'dataProvider'=>$dataProvider, false, true
+			));
+		}		
 	}
 
 	/**
@@ -338,11 +365,9 @@ class EnrollController extends Controller
             $x = $dataProvider->getCriteria();
             $x->addCondition("user.username='$user'");
             $dataProvider->setCriteria($x);
-            
-		$this->render('teacher/index',array(
-                        'assignModel' => $assign,
-			'dataProvider'=>$dataProvider,
-		));
+           
+		
+			return array('assign' => $assign, 'dataProvider' => $dataProvider); 
     }
         
     public function testCourseOfferFullPrint()
