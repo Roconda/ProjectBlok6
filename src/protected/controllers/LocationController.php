@@ -155,7 +155,7 @@ class LocationController extends Controller
                      
                     			
 		}
-                 $session['Location_records']=Test::model()->findAll($criteria); 
+                 $session['Location_records']=Location::model()->findAll($criteria); 
 
                 $this->render('index',array(
 			'model'=>$model,
