@@ -31,7 +31,7 @@ class LocationController extends Controller
 				'expression'=> "yii::app()->user->can('location_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'generatepdf', 'generateexcel'),
 				'expression'=> "yii::app()->user->can('location_read')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
