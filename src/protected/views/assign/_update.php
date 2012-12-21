@@ -15,15 +15,20 @@
 
 	<?php echo $form->errorSummary($model); ?>
         
+        <?php
+            $trajectList = $this->getTrajectList();
+        ?>
+        
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
-            <?php echo $form->textField($model,'user_id',array('value'=>$assignment['user_id'])); ?>
+            <?php echo $form->textField($model,'user_id',array('value'=>$assignment['username'])); ?>
             <?php echo $form->error($model,'user_id'); ?>
 	</div>
         
 	<div class="row">
                 <?php echo $form->labelEx($model,'traject_id'); ?>
-		<?php echo $form->textField($model,'traject_id',array('value'=>$assignment['traject_id'])); ?>
+		<?php echo $form->dropDownList($model,'traject_id',$trajectList,
+                        array('options' => array($assignment['traject_id']=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'traject_id'); ?>
 	</div>
 

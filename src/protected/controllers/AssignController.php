@@ -149,29 +149,39 @@ class AssignController extends Controller
             else if(yii::app()->user->can('assign_update') 
                     || (yii::app()->user->getName() == 'admin'))
             {
-		$model=$this->loadModel($id);
+                if(isset($_GET['tid']))
+                {
+                    $tid=$_GET['tid'];
+                    $model=$this->loadModel($id, $tid);
                 
-                $assignment = array();
-                foreach($model as $value)
-                    {
-                        $assignment['user_id'] = $value->user_id;
-                        $assignment['traject_id'] = $value->traject_id;
-                        $assignment['startdate'] = $value->startdate;
-                        $assignment['completed'] = $value->completed;
-                    }
+                    $assignment = array();
+                    foreach($model as $value)
+                        {
+                            $assignment['user_id'] = $value->user_id;
+                            $assignment['traject_id'] = $value->traject_id;
+                            $assignment['startdate'] = $value->startdate;
+                            $assignment['completed'] = $value->completed;
+                        }
+                }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Assign']))
 		{
+                    $userid=$_POST['Assign']['user_id'];
+                    $user=User::model()->findAll("username='" . $_POST['Assign']['user_id'] . "'");
+                    foreach($user as $uid){
+                        $userid=$uid->id;
+                    }
+                    $_POST['Assign']['user_id']=$userid;
 			$assignment=$_POST['Assign'];
                         Assign::model()->updateAll(array(
                             'user_id'=>$assignment['user_id'],
                             'traject_id'=>$assignment['traject_id'],
                             'startdate'=>$assignment['startdate'],
                             'completed'=>$assignment['completed'])
-                                ,"user_id=$id");
+                                ,"user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
 		}
 
@@ -188,13 +198,17 @@ class AssignController extends Controller
 	 */
 	public function actionUpdateCompleted($id)
 	{
-		$model=$this->loadModel($id);
+            if(isset($_GET['tid']))
+            {
+                $tid = $_GET['tid'];
+		$model=$this->loadModel($id, $tid);
                 
                 $assignment = array();
                 foreach($model as $value)
                     {
                         $assignment['completed'] = $value->completed;
                     }
+            }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -202,8 +216,9 @@ class AssignController extends Controller
 		if(isset($_POST['Assign']))
 		{
 			$assignment['completed']=$_POST['Assign']['completed'];
-                        Assign::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id");
-				$this->redirect(array('index'));
+                        Assign::model()->updateAll(array('completed'=>$assignment['completed']),
+                                "user_id=$id AND traject_id=$tid");
+                        $this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -218,7 +233,11 @@ class AssignController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		Assign::model()->deleteAll("user_id=$id");
+            if(isset($_GET['tid']))
+            {
+                $tid = $_GET['tid'];
+		Assign::model()->deleteAll("user_id=$id AND traject_id=$tid");
+            }
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -266,9 +285,9 @@ class AssignController extends Controller
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer the ID of the model to be loaded
 	 */
-	public function loadModel($id)
+	public function loadModel($id, $tid)
 	{
-		$model=Assign::model()->findAll("user_id=$id");
+		$model=Assign::model()->findAll("user_id=$id AND traject_id=$tid");
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -300,6 +319,16 @@ class AssignController extends Controller
 		$this->render('teacher/index',array(
 			'dataProvider'=>$dataProvider,
 		));
+    }
+    
+    public function getTrajectList()
+    {
+        $traject = Traject::model()->findAll();
+            $dick = array();
+            foreach($traject as $tr){
+                $dick[$tr->id] = $tr->description;
+            }
+        return $dick;
     }
         
     public function testCourseOfferFullPrint()

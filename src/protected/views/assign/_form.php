@@ -16,11 +16,7 @@
 	<?php echo $form->errorSummary($model); ?>
 
         <?php
-            $traject = Traject::model()->findAll();
-            $dick = array();
-            foreach($traject as $tr){
-                $dick[$tr->id] = $tr->description;
-            }
+            $dick = $this->getTrajectList();
         ?>
         
        <div class="row">

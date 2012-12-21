@@ -157,7 +157,7 @@ class EnrollController extends Controller
 		{
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
-				$this->redirect(array('ownindex','id'=>$model->user_id));
+				$this->redirect(array('index','id'=>$model->user_id));
 		}
 
 		$this->render('teacher/create',array(
@@ -199,6 +199,12 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    $userid=$_POST['Enroll']['user_id'];
+                    $user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
+                    foreach($user as $uid){
+                        $userid=$uid->id;
+                    }
+                    $_POST['Enroll']['user_id']=$userid;
 			$enrollment=$_POST['Enroll'];
 			Enroll::model()->updateAll(array(
                             'user_id'=>$enrollment['user_id'],
@@ -238,8 +244,9 @@ class EnrollController extends Controller
 		if(isset($_POST['Enroll']))
 		{
 			$assignment['completed']=$_POST['Enroll']['completed'];
-			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),"user_id=$id AND courseoffer_id=$cid");
-				$this->redirect(array('index'));
+			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),
+                                "user_id=$id AND courseoffer_id=$cid");
+                        $this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -368,6 +375,28 @@ class EnrollController extends Controller
            
 		
 			return array('assign' => $assign, 'dataProvider' => $dataProvider); 
+    }
+    
+    public function getCourseOfferList()
+    {
+        $courseoffer = Courseoffer::model()->findAll();
+            $bob = array();
+            foreach($courseoffer as $cs){
+                $course= $cs->course->description;
+                $loc = "";
+                if(isset($cs->location->description)){
+                    $loc = $cs->location->description;
+                }
+                $fysiek = 'Digitaal';
+                if($cs->fysiek == 1){
+                    $fysiek = 'Fysiek';
+                }
+                $year="Year: " . $cs->year;
+                $block="Block: " . $cs->block;
+                $polis = "$course: $fysiek,  $loc, $year, $block";
+                $bob[$cs->id] = $polis;
+            }
+        return $bob;
     }
         
     public function testCourseOfferFullPrint()

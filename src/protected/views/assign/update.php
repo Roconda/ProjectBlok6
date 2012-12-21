@@ -14,6 +14,7 @@ $assignment = array();
 foreach($model as $value)
 {
     $name = $value->user->username;
+    $assignment['username'] = $name;
     $assignment['user_id'] = $value->user_id;
     $assignment['traject_id'] = $value->traject_id;
     $assignment['startdate'] = $value->startdate;

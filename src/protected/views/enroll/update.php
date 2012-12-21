@@ -14,6 +14,7 @@ $enrollment = array();
 foreach($model as $value)
 {
     $name = $value->user->username;
+    $enrollment['username'] = $name;
     $enrollment['user_id'] = $value->user_id;
     $enrollment['courseoffer_id'] = $value->courseoffer_id;
     $enrollment['completed'] = $value->completed;

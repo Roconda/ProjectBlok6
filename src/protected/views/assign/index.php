@@ -44,10 +44,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                         'template'=>$templateField,
                         'buttons'=>array(
                             'update'=>array(
-                            'url'=>'Yii::app()->createUrl("assign/update", array("id"=>$data->user_id))',
+                            'url'=>'Yii::app()->createUrl("assign/update",
+                                array("id"=>$data->user_id, "tid"=>$data->traject_id))',
                                 ),
                             'delete'=>array(
-                            'url'=>'Yii::app()->createUrl("assign/delete", array("id"=>$data->user_id))',
+                            'url'=>'Yii::app()->createUrl("assign/delete",
+                                array("id"=>$data->user_id, "tid"=>$data->traject_id))',
                                 )
                             )
                 )

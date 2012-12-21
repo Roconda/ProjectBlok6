@@ -16,21 +16,7 @@
 	<?php echo $form->errorSummary($model); ?>
         
         <?php
-            $courseoffer = Courseoffer::model()->findAll();
-            $bob = array();
-            foreach($courseoffer as $cs){
-                $course= $cs->course->description;
-                $loc = "";
-                if(isset($cs->location->description)){
-                    $loc = $cs->location->description;
-                }
-                $fysiek = 'Digitaal';
-                if($cs->fysiek == 1){
-                    $fysiek = 'Fysiek';
-                }
-                $polis = "$course: $fysiek,  $loc";
-                $bob[$cs->id] = $polis;
-            }
+            $bob = $this->getCourseOfferList();
         ?>
 
        <div class="row">

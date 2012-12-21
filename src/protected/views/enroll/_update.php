@@ -15,16 +15,19 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+        
+        <?php $courseofferList = $this->getCourseOfferList(); ?>
 
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
-            <?php echo $form->textField($model,'user_id',array('value'=>$enrollment['user_id'])); ?>
+            <?php echo $form->textField($model,'user_id',array('value'=>$enrollment['username'])); ?>
             <?php echo $form->error($model,'user_id'); ?>
        </div>
 
 	<div class="row">
                 <?php echo $form->labelEx($model,'courseoffer_id'); ?>
-		<?php echo $form->textField($model,'courseoffer_id',array('value'=>$enrollment['courseoffer_id'])); ?>
+		<?php echo $form->dropDownList($model,'courseoffer_id',$courseofferList,
+                        array('options' => array($enrollment['courseoffer_id']=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'courseoffer_id'); ?>
 	</div>
         
