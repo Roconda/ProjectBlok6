@@ -79,11 +79,11 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view', 'indexajax'),
+				'actions'=>array('index','view'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
             array('allow', // allow authenticated user to perform the following
-				'actions'=>array('ownindex','index'),
+				'actions'=>array('ownindex','index', 'indexajax'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
             array('allow', // allow authenticated user to perform the following
