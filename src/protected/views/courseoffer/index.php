@@ -1,41 +1,92 @@
 <?php
-/* @var $this CourseofferController */
-/* @var $dataProvider CActiveDataProvider */
-
 $this->breadcrumbs=array(
-	'Courseoffers',
+	'Courses',
 );
+
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+    $('.search-form').slideToggle('fast');
+    return false;
+});
+$('.search-form form').submit(function(){
+    $.fn.yiiGridView.update('course-grid', {
+        data: $(this).serialize()
+    });
+    return false;
+});
+");
+
 ?>
 
-<h1>Cursus aanbod</h1>
+<h1>Courses offer</h1>
+<hr />
+
+<?php 
+$this->beginWidget('zii.widgets.CPortlet', array(
+	'htmlOptions'=>array(
+		'class'=>''
+	)
+));
+$this->widget('bootstrap.widgets.TbMenu', array(
+	'type'=>'pills',
+	'items'=>array(
+		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('course_create')),
+		array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
+		array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
+		array('label'=>'Export to PDF', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
+		array('label'=>'Export to Excel', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
+	),
+));
+$this->endWidget();
+?>
 
 
-<div class="row">
-<?php
-/* 
-$this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); 
 
- * 
- */
-$this->widget('bootstrap.widgets.TbGridView', array(
-	'dataProvider'=>$dataProvider,
-	'type' => 'striped',
-	//'itemView'=>'_view',
-	'columns' => array(
+<div class="search-form" style="display:none">
+<?php $this->renderPartial('_search',array(
+	'model'=>$model,
+)); ?>
+</div><!-- search-form -->
+
+
+<?php $this->widget('bootstrap.widgets.TbGridView',array(
+	'id'=>'course-grid',
+	'dataProvider'=>$model->search(),
+        'template'=>'{summary}{pager}{items}{pager}',
+	'columns'=>array(
 		array('name' => 'course.description'),
 		array('name' => 'location.description', 'header' => 'Locatie'),
 		array('name' => 'year'),
 		array('name' => 'block'),
 		array('name' => 'fysiek'),
 		array('name' => 'blocked'),
-                array('name' => 'course.required'),
-	)
-)); 
-
-?>
-</div>
-
-<?php require_once(__DIR__.'/../components/button/create_manage.php'); ?>
+		array('name' => 'course.required'),
+		array(
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template' => '{view} {update} {delete}',
+			'buttons' => array(
+			      'view' => array(
+					'label'=> 'View',
+					'options'=>array(
+						'class'=>'btn btn-small view'
+					)
+				),	
+				'update' => array(
+					'label'=> 'Update',
+					'visible' => 'Yii::app()->user->can("courseoffer_update")',
+					'options'=>array(
+						'class'=>'btn btn-small update'
+					)
+				),
+				'delete' => array(
+					'label'=> 'Delete',
+					'visible' => 'Yii::app()->user->can("courseoffer_delete")',
+					'options'=>array(
+						'class'=>'btn btn-small delete'
+					)
+				)
+			),
+            'htmlOptions'=>array('style'=>'width: 125px'),
+           )
+	),
+)); ?>

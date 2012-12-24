@@ -15,7 +15,6 @@ class CourseofferController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -47,7 +46,7 @@ class CourseofferController extends Controller
 				'actions'=>array('admin','create','view','index','update','delete'),
 				'users'=>array('admin'),
 			),
-			array('deny',  // deny all users
+			array('allow',  // deny all users
 				'users'=>array('*'),
 			),
 		);
@@ -118,11 +117,17 @@ class CourseofferController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -130,28 +135,28 @@ class CourseofferController extends Controller
 	 */
 	public function actionIndex()
 	{
-                $courseoffer=Courseoffer::model()->with('course', 'location');
-		$dataProvider=new CActiveDataProvider($courseoffer, array(
-                            'sort'=>array(
-                            'attributes'=>array(
-                                'course.description'=>array(
-                                    'asc'=>'course.description',
-                                    'desc'=>'course.description DESC',
-                                ),
-                                'location.description'=>array(
-                                    'asc'=>'location.description',
-                                    'desc'=>'location.description DESC',
-                                ),
-                                'course.required'=>array(
-                                    'asc'=>'course.required',
-                                    'desc'=>'course.required DESC',
-                                ),
-                                '*',
-                             ),
-                          ),                  
-    ));
+		$session=new CHttpSession;
+		$session->open();		
+		$criteria = new CDbCriteria();            
+
+		$model=new Courseoffer('search');
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['Courseoffer']))
+		{
+				$model->attributes=$_GET['Courseoffer'];
+
+			   if (!empty($model->course->description)) $criteria->addCondition('id = "'.$model->id.'"');			 
+				
+			   if (!empty($model->location->description)) $criteria->addCondition('description = "'.$model->description.'"');
+				
+			   if (!empty($model->course->required)) $criteria->addCondition('required = "'.$model->required.'"');
+						
+		}
+		 $session['Course_records']=Course::model()->findAll($criteria); 
+
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+		'model'=>$model,
 		));
 	}
 
@@ -228,4 +233,68 @@ class CourseofferController extends Controller
                 
             }
         }
+	
+	public function actionGenerateExcel()
+	{
+            $session=new CHttpSession;
+            $session->open();		
+            
+             if(isset($session['Course_records']))
+               {
+                $model=$session['Course_records'];
+               }
+               else
+                 $model = CourseOffer::model()->findAll();
+
+		
+		Yii::app()->request->sendFile(date('YmdHis').'.xls',
+			$this->renderPartial('excelReport', array(
+				'model'=>$model
+			), true)
+		);
+	}
+        public function actionGeneratePdf() 
+	{
+            $session=new CHttpSession;
+            $session->open();
+		Yii::import('application.extensions.giiplus.bootstrap.*');
+		require_once('tcpdf/tcpdf.php');
+		require_once('tcpdf/config/lang/eng.php');
+
+
+               if(isset($session['Course_records']))
+               {
+                $model=$session['Course_records'];
+               }
+               else
+                 $model = CourseOffer::model()->findAll();
+
+		
+
+		$html = $this->renderPartial('expenseGridtoReport', array(
+			'model'=>$model
+		), true);
+		
+		//die($html);
+		
+		$pdf = new TCPDF();
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(Yii::app()->name);
+		$pdf->SetTitle('CourseOffer Report');
+		$pdf->SetSubject('CourseOffer Report');
+		//$pdf->SetKeywords('example, text, report');
+		$pdf->SetHeaderData('', 0, "Report", '');
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->setHeaderFont(Array('helvetica', '', 8));
+		$pdf->setFooterFont(Array('helvetica', '', 6));
+		$pdf->SetMargins(15, 18, 15);
+		$pdf->SetHeaderMargin(5);
+		$pdf->SetFooterMargin(10);
+		$pdf->SetAutoPageBreak(TRUE, 0);
+		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->AddPage();
+		$pdf->writeHTML($html, true, false, true, false, '');
+		$pdf->LastPage();
+		$pdf->Output("Course_002.pdf", "I");
+	}
 }

@@ -1,60 +1,53 @@
-<?php
-/* @var $this CourseofferController */
-/* @var $model Courseoffer */
-/* @var $form CActiveForm */
-?>
-
 <div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'courseoffer-form',
 	'enableAjaxValidation'=>false,
+        'method'=>'post',
+	'type'=>'horizontal',
+	'htmlOptions'=>array(
+		'enctype'=>'multipart/form-data'
+	)
 )); ?>
+     	<fieldset>
+		<legend>
+			<p class="note">Fields with <span class="required">*</span> are required.</p>
+		</legend>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<?php echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span12')); ?>
+        		
+   <div class="control-group">		
+			<div class="span4">
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->textFieldRow($model,'course_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'course_id'); ?>
-		<?php echo $form->textField($model,'course_id'); ?>
-		<?php echo $form->error($model,'course_id'); ?>
+	<?php echo $form->textFieldRow($model,'location_id',array('class'=>'span5')); ?>
+	
+	<?php echo $form->textFieldRow($model,'year',array('class'=>'span5')); ?>
+	
+	<?php echo $form->textFieldRow($model,'block',array('class'=>'span5')); ?>
+	
+	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
+	
+	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
+
+                        </div>   
+  </div>
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+                        'icon'=>'ok white',  
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); ?>
+              <?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'reset',
+                        'icon'=>'remove',  
+			'label'=>'Reset',
+		)); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'location_id'); ?>
-		<?php echo $form->textField($model,'location_id'); ?>
-		<?php echo $form->error($model,'location_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'year'); ?>
-		<?php echo $form->textField($model,'year'); ?>
-		<?php echo $form->error($model,'year'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'block'); ?>
-		<?php echo $form->textField($model,'block'); ?>
-		<?php echo $form->error($model,'block'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'fysiek'); ?>
-		<?php echo $form->textField($model,'fysiek'); ?>
-		<?php echo $form->error($model,'fysiek'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'blocked'); ?>
-		<?php echo $form->textField($model,'blocked'); ?>
-		<?php echo $form->error($model,'blocked'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+</fieldset>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
