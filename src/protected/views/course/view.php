@@ -1,24 +1,33 @@
 <?php
-/* @var $this CourseController */
-/* @var $model Course */
-
 $this->breadcrumbs=array(
 	'Courses'=>array('index'),
 	$model->id,
 );
-
-$this->menu=array(
-	array('label'=>'List Course', 'url'=>array('index')),
-	array('label'=>'Create Course', 'url'=>array('create')),
-	array('label'=>'Update Course', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Course', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Course', 'url'=>array('admin')),
-);
 ?>
 
 <h1>View Course #<?php echo $model->id; ?></h1>
+<hr />
+<?php 
+$this->beginWidget('zii.widgets.CPortlet', array(
+	'htmlOptions'=>array(
+		'class'=>''
+	)
+));
+$this->widget('bootstrap.widgets.TbMenu', array(
+	'type'=>'pills',
+	'items'=>array(
+		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array()),
+                array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'), 'linkOptions'=>array()),
+                array('label'=>'Update', 'icon'=>'icon-edit', 'url'=>Yii::app()->controller->createUrl('update',array('id'=>$model->id)), 'linkOptions'=>array()),
+		//array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
+		array('label'=>'Print', 'icon'=>'icon-print', 'url'=>'javascript:void(0);return false', 'linkOptions'=>array('onclick'=>'printDiv();return false;')),
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+)));
+$this->endWidget();
+?>
+<div class='printableArea'>
+
+<?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
@@ -26,3 +35,16 @@ $this->menu=array(
 		'required',
 	),
 )); ?>
+</div>
+<style type="text/css" media="print">
+body {visibility:hidden;}
+.printableArea{visibility:visible;} 
+</style>
+<script type="text/javascript">
+function printDiv()
+{
+
+window.print();
+
+}
+</script>

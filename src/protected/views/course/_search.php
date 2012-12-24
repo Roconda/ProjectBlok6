@@ -1,35 +1,38 @@
-<?php
-/* @var $this CourseController */
-/* @var $model Course */
-/* @var $form CActiveForm */
-?>
-
-<div class="wide form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php  $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+        'id'=>'search-course-form',
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
-)); ?>
+));  ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'required'); ?>
-		<?php echo $form->textField($model,'required'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'description',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<?php echo $form->textFieldRow($model,'required',array('class'=>'span5')); ?>
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>
+               <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'button', 'icon'=>'icon-remove-sign white', 'label'=>'Reset', 'htmlOptions'=>array('class'=>'btnreset btn-small'))); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- search-form -->
+
+<?php $cs = Yii::app()->getClientScript();
+$cs->registerCoreScript('jquery');
+$cs->registerCoreScript('jquery.ui');
+$cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');
+?>	
+   <script>
+	$(".btnreset").click(function(){
+		$(":input","#search-course-form").each(function() {
+		var type = this.type;
+		var tag = this.tagName.toLowerCase(); // normalize case
+		if (type == "text" || type == "password" || tag == "textarea") this.value = "";
+		else if (type == "checkbox" || type == "radio") this.checked = false;
+		else if (tag == "select") this.selectedIndex = "";
+	  });
+	});
+   </script>
+

@@ -1,36 +1,45 @@
-<?php
-/* @var $this CourseController */
-/* @var $model Course */
-/* @var $form CActiveForm */
-?>
-
 <div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'course-form',
 	'enableAjaxValidation'=>false,
+        'method'=>'post',
+	'type'=>'horizontal',
+	'htmlOptions'=>array(
+		'enctype'=>'multipart/form-data'
+	)
 )); ?>
+     	<fieldset>
+		<legend>
+			<p class="note">Fields with <span class="required">*</span> are required.</p>
+		</legend>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<?php echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span12')); ?>
+        		
+   <div class="control-group">		
+			<div class="span4">
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->textFieldRow($model,'description',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'description'); ?>
+	<?php echo $form->textFieldRow($model,'required',array('class'=>'span5')); ?>
+
+                        </div>   
+  </div>
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+                        'icon'=>'ok white',  
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); ?>
+              <?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'reset',
+                        'icon'=>'remove',  
+			'label'=>'Reset',
+		)); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'required'); ?>
-		<?php echo $form->textField($model,'required'); ?>
-		<?php echo $form->error($model,'required'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+</fieldset>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
