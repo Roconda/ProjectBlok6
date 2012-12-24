@@ -46,7 +46,7 @@ class CourseofferController extends Controller
 				'actions'=>array('admin','create','view','index','update','delete'),
 				'users'=>array('admin'),
 			),
-			array('allow',  // deny all users
+			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
