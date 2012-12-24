@@ -15,7 +15,6 @@ class TrajectController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -118,11 +117,17 @@ class TrajectController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(Yii::app()->request->isGetRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -130,10 +135,38 @@ class TrajectController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Traject');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+            $session=new CHttpSession;
+            $session->open();		
+            $criteria = new CDbCriteria();            
+
+                $model=new Traject('search');
+                $model->unsetAttributes();  // clear any default values
+
+                if(isset($_GET['Traject']))
+		{
+                        $model->attributes=$_GET['Traject'];
+			
+			
+                   	
+                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+                     
+                    	
+                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+                     
+                    	
+                       if (!empty($model->duration)) $criteria->addCondition('duration = "'.$model->duration.'"');
+                     
+                    	
+                       if (!empty($model->nrcourses)) $criteria->addCondition('nrcourses = "'.$model->nrcourses.'"');
+                     
+                    			
+		}
+                 $session['Traject_records']=Traject::model()->findAll($criteria); 
+
+                $this->render('index',array(
+			'model'=>$model,
 		));
+
 	}
 
 	/**
@@ -175,5 +208,68 @@ class TrajectController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+        public function actionGenerateExcel()
+	{
+            $session=new CHttpSession;
+            $session->open();		
+            
+             if(isset($session['Traject_records']))
+               {
+                $model=$session['Traject_records'];
+               }
+               else
+                 $model = Traject::model()->findAll();
+
+		
+		Yii::app()->request->sendFile(date('YmdHis').'.xls',
+			$this->renderPartial('excelReport', array(
+				'model'=>$model
+			), true)
+		);
+	}
+        public function actionGeneratePdf() 
+	{
+            $session=new CHttpSession;
+            $session->open();
+		Yii::import('application.extensions.giiplus.bootstrap.*');
+		require_once('tcpdf/tcpdf.php');
+		require_once('tcpdf/config/lang/eng.php');
+
+
+               if(isset($session['Traject_records']))
+               {
+                $model=$session['Traject_records'];
+               }
+               else
+                 $model = Traject::model()->findAll();
+
+		
+
+		$html = $this->renderPartial('expenseGridtoReport', array(
+			'model'=>$model
+		), true);
+		
+		//die($html);
+		
+		$pdf = new TCPDF();
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(Yii::app()->name);
+		$pdf->SetTitle('Traject Report');
+		$pdf->SetSubject('Traject Report');
+		//$pdf->SetKeywords('example, text, report');
+		$pdf->SetHeaderData('', 0, "Report", '');
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->setHeaderFont(Array('helvetica', '', 8));
+		$pdf->setFooterFont(Array('helvetica', '', 6));
+		$pdf->SetMargins(15, 18, 15);
+		$pdf->SetHeaderMargin(5);
+		$pdf->SetFooterMargin(10);
+		$pdf->SetAutoPageBreak(TRUE, 0);
+		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->AddPage();
+		$pdf->writeHTML($html, true, false, true, false, '');
+		$pdf->LastPage();
+		$pdf->Output("Traject_002.pdf", "I");
 	}
 }
