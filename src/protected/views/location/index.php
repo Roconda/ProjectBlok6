@@ -30,7 +30,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
 	'type'=>'pills',
 	'items'=>array(
-		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array()),
+		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('location_create') ),
                 array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
 		array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
 		array('label'=>'Export to PDF', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
@@ -49,7 +49,8 @@ $this->endWidget();
 </div><!-- search-form -->
 
 
-<?php $this->widget('bootstrap.widgets.TbGridView',array(
+<?php
+$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'location-grid',
 	'dataProvider'=>$model->search(),
         'template'=>'{summary}{pager}{items}{pager}',
@@ -58,22 +59,24 @@ $this->endWidget();
 		'description',
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template' => '{view} {update} {delete}',
+			'template' => '{view}{update}{delete}',
 			'buttons' => array(
-			      'view' => array(
+			    'view' => array(
 					'label'=> 'View',
 					'options'=>array(
 						'class'=>'btn btn-small view'
 					)
 				),	
-                              'update' => array(
+				'update' => array(
 					'label'=> 'Update',
+					'visible' => 'Yii::app()->user->can("location_update")',
 					'options'=>array(
 						'class'=>'btn btn-small update'
 					)
 				),
 				'delete' => array(
 					'label'=> 'Delete',
+					'visible' => 'Yii::app()->user->can("location_delete")',
 					'options'=>array(
 						'class'=>'btn btn-small delete'
 					)

@@ -25,7 +25,7 @@ if(yii::app()->user->can('enroll_update_completed')) {
    $templateField = '{update}';
 }
 else if(yii::app()->user->can('enroll_update')
-        || (yii::app()->user->getName() == 'admin')) {
+        || (yii::app()->user->isAdmin())) {
     $templateField = '{update}{delete}';
 }
 $this->widget('bootstrap.widgets.TbGridView', array(
@@ -35,21 +35,21 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'user.profile.firstname', 'header' => Yii::t('enroll', 'Firstname')),
                 array('name' => 'user.profile.lastname', 'header' => Yii::t('enroll', 'Lastname')),
                 array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
-		array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
+				array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
                 array('name' => 'completed'),
                 array(
-                        'class'=>'CButtonColumn',
-                        'template'=>$templateField,
-                        'buttons'=>array(
-                            'update'=>array(
-                            'url'=>'Yii::app()->createUrl("enroll/update", 
-                                array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
-                                ),
-                            'delete'=>array(
-                            'url'=>'Yii::app()->createUrl("enroll/delete",
-                                array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
-                                ),
-                            )
+					'class'=>'CButtonColumn',
+					'template'=>$templateField,
+					'buttons'=>array(
+						'update'=>array(
+							'url'=>'Yii::app()->createUrl("enroll/update", 
+							array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+						),
+						'delete'=>array(
+							'url'=>'Yii::app()->createUrl("enroll/delete",
+							array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+						),
+					)
                 )
 	)
 
