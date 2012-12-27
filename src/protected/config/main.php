@@ -215,5 +215,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'min06sog@gmail.com',
+		//Wordt gebruikt in RegistrationController, hierbij word dit role_id als default bij het registeren.
+		'default_register_role'=>5,
 	),
 );
