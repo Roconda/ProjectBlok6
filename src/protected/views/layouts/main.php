@@ -10,6 +10,9 @@
     <![endif]-->
     
     <style type="text/css">
+    	body{
+    		background-image:url('<?php echo Yii::app()->baseUrl; ?>/images/gray_jean.png');
+    	}
     	#paddingContent{
     		margin-top: 60px;
     	}
@@ -41,14 +44,16 @@
 			</div>
 			
 
-			<div class="span8 offset1">
-				<?php if(isset($this->breadcrumbs)):?>
-					<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
-						 'links'=>$this->breadcrumbs,
-					)); */ ?><!-- breadcrumbs -->
-				<?php endif?>
-			
-				<?php echo $content; ?>
+			<div class="span8 offset1" style="background-color:#fff;margin-left:20px 50px;padding:20px 0px 20px 0px;">
+				<div style="margin-left:20px;">
+					<?php if(isset($this->breadcrumbs)):?>
+						<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
+							 'links'=>$this->breadcrumbs,
+						)); */ ?><!-- breadcrumbs -->
+					<?php endif?>
+				
+						<?php echo $content; ?>
+				</div>
 			</div>
 		
 			<div class="clear"></div>
