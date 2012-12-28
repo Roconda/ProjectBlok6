@@ -11,7 +11,7 @@ $items = array(
 
 if(!Yii::app()->user->isGuest) {
 	array_push($items, '<ul class="nav pull-right">');
-	array_push($items, '<li>'.CHtml::link('Settings', array('/profile/profile/view')).'</li>');//TODO: verander deze url naar dynamisch
+	array_push($items, '<li>'.CHtml::link('Settings',array('/profile/profile/view')).'</li>');//TODO: verander deze url naar dynamisch
 	array_push($items, '<li><a class="disabled">Logged in as '. Yii::app()->user->name .'</a></li>');
 	array_push($items, '</ul>');
 }
