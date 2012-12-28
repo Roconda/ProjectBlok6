@@ -53,7 +53,7 @@
 			
 
 			<div id="contentContainer" class="span8 offset1">
-				<div style="margin-left:20px;">
+				<div style="margin-left:10px;margin-right:10px;">
 					<?php if(isset($this->breadcrumbs)):?>
 						<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
 							 'links'=>$this->breadcrumbs,
