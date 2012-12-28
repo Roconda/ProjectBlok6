@@ -23,6 +23,14 @@
     	.nav-list > li > a {
     		color: #81001C;
     	}
+		div#contentContainer {
+			-moz-border-radius: 15px;
+			border-radius: 15px;
+			border: 1px solid #E3E3E3;
+			background-color:#fafafa;
+			margin-left:10px;
+			padding:20px 0px 20px 0px;
+		}
     </style>
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -44,7 +52,7 @@
 			</div>
 			
 
-			<div class="span8 offset1" style="background-color:#fff;margin-left:20px 50px;padding:20px 0px 20px 0px;">
+			<div id="contentContainer" class="span8 offset1">
 				<div style="margin-left:20px;">
 					<?php if(isset($this->breadcrumbs)):?>
 						<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
