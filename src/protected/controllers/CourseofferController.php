@@ -139,7 +139,7 @@ class CourseofferController extends Controller
 		$session->open();		
 		$criteria = new CDbCriteria();            
 
-		$model=new Courseoffer('search');
+		$model= Courseoffer::model()->with('user','course','location');
 		$model->unsetAttributes();  // clear any default values
 
 		if(isset($_GET['Courseoffer']))
@@ -200,6 +200,25 @@ class CourseofferController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function getCourseList()
+        {
+            $course = Course::model()->findAll();
+            $bob = array();
+            foreach($course as $co){
+                $bob[$co->id] = $co->description;
+            }
+            return $bob;
+        }
+        public function getLocationList()
+        {
+            $loc = Location::model()->findAll();
+            $bob = array();
+            foreach($loc as $lo){
+                $bob[$lo->id] = $lo->description;
+            }
+            return $bob;
+        }
         
         public function testCourseOfferFullPrint()
         {

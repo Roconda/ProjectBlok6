@@ -17,10 +17,12 @@
         		
    <div class="control-group">		
 			<div class="span4">
+        <?php $courseList = $this->getCourseList(); ?>
+        <?php $locationList = $this->getLocationList(); ?>
 
-	<?php echo $form->textFieldRow($model,'course_id',array('class'=>'span5')); ?>
+	<?php echo $form->dropDownListRow($model,'course_id',$courseList); ?>
 
-	<?php echo $form->textFieldRow($model,'location_id',array('class'=>'span5')); ?>
+	<?php echo $form->dropDownListRow($model,'location_id',$locationList); ?>
 	
 	<?php echo $form->textFieldRow($model,'year',array('class'=>'span5')); ?>
 	
@@ -28,7 +30,7 @@
 	
 	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
 	
-	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'blocked',array('class'=>'span5')); ?>
 
                         </div>   
   </div>
