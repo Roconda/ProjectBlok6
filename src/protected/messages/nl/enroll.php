@@ -9,6 +9,9 @@ return array(
         'Trail' => 'Traject',
         'Required' => 'Verplicht',
         'Year' => 'Jaar',
+        'completed' => 'behaald',
+        'failed' => 'niet behaald',
+        'uncompleted' => 'niet gedaan',
 );
 ?>
 

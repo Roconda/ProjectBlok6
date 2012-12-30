@@ -136,9 +136,29 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(isset($_POST['Enroll']))
+                    {
+                    $userid=$_POST['Enroll']['user_id'];
+                    $user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
+                    foreach($user as $uid){
+                        $userid=$uid->id;
+                    }
+                    $_POST['Enroll']['user_id']=$userid;
+                    $connection=Yii::app()->db;
+			$sql="INSERT INTO enroll (user_id,courseoffer_id,completed)
+                            VALUES(:user_id,:courseoffer_id,:completed)";
+                        $command = $connection->createCommand($sql);
+                        $command->bindParam(":user_id", $_POST['Enroll']['user_id'], PDO::PARAM_STR);
+                        $command->bindParam(":courseoffer_id", $_POST['Enroll']['courseoffer_id'], PDO::PARAM_STR);
+                        $command->bindParam(":completed", $_POST['Enroll']['completed'], PDO::PARAM_STR);
+                        $command->execute();
+                        $this->redirect(array('index'));
+                    }
+                    /*
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
 				$this->redirect(array('index','id'=>$model->user_id));
+                     */
 		}
 
 		$this->render('create',array(
