@@ -106,9 +106,31 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    if(isset($_POST['Assign']))
+                    {
+                    $userid=$_POST['Assign']['user_id'];
+                    $user=User::model()->findAll("username='" . $_POST['Assign']['user_id'] . "'");
+                    foreach($user as $uid){
+                        $userid=$uid->id;
+                    }
+                    $_POST['Assign']['user_id']=$userid;
+                    $connection=Yii::app()->db;
+			$sql="INSERT INTO assign (user_id, traject_id, startdate, completed)
+                            VALUES(:user_id,:traject_id,:startdate,:completed)";
+                        $command = $connection->createCommand($sql);
+                        $command->bindParam(":user_id", $_POST['Assign']['user_id'], PDO::PARAM_STR);
+                        $command->bindParam(":traject_id", $_POST['Assign']['traject_id'], PDO::PARAM_STR);
+                        $command->bindParam(":startdate", $_POST['Assign']['startdate'], PDO::PARAM_STR);
+                        $command->bindParam(":completed", $_POST['Assign']['completed'], PDO::PARAM_STR);
+                        $command->execute();
+                        $this->redirect(array('index'));
+                    }
+                    
+                    /*
 			$model->attributes=$_POST['Assign'];
 			if($model->save())
 				$this->redirect(array('index','id'=>$model->user_id));
+                     */
 		}
 
 		$this->render('create',array(
@@ -147,7 +169,7 @@ class AssignController extends Controller
                 $this->actionUpdateCompleted($id);
             }
             else if(yii::app()->user->can('assign_update') 
-                    || (yii::app()->user->getName() == 'admin'))
+                    || (yii::app()->user->isAdmin()))
             {
                 if(isset($_GET['tid']))
                 {
@@ -180,7 +202,8 @@ class AssignController extends Controller
                             'user_id'=>$assignment['user_id'],
                             'traject_id'=>$assignment['traject_id'],
                             'startdate'=>$assignment['startdate'],
-                            'completed'=>$assignment['completed'])
+                            'completed'=>$assignment['completed']
+                            )
                                 ,"user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
 		}

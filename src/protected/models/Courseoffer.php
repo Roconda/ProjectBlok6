@@ -106,6 +106,23 @@ class Courseoffer extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+                        'sort'=>array(
+                            'attributes'=>array(
+                                'course.description'=>array(
+                                    'asc'=>'course.description',
+                                    'desc'=>'course.description DESC',
+                                ),
+                                'location.description'=>array(
+                                    'asc'=>'location.description',
+                                    'desc'=>'location.description DESC',
+                                ),
+                                'course.required'=>array(
+                                    'asc'=>'course.required',
+                                    'desc'=>'course.required DESC',
+                                ),
+                                '*',
+                             ),
+                          )
 		));
 	}
 }

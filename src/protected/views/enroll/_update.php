@@ -17,6 +17,9 @@
 	<?php echo $form->errorSummary($model); ?>
         
         <?php $courseofferList = $this->getCourseOfferList(); ?>
+        <?php $completedList = array('uncompleted' => Yii::t('enroll', 'uncompleted'),
+                                     'failed' => Yii::t('enroll', 'failed'),
+                                     'completed' => Yii::t('enroll', 'completed')) ?>
 
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
@@ -33,7 +36,8 @@
         
        <div class="row">
                 <?php echo $form->labelEx($model,'completed'); ?>
-		<?php echo $form->textField($model,'completed',array('value'=>$enrollment['completed'])); ?>
+		<?php echo $form->dropDownList($model,'completed',$completedList,
+                        array('options' => array($enrollment['completed']=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'completed'); ?>
 	</div>
 

@@ -15,9 +15,10 @@
 
 	<?php echo $form->errorSummary($model); ?>
         
-        <?php
-            $trajectList = $this->getTrajectList();
-        ?>
+        <?php $trajectList = $this->getTrajectList(); ?>
+        <?php $completedList = array('uncompleted' => Yii::t('assign', 'uncompleted'),
+                                     'failed' => Yii::t('assign', 'failed'),
+                                     'completed' => Yii::t('assign', 'completed')) ?>
         
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
@@ -40,7 +41,8 @@
 
         <div class="row">
             <?php echo $form->labelEx($model,'completed'); ?>
-            <?php echo $form->textField($model,'completed', array('value'=>$assignment['completed'])); ?>
+            <?php echo $form->dropDownList($model,'completed',$completedList,
+                        array('options' => array($assignment['completed']=>array('selected'=>true)))); ?>
             <?php echo $form->error($model,'completed'); ?>
 	</div>
         

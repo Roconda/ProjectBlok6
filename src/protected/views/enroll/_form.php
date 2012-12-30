@@ -21,7 +21,7 @@
 
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
-            <?php echo $form->textField($model,'user_id',array('value'=>yii::app()->user->getId())); ?>
+            <?php echo $form->textField($model,'user_id'); ?>
             <?php echo $form->error($model,'user_id'); ?>
        </div>
 

@@ -6,5 +6,8 @@ return array(
         'Startdate' => 'Startdatum',
         'Completed' => 'Behaald',
         'Notes' => 'Aantekeningen',
+        'completed' => 'behaald',
+        'failed' => 'niet behaald',
+        'uncompleted' => 'niet gedaan',
 );
 ?>
