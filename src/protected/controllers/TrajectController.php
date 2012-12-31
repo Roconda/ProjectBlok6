@@ -209,7 +209,8 @@ class TrajectController extends Controller
 			Yii::app()->end();
 		}
 	}
-        public function actionGenerateExcel()
+    
+	public function actionGenerateExcel()
 	{
             $session=new CHttpSession;
             $session->open();		
@@ -228,7 +229,8 @@ class TrajectController extends Controller
 			), true)
 		);
 	}
-        public function actionGeneratePdf() 
+	
+	public function actionGeneratePdf() 
 	{
             $session=new CHttpSession;
             $session->open();

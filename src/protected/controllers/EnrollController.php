@@ -103,7 +103,7 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','create','view','index','update','delete','owncreate','ownindex'),
+				'actions'=>array('admin','create','view','index','update','delete','owncreate','ownindex','generatepdf','generateexcel'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -381,8 +381,8 @@ class EnrollController extends Controller
 		}
 	}
         
-        public function actionOwnIndex()
-        {
+	public function actionOwnIndex()
+	{
             $assign = Assign::model();
             $enroll = Enroll::model()->with('courseoffer', 'user');
             $dataProvider=new CActiveDataProvider($enroll, array(
@@ -397,6 +397,69 @@ class EnrollController extends Controller
 			return array('assign' => $assign, 'dataProvider' => $dataProvider); 
     }
     
+	public function actionGenerateExcel()
+	{
+		$session=new CHttpSession;
+		$session->open();		
+		
+		 if(isset($session['Enroll_records']))
+		   {
+			$model=$session['Enroll_records'];
+		   }
+		   else
+			 $model = Enroll::model()->findAll();
+
+		
+		Yii::app()->request->sendFile(date('YmdHis').'.xls',
+			$this->renderPartial('excelReport', array(
+				'model'=>$model
+			), true)
+		);
+	}
+	
+	public function actionGeneratePdf() 
+	{
+		$session=new CHttpSession;
+		$session->open();
+		Yii::import('application.extensions.giiplus.bootstrap.*');
+		require_once('tcpdf/tcpdf.php');
+		require_once('tcpdf/config/lang/eng.php');
+
+
+               if(isset($session['Enroll_records']))
+               {
+                $model=$session['Enroll_records'];
+               }
+               else
+                 $model = Enroll::model()->findAll();
+
+		
+
+		$html = $this->renderPartial('expenseGridtoReport', array(
+			'model'=>$model
+		), true);
+		
+		$pdf = new TCPDF();
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(Yii::app()->name);
+		$pdf->SetTitle('Enroll Report');
+		$pdf->SetSubject('Enroll Report');
+		//$pdf->SetKeywords('example, text, report');
+		$pdf->SetHeaderData('', 0, "Report", '');
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->setHeaderFont(Array('helvetica', '', 8));
+		$pdf->setFooterFont(Array('helvetica', '', 6));
+		$pdf->SetMargins(15, 18, 15);
+		$pdf->SetHeaderMargin(5);
+		$pdf->SetFooterMargin(10);
+		$pdf->SetAutoPageBreak(TRUE, 0);
+		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->AddPage();
+		$pdf->writeHTML($html, true, false, true, false, '');
+		$pdf->LastPage();
+		$pdf->Output("Enroll_002.pdf", "I");
+	}
+	
     public function getCourseOfferList()
     {
         $courseoffer = Courseoffer::model()->findAll();
