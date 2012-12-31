@@ -24,7 +24,6 @@
     		color: #81001C;
     	}
 		div#contentContainer {
-			-moz-border-radius: 15px;
 			border-radius: 15px;
 			border: 1px solid #E3E3E3;
 			background-color:#fafafa;
