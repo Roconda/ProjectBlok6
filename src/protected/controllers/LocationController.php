@@ -43,8 +43,8 @@ class LocationController extends Controller
 				'expression'=> "yii::app()->user->can('location_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','create','view','index','update','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','create','view','index','update','delete','generatepdf','generateexcel'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
