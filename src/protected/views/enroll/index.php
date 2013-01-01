@@ -1,10 +1,21 @@
 <?php
-/* @var $this EnrollController */
-/* @var $dataProvider CActiveDataProvider */
-
 $this->breadcrumbs=array(
 	'Enroll',
 );
+
+Yii::app()->clientScript->registerScript('search', "
+$('.search-button').click(function(){
+    $('.search-form').slideToggle('fast');
+    return false;
+});
+$('.search-form form').submit(function(){
+    $.fn.yiiGridView.update('course-grid', {
+        data: $(this).serialize()
+    });
+    return false;
+});
+");
+
 ?>
 
 <h1>Enroll</h1>
@@ -28,6 +39,12 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 ));
 $this->endWidget();
 ?>
+
+<div class="search-form" style="display:none">
+<?php $this->renderPartial('_search',array(
+	'model'=>$dataProvider->model,
+)); ?>
+</div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'enroll-grid',
