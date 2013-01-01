@@ -2,7 +2,7 @@
 
 class EnrollController extends Controller
 {
-    private $sort=array(
+        private $sort=array(
                             'attributes'=>array(
                                 'user.profile.firstname'=>array(
                                     'asc'=>'user.profile.firstname',
@@ -82,11 +82,11 @@ class EnrollController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index', 'indexajax'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "yii::app()->user->can('enroll_create_own')",
 			),
