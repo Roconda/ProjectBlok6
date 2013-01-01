@@ -94,6 +94,23 @@ class Assign extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+                        'sort'=>array(
+                            'attributes'=>array(
+                                'user.username'=>array(
+                                    'asc'=>'user.username',
+                                    'desc'=>'user.username DESC',
+                                ),
+                                'traject.description'=>array(
+                                    'asc'=>'traject.description',
+                                    'desc'=>'traject.description DESC',
+                                ),
+                                'traject.duration'=>array(
+                                    'asc'=>'traject.duration',
+                                    'desc'=>'traject.duration DESC',
+                                ),
+                                '*',
+                            ),
+                        )
 		));
 	}
 }
