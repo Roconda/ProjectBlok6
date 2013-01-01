@@ -88,7 +88,7 @@ class Assign extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('course_id',$this->course_id);
+		//$criteria->compare('course_id',$this->course_id);
 		$criteria->compare('completed',$this->completed,true);
 		$criteria->compare('notes',$this->notes,true);
 

@@ -278,12 +278,37 @@ class AssignController extends Controller
 		}
 		else
 		{
+		/*
             $assign=Assign::model()->with('traject', 'user');
 			$dataProvider=new CActiveDataProvider($assign, array(
                     'sort'=>$this->sort,
             ));
 			$this->render('index',array(
 				'dataProvider'=>$dataProvider,
+				'model'=>$assign,
+			));
+		*/
+			//--------------------
+			$session=new CHttpSession;
+			$session->open();		
+			$criteria = new CDbCriteria();            
+
+			$model=new Assign('search');
+			$model->unsetAttributes();  // clear any default values
+
+			if(isset($_GET['Assign']))
+			{
+				$model->attributes=$_GET['Assign'];
+				//if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+				
+				//if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+			 
+				//if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
+			}
+			$session['Assign_records']=Assign::model()->findAll($criteria); 
+
+			$this->render('index',array(
+			'model'=>$model,
 			));
 		}
 	}
