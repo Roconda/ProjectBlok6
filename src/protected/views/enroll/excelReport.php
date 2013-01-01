@@ -3,29 +3,29 @@
 
 	<tr>
 		<th width="80px">
-		      firstname		</th>
+		      username		</th>
  		<th width="80px">
-		      lastname		</th>
+		      traject		</th>
  		<th width="80px">
-		      course		</th>
+		      traject duration		</th>
  		<th width="80px">
-		      location		</th>
+		      start date		</th>
 		<th width="80px">
 		      completed		</th>
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
         		<td>
-			<?php echo $row->user->profile->firstname; ?>
+			<?php echo $row->user->username; ?>
 		</td>
        		<td>
-			<?php echo $row->user->profile->lastname; ?>
+			<?php echo $row->traject->description; ?>
 		</td>
        		<td>
-			<?php echo $row->courseoffer->course->description; ?>
+			<?php echo $row->traject->duration; ?>
 		</td>
        		<td>
-			<?php echo "NOGMAKEN"; /*$row->courseoffer->location->description;*/ ?>
+			<?php echo $row->startdate; ?>
 		</td>
 		<td>
 			<?php echo $row->completed; ?>
