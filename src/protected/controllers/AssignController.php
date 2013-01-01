@@ -18,7 +18,7 @@ class AssignController extends Controller
                                 ),
                                 '*',
                              ),
-                          ); 
+                          );
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -52,11 +52,11 @@ class AssignController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "Yii::app()->user->can('assign_read')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index'),
 				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "Yii::app()->user->can('assign_create_own')",
 			),

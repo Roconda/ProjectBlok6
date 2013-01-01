@@ -94,27 +94,6 @@ class Enroll extends CActiveRecord
                 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-                        'sort'=>array(
-                            'attributes'=>array(
-                                'user.profile.firstname'=>array(
-                                    'asc'=>'user.profile.firstname',
-                                    'desc'=>'user.profile.firstname DESC',
-                                ),
-                                'user.profile.lastname'=>array(
-                                    'asc'=>'user.profile.lastname',
-                                    'desc'=>'user.profile.lastname DESC',
-                                ),
-                                'courseoffer.course.description'=>array(
-                                    'asc'=>'courseoffer.course.description',
-                                    'desc'=>'courseoffer.course.description DESC',
-                                ),
-                                'courseoffer.location.description'=>array(
-                                    'asc'=>'courseoffer.location.description',
-                                    'desc'=>'courseoffer.location.description DESC',
-                                ),
-                                '*',
-                            ),
-                        )
 		));
 	}
 }
