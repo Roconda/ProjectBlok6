@@ -18,7 +18,7 @@ class AssignController extends Controller
                                 ),
                                 '*',
                              ),
-                          ); 
+                          );
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -52,11 +52,11 @@ class AssignController extends Controller
 				'actions'=>array('index','view'),
 				'expression'=> "Yii::app()->user->can('assign_read')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index'),
 				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
-            array('allow', // allow authenticated user to perform the following
+                        array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "Yii::app()->user->can('assign_create_own')",
 			),
@@ -73,8 +73,8 @@ class AssignController extends Controller
 				'expression'=> "Yii::app()->user->can('assign_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','create','view','index','update','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','create','view','index','update','delete','generatepdf','generateexcel'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -278,12 +278,37 @@ class AssignController extends Controller
 		}
 		else
 		{
+		/*
             $assign=Assign::model()->with('traject', 'user');
 			$dataProvider=new CActiveDataProvider($assign, array(
                     'sort'=>$this->sort,
             ));
 			$this->render('index',array(
 				'dataProvider'=>$dataProvider,
+				'model'=>$assign,
+			));
+		*/
+			//--------------------
+			$session=new CHttpSession;
+			$session->open();		
+			$criteria = new CDbCriteria();            
+
+			$model=new Assign('search');
+			$model->unsetAttributes();  // clear any default values
+
+			if(isset($_GET['Assign']))
+			{
+				$model->attributes=$_GET['Assign'];
+				//if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+				
+				//if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+			 
+				//if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
+			}
+			$session['Assign_records']=Assign::model()->findAll($criteria); 
+
+			$this->render('index',array(
+			'model'=>$model,
 			));
 		}
 	}
@@ -344,6 +369,71 @@ class AssignController extends Controller
 		));
     }
     
+	public function actionGenerateExcel()
+	{
+		$session=new CHttpSession;
+		$session->open();		
+		
+		 if(isset($session['Assign_records']))
+		   {
+			$model=$session['Assign_records'];
+		   }
+		   else
+			 $model = Assign::model()->findAll();
+
+		
+		Yii::app()->request->sendFile(date('YmdHis').'.xls',
+			$this->renderPartial('excelReport', array(
+				'model'=>$model
+			), true)
+		);
+	}
+	
+	public function actionGeneratePdf() 
+	{
+		$session=new CHttpSession;
+		$session->open();
+		Yii::import('application.extensions.giiplus.bootstrap.*');
+		require_once('tcpdf/tcpdf.php');
+		require_once('tcpdf/config/lang/eng.php');
+
+
+               if(isset($session['Assign_records']))
+               {
+                $model=$session['Assign_records'];
+               }
+               else
+                 $model = Assign::model()->findAll();
+
+		
+
+		$html = $this->renderPartial('expenseGridtoReport', array(
+			'model'=>$model
+		), true);
+		
+		//die($html);
+		
+		$pdf = new TCPDF();
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(Yii::app()->name);
+		$pdf->SetTitle('Assign Report');
+		$pdf->SetSubject('Assign Report');
+		//$pdf->SetKeywords('example, text, report');
+		$pdf->SetHeaderData('', 0, "Report", '');
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->setHeaderFont(Array('helvetica', '', 8));
+		$pdf->setFooterFont(Array('helvetica', '', 6));
+		$pdf->SetMargins(15, 18, 15);
+		$pdf->SetHeaderMargin(5);
+		$pdf->SetFooterMargin(10);
+		$pdf->SetAutoPageBreak(TRUE, 0);
+		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->AddPage();
+		$pdf->writeHTML($html, true, false, true, false, '');
+		$pdf->LastPage();
+		$pdf->Output("Traject_002.pdf", "I");
+	}
+	
     public function getTrajectList()
     {
         $traject = Traject::model()->findAll();

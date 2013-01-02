@@ -148,7 +148,7 @@ CREATE  TABLE IF NOT EXISTS `courseoffer` (
   CONSTRAINT `fk_CourseOffer_Location1`
     FOREIGN KEY (`location_id` )
     REFERENCES `location` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE SET NULL
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

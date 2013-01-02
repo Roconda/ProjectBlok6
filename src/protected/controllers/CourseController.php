@@ -43,8 +43,8 @@ class CourseController extends Controller
 				'expression'=> "yii::app()->user->can('course_delete')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','create','view','index','update','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('admin','create','view','index','update','delete','generatepdf','generateexcel'),
+				'expression'=>'Yii::app()->user->isAdmin()',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -135,35 +135,27 @@ class CourseController extends Controller
 	 */
 	public function actionIndex()
 	{
-            $session=new CHttpSession;
-            $session->open();		
-            $criteria = new CDbCriteria();            
+		$session=new CHttpSession;
+		$session->open();		
+		$criteria = new CDbCriteria();            
 
-                $model=new Course('search');
-                $model->unsetAttributes();  // clear any default values
+		$model=new Course('search');
+		$model->unsetAttributes();  // clear any default values
 
-                if(isset($_GET['Course']))
+		if(isset($_GET['Course']))
 		{
-                        $model->attributes=$_GET['Course'];
+			$model->attributes=$_GET['Course'];
+			if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
 			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-                     
-                    	
-                       if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"');
-                     
-                    			
+			if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+		 
+			if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
 		}
-                 $session['Course_records']=Course::model()->findAll($criteria); 
+		$session['Course_records']=Course::model()->findAll($criteria); 
 
-                $this->render('index',array(
-			'model'=>$model,
+		$this->render('index',array(
+		'model'=>$model,
 		));
-
 	}
 
 	/**
