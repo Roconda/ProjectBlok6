@@ -80,6 +80,8 @@ INSERT INTO `action` VALUES (49,'user_profile_read_own',NULL,NULL);
 INSERT INTO `action` VALUES (50,'user_profile_update_own',NULL,NULL);
 INSERT INTO `action` VALUES (51,'assign_update_completed',NULL,NULL);
 INSERT INTO `action` VALUES (52,'enroll_update_completed',NULL,NULL);
+INSERT INTO `action` VALUES (53,'export_pdf');
+INSERT INTO `action` VALUES (54,'export_xls');
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
