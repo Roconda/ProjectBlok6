@@ -3,6 +3,12 @@ $this->breadcrumbs=array(
 	'Courses',
 );
 
+$crit = $model->findAll();
+foreach($crit as $c)
+{
+echo $c->course->description;
+}
+
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
     $('.search-form').slideToggle('fast');
@@ -30,7 +36,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
 	'type'=>'pills',
 	'items'=>array(
-		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('courseoffer_create')),
+		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('courseoffer_create') || Yii::app()->user->isAdmin()),
 		array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
 		array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
 		array('label'=>'Export to PDF', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
@@ -40,7 +46,18 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 $this->endWidget();
 ?>
 
-
+<?php $courseoffer = Courseoffer::model()->findAll();
+            $bob = array();
+            foreach($courseoffer as $cs){
+                $loc = "";
+                if(isset($cs->location->description)){
+                    $loc = $cs->location->description;
+                }
+                $id = md5($cs->id);
+                $polis = $loc;
+                $bob[$id] = $polis;
+            }
+        ?>
 
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
@@ -54,13 +71,13 @@ $this->endWidget();
 	'dataProvider'=>$model->search(),
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		array('name' => 'course.description'),
-		array('name' => 'location.description', 'header' => 'Locatie'),
+		array('name'=>'course_description', 'type'=>'raw', 'value'=>'$data->course->description'),
+		array('name' => 'location_description', 'type'=>'raw', 'value'=>'1'),
 		array('name' => 'year'),
 		array('name' => 'block'),
 		array('name' => 'fysiek'),
 		array('name' => 'blocked'),
-		array('name' => 'course.required'),
+		array('name' => 'course_required', 'type'=>'raw', 'value'=>'$data->course->required'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template' => '{view} {update} {delete}',

@@ -7,9 +7,9 @@
 
 	<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'course_id',array('class'=>'span5','maxlength'=>45)); ?>
+	<?php echo $form->textFieldRow($model,'course_description',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'location_id',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'location_description',array('class'=>'span5')); ?>
 	
 	<?php echo $form->textFieldRow($model,'year',array('class'=>'span5')); ?>
 	
@@ -18,6 +18,8 @@
 	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
 	
 	<?php echo $form->textFieldRow($model,'blocked',array('class'=>'span5')); ?>
+
+        <?php echo $form->textFieldRow($model,'course_required',array('class'=>'span5')); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>

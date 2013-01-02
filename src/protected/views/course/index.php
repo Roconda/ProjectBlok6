@@ -54,7 +54,6 @@ $this->endWidget();
 	'dataProvider'=>$model->search(),
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		'id',
 		'description',
 		'required',
        array(
