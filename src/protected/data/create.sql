@@ -149,7 +149,7 @@ CREATE  TABLE IF NOT EXISTS `courseoffer` (
     FOREIGN KEY (`location_id` )
     REFERENCES `location` (`id` )
     ON DELETE SET NULL
-    ON UPDATE CASCADE)
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
