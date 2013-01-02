@@ -1,15 +1,16 @@
-<?php  $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php
+$form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
         'id'=>'search-assign-form',
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 ));  ?>
 
 
-	<?php echo $form->textFieldRow($model,'user',array('class'=>'span5')); //user.username ?>
+	<?php //echo $form->textFieldRow($model,'user',array('class'=>'span5')); //user.username ?>
 
-	<?php echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.description ?>
+	<?php //echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.description ?>
 
-	<?php echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.duration ?>
+	<?php //echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.duration ?>
 	
 	<?php echo $form->textFieldRow($model,'startdate',array('class'=>'span5')); ?>
 	
@@ -17,7 +18,7 @@
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>
-               <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'button', 'icon'=>'icon-remove-sign white', 'label'=>'Reset', 'htmlOptions'=>array('class'=>'btnreset btn-small'))); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'button', 'icon'=>'icon-remove-sign white', 'label'=>'Reset', 'htmlOptions'=>array('class'=>'btnreset btn-small'))); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -28,14 +29,14 @@ $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');
 ?>	
-   <script>
-	$(".btnreset").click(function(){
-		$(":input","#search-assign-form").each(function() {
-		var type = this.type;
-		var tag = this.tagName.toLowerCase(); // normalize case
-		if (type == "text" || type == "password" || tag == "textarea") this.value = "";
-		else if (type == "checkbox" || type == "radio") this.checked = false;
-		else if (tag == "select") this.selectedIndex = "";
-	  });
-	});
-   </script>
+<script>
+$(".btnreset").click(function(){
+	$(":input","#search-assign-form").each(function() {
+	var type = this.type;
+	var tag = this.tagName.toLowerCase(); // normalize case
+	if (type == "text" || type == "password" || tag == "textarea") this.value = "";
+	else if (type == "checkbox" || type == "radio") this.checked = false;
+	else if (tag == "select") this.selectedIndex = "";
+  });
+});
+</script>

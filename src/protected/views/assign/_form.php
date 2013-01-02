@@ -1,53 +1,49 @@
-<?php
-/* @var $this CourseofferController */
-/* @var $model Courseoffer */
-/* @var $form CActiveForm */
-?>
-
 <div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'assign-form',
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+	'id'=>'course-form',
 	'enableAjaxValidation'=>false,
+        'method'=>'post',
+	'type'=>'horizontal',
+	'htmlOptions'=>array(
+		'enctype'=>'multipart/form-data'
+	)
 )); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+     	<fieldset>
+		<legend>
+			<p class="note">Fields with <span class="required">*</span> are required.</p>
+		</legend>
 
 	<?php echo $form->errorSummary($model); ?>
+        		
+   <div class="control-group">		
+			<div class="span4">
 
-        <?php
-            $dick = $this->getTrajectList();
-        ?>
-        
-       <div class="row">
-            <?php echo $form->labelEx($model,'user_id'); ?>
-            <?php echo $form->textField($model,'user_id'); ?>
-            <?php echo $form->error($model,'user_id'); ?>
-	</div>
-        
-	<div class="row">
-		<?php echo $form->labelEx($model,'traject_id'); ?>
-		<?php echo $form->dropDownList($model,'traject_id',$dick); ?>
-		<?php echo $form->error($model,'traject_id'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'startdate'); ?>
-		<?php echo $form->dateField($model,'startdate'); ?>
-		<?php echo $form->error($model,'startdate'); ?>
-	</div>
+	<?php echo $form->dropDownListRow($model,'traject_id',$this->getTrajectList(),null,array('class'=>'span5')); ?>
 
-        <div class="row">
-            <?php echo $form->hiddenField($model,'completed',array('value'=>'1')); ?>
-            <?php echo $form->error($model,'completed'); ?>
+	<?php echo $form->textFieldRow($model,'startdate',array('class'=>'span5')); ?>
+	
+	<?php echo $form->textFieldRow($model,'completed',array('class'=>'span5','value'=>'1')); ?>
+	
+                        </div>   
+  </div>
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+                        'icon'=>'ok white',  
+			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+		)); ?>
+              <?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'reset',
+                        'icon'=>'remove',  
+			'label'=>'Reset',
+		)); ?>
 	</div>
-        
-	<div class="row buttons">
-		<?php
-                    echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); 
-                ?>
-	</div>
+</fieldset>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>
