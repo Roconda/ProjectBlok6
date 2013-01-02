@@ -14,6 +14,9 @@
  */
 class Courseoffer extends CActiveRecord
 { 
+    public $course_description;
+    public $course_required;
+    public $location_description;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -44,7 +47,7 @@ class Courseoffer extends CActiveRecord
 			array('course_id, location_id, year, block, fysiek, blocked', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, course_id, location_id, year, block, fysiek, blocked', 'safe', 'on'=>'search'),
+			array('id, course_id, location_id, year, block, fysiek, blocked,course_description, course_required, location_description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +85,9 @@ class Courseoffer extends CActiveRecord
 			'block' => Yii::t ('courseOffer', 'Block'),
 			'fysiek' => Yii::t ('courseOffer', 'Physical'),
 			'blocked' => Yii::t ('courseOffer', 'Frozen'),
+                        'course_description' => 'CDescription',
+                        'location_description' => 'CLocation',
+                        'course_required' => 'CRequired',
 		);
 	}
 
@@ -93,30 +99,38 @@ class Courseoffer extends CActiveRecord
 	{
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
-
-		$criteria=new CDbCriteria;
                 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('course_id',$this->course_id);
-		$criteria->compare('location_id',$this->location_id);
-		$criteria->compare('year',$this->year);
-		$criteria->compare('block',$this->block);
-		$criteria->compare('fysiek',$this->fysiek);
-		$criteria->compare('blocked',$this->blocked);
+		$criteria=new CDbCriteria;
+                $criteria->with = array('course', 'location');
+                
+		$criteria->compare('t.id',$this->id);
+		$criteria->compare('t.course_id',$this->course_id);
+		$criteria->compare('t.location_id',$this->location_id);
+		$criteria->compare('t.year',$this->year);
+		$criteria->compare('t.block',$this->block);
+		$criteria->compare('t.fysiek',$this->fysiek);
+		$criteria->compare('t.blocked',$this->blocked);
+                $criteria->compare('course_description',$this->course_id,true);
+                $criteria->compare('location_description',$this->location,true);
+                $criteria->compare('course_required',$this->course,true);
+
+                
+                //$criteria->compare('course.description',$this->course_id, true);
+                //$criteria->compare('course.required',$this->course_id, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
                         'sort'=>array(
                             'attributes'=>array(
-                                'course.description'=>array(
+                                'course_description'=>array(
                                     'asc'=>'course.description',
                                     'desc'=>'course.description DESC',
                                 ),
-                                'location.description'=>array(
+                                'location_description'=>array(
                                     'asc'=>'location.description',
                                     'desc'=>'location.description DESC',
                                 ),
-                                'course.required'=>array(
+                                'course_required'=>array(
                                     'asc'=>'course.required',
                                     'desc'=>'course.required DESC',
                                 ),

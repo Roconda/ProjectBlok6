@@ -55,7 +55,6 @@ $this->widget('bootstrap.widgets.TbGridView',array(
 	'dataProvider'=>$model->search(),
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		'id',
 		'description',
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
