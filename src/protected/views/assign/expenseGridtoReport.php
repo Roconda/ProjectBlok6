@@ -1,36 +1,30 @@
 <?php if ($model !== null):?>
 <table border="1">
-
 	<tr>
-		<th width="80px">
-		      Username</th>
- 		<th width="80px">
-		      Trail</th>
- 		<th width="80px">
-		      Duration</th>
- 		<th width="80px">
-		      startdate		</th>
-		  <th width="80px">
-		      completed		</th>
+		<th><?php echo Yii::t('assign', 'Username'); ?></th>
+ 		<th><?php echo Yii::t('assign', 'Trail'); ?></th>
+ 		<th><?php echo Yii::t('assign', 'Duration'); ?></th>
+ 		<th><?php echo Yii::t('assign', 'Startdate'); ?></th>
+		<th><?php echo Yii::t('assign', 'completed'); ?></th>
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
-        		<td>
+		<td>
 			<?php echo $row->user->username; ?>
 		</td>
        		<td>
 			<?php echo $row->traject->description; ?>
 		</td>
-       		<td>
+		<td>
 			<?php echo $row->traject->duration; ?>
 		</td>
-       		<td>
+		<td>
 			<?php echo $row->startdate; ?>
 		</td>
 		<td>
 			<?php echo $row->completed; ?>
 		</td>
-       	</tr>
-     <?php endforeach; ?>
+	</tr>
+	<?php endforeach; ?>
 </table>
 <?php endif; ?>
