@@ -383,7 +383,7 @@ class AssignController extends Controller
 
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
-			$this->renderPartial('excelReport', array(
+			$this->renderPartial('expenseGridtoReport', array(
 				'model'=>$model
 			), true)
 		);

@@ -1,10 +1,11 @@
 <?php
 return array(
-        'Course' => 'Cursus',
+	'Course' => 'Cursus',
 	'Location' => 'Locatie',
 	'Year' => 'Jaar',
-        'Block' => 'Blok',
+	'Block' => 'Blok',
 	'Physical' => 'Fysiek',
-        'Frozen' => 'Bevroren',
+	'Frozen' => 'Bevroren',
+	'Required' => 'Verplicht',
 );
 ?>

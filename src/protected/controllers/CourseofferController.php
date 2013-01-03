@@ -255,16 +255,15 @@ class CourseofferController extends Controller
 	
 	public function actionGenerateExcel()
 	{
-            $session=new CHttpSession;
-            $session->open();		
-            
-             if(isset($session['Course_records']))
-               {
-                $model=$session['Course_records'];
-               }
-               else
-                 $model = CourseOffer::model()->findAll();
-
+		$session=new CHttpSession;
+		$session->open();		
+		
+		if(isset($session['Course_records']))
+		{
+			$model=$session['Course_records'];
+		}
+		else
+			$model = CourseOffer::model()->findAll();
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
 			$this->renderPartial('excelReport', array(
@@ -272,23 +271,21 @@ class CourseofferController extends Controller
 			), true)
 		);
 	}
-        public function actionGeneratePdf() 
+	
+	public function actionGeneratePdf() 
 	{
-            $session=new CHttpSession;
-            $session->open();
+		$session=new CHttpSession;
+		$session->open();
 		Yii::import('application.extensions.giiplus.bootstrap.*');
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-
-               if(isset($session['Course_records']))
-               {
-                $model=$session['Course_records'];
-               }
-               else
-                 $model = CourseOffer::model()->findAll();
-
-		
+		if(isset($session['Course_records']))
+		{
+			$model=$session['Course_records'];
+		}
+		else
+			$model = CourseOffer::model()->findAll();
 
 		$html = $this->renderPartial('expenseGridtoReport', array(
 			'model'=>$model
