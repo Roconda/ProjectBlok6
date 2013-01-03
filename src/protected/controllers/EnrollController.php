@@ -27,12 +27,12 @@ class EnrollController extends Controller
         private $teachersort=array(
                             'attributes'=>array(
                                 'courseoffer.course.description'=>array(
-                                    'asc'=>'courseoffer.course.description',
-                                    'desc'=>'courseoffer.course.description DESC',
+                                    'asc'=>'course.description',
+                                    'desc'=>'course.description DESC',
                                 ),
                                 'courseoffer.location.description'=>array(
-                                    'asc'=>'courseoffer.location.description',
-                                    'desc'=>'courseoffer.location.description DESC',
+                                    'asc'=>'location.description',
+                                    'desc'=>'location.description DESC',
                                 ),
                                 'courseoffer.year'=>array(
                                     'asc'=>'courseoffer.year',
@@ -43,8 +43,8 @@ class EnrollController extends Controller
                                     'desc'=>'courseoffer.block DESC',
                                 ),
                                 'courseoffer.course.required'=>array(
-                                    'asc'=>'courseoffer.course.required',
-                                    'desc'=>'courseoffer.course.required DESC',
+                                    'asc'=>'course.required',
+                                    'desc'=>'course.required DESC',
                                 ),
                                 '*',
                              ),
@@ -383,7 +383,14 @@ class EnrollController extends Controller
 	public function actionOwnIndex()
 	{
             $assign = Assign::model();
-            $enroll = Enroll::model()->with('courseoffer', 'user');
+            $enroll = Enroll::model();
+            $criteria = new CDbCriteria();
+            $criteria->join = 'LEFT OUTER JOIN `courseoffer` `courseoffer` ON (`t`.`courseoffer_id`=`courseoffer`.`id`) 
+                LEFT OUTER JOIN profile profile ON t.user_id=profile.user_id 
+                LEFT OUTER JOIN `course` `course` ON (`courseoffer`.`course_id`=`course`.`id`)
+                LEFT OUTER JOIN `location` `location` ON (`courseoffer`.`location_id`=`location`.`id`)  
+                LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`)';
+            $enroll->setDbCriteria($criteria);
             $dataProvider=new CActiveDataProvider($enroll, array(
                 'sort'=>$this->teachersort,
             ));
