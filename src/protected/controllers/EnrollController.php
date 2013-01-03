@@ -300,6 +300,7 @@ class EnrollController extends Controller
             $enroll = Enroll::model();
             
             $criteria = new CDbCriteria();
+            $criteria->mergeWith($enroll->search());
             $criteria->join = 'LEFT OUTER JOIN `courseoffer` `courseoffer` ON (`t`.`courseoffer_id`=`courseoffer`.`id`) 
                 LEFT OUTER JOIN profile profile ON t.user_id=profile.user_id 
                 LEFT OUTER JOIN `course` `course` ON (`courseoffer`.`course_id`=`course`.`id`)

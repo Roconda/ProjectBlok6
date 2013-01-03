@@ -6,14 +6,16 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 ));  ?>
 
 
-	<?php //echo $form->textFieldRow($model,'user',array('class'=>'span5')); //user.username ?>
+	<?php echo $form->textFieldRow($model,'user_username',array('class'=>'span5')); //user.username ?>
 
-	<?php //echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.description ?>
+	<?php echo $form->textFieldRow($model,'traject_description',array('class'=>'span5')); //traject.description ?>
 
-	<?php //echo $form->textFieldRow($model,'traject',array('class'=>'span5')); //traject.duration ?>
+	<?php echo $form->textFieldRow($model,'traject_duration',array('class'=>'span5')); //traject.duration ?>
 	
-	<?php echo $form->textFieldRow($model,'startdate',array('class'=>'span5')); ?>
-	
+        <?php echo $form->labelEx($model,'startdate'); ?>
+	<?php echo $form->dateField($model,'startdate',array('class'=>'span5')); ?>
+        <?php echo $form->error($model,'startdate'); ?>
+
 	<?php echo $form->textFieldRow($model,'completed',array('class'=>'span5')); ?>
 
 	<div class="form-actions">

@@ -92,8 +92,11 @@ class Enroll extends CActiveRecord
 		$criteria->compare('completed',$this->completed,true);
 		$criteria->compare('notes',$this->notes,true);
                 
+                return $criteria;
+                 /*
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+                  */
 	}
 }

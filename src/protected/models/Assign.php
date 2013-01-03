@@ -28,6 +28,9 @@ class Assign extends CActiveRecord
                                 '*',
                              ),
                           );
+    public $user_username;
+    public $traject_description;
+    public $traject_duration;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -61,7 +64,7 @@ class Assign extends CActiveRecord
 			array('notes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, traject_id, completed, notes', 'safe', 'on'=>'search'),
+			array('user_id, traject_id, startdate, completed, notes, user_username, traject_description, traject_duration', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -106,7 +109,8 @@ class Assign extends CActiveRecord
                 $criteria->with = array('traject', 'user');
 
 		$criteria->compare('user_id',$this->user_id,true);
-		//$criteria->compare('course_id',$this->course_id);
+		$criteria->compare('traject_id',$this->traject_id);
+                $criteria->compare('startdate', $this->startdate);
 		$criteria->compare('completed',$this->completed,true);
 		$criteria->compare('notes',$this->notes,true);
 
