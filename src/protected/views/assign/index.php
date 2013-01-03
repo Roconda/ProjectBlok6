@@ -64,11 +64,7 @@ $this->endWidget();
 			//'template' => '{view} {update} {delete}',
 			'buttons' => array(	
 				'view' => array(
-					'label'=> 'View',
-					'url'=>'Yii::app()->createUrl("assign/view", array("id"=>$data->user_id, "tid"=>$data->traject_id))',
-					'options'=>array(
-						'class'=>'btn btn-small view'
-					)
+					'visible'=> 'false',
 				),
 				'update' => array(
 					'label'=> 'Update',
@@ -91,5 +87,3 @@ $this->endWidget();
 	   )
 	),
 )); ?>
-
-
