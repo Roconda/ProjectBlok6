@@ -3,11 +3,6 @@ $this->breadcrumbs=array(
 	'Courses',
 );
 
-$crit = $model->findAll();
-foreach($crit as $c)
-{
-//echo $c->course->description;
-}
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){

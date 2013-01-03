@@ -44,7 +44,7 @@ if(yii::app()->user->can('enroll_update_completed')) {
                                                     'enrollment'=>$enrollment,));
 }
 else if(yii::app()->user->can('enroll_update')
-        || (yii::app()->user->getName() == 'admin')) {
+        || (yii::app()->user->isAdmin())) {
     echo $this->renderPartial('_form', array('model'=>$model,
                                                     'enrollment'=>$enrollment,));
 }
