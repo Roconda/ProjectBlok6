@@ -110,12 +110,9 @@ class Courseoffer extends CActiveRecord
 		$criteria->compare('t.block',$this->block);
 		$criteria->compare('t.fysiek',$this->fysiek);
 		$criteria->compare('t.blocked',$this->blocked);
-                $merge->join = 'LEFT OUTER JOIN course c ON t.course_id=c.id LEFT OUTER JOIN location l ON t.location_id=l.id';
-                $criteria->mergeWith($merge);
                 
-                $criteria->compare('c.description',$this->course_description,true);
-                $criteria->compare('l.description',$this->location_description,true);
-                $criteria->compare('c.required',$this->course_required,true);
+                $criteria->with = array('course', 'location');
+                
                 
                 
 
@@ -128,16 +125,16 @@ class Courseoffer extends CActiveRecord
                         'sort'=>array(
                             'attributes'=>array(
                                 'course_description'=>array(
-                                    'asc'=>'c.description',
-                                    'desc'=>'c.description DESC',
+                                    'asc'=>'course.description',
+                                    'desc'=>'course.description DESC',
                                 ),
                                 'location_description'=>array(
-                                    'asc'=>'l.description',
-                                    'desc'=>'l.description DESC',
+                                    'asc'=>'location.description',
+                                    'desc'=>'location.description DESC',
                                 ),
                                 'course_required'=>array(
-                                    'asc'=>'c.required',
-                                    'desc'=>'c.required DESC',
+                                    'asc'=>'course.required',
+                                    'desc'=>'course.required DESC',
                                 ),
                                 '*',
                              ),

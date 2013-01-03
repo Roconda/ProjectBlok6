@@ -55,13 +55,13 @@ $this->endWidget();
         'filter'=>$model,
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		array('name'=>'course_description', 'type'=>'raw', 'value'=>'$data->course->description'),
-		array('name' => 'location_description', 'type'=>'raw', 'value'=>'$data->location->description'),
+		array('name'=>'course_description', 'value'=>'$data->course->description'),
+		array('name' => 'location_description', 'value'=>'$data->location->description'),
 		array('name' => 'year'),
 		array('name' => 'block'),
-		array('name' => 'fysiek'),
-		array('name' => 'blocked'),
-		array('name' => 'course_required', 'type'=>'raw', 'value'=>'$data->course->required'),
+		array('name' => 'fysiek', 'type' => 'boolean'),
+		array('name' => 'blocked', 'type' => 'boolean'),
+		array('name' => 'course_required', 'type'=>'boolean', 'value'=>'$data->course->required'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template' => '{update} {delete}',
