@@ -58,7 +58,7 @@ $this->endWidget();
 		array('name' => 'completed'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
-			//'template' => '{view} {update} {delete}',
+			'template' => '{update} {delete}',
 			'buttons' => array(
 			      'view' => array(
 					'label'=> 'View',
