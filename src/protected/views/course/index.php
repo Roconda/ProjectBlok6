@@ -58,24 +58,20 @@ $this->endWidget();
 		'required',
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template' => '{view} {update} {delete}',
 			'buttons' => array(
 			      'view' => array(
-					'label'=> 'View',
-					'options'=>array(
-						'class'=>'btn btn-small view'
-					)
+					'visible' => 'false',
 				),	
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("course_update")',
+					'visible' => 'Yii::app()->user->can("course_update") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small update'
 					)
 				),
 				'delete' => array(
 					'label'=> 'Delete',
-					'visible' => 'Yii::app()->user->can("course_delete")',
+					'visible' => 'Yii::app()->user->can("course_delete") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small delete'
 					)

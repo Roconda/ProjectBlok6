@@ -31,7 +31,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 	'type'=>'pills',
 	'items'=>array(
 		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('traject_create') || Yii::app()->user->isAdmin()),
-                array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
+		array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
 		array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
 		array('label'=>'Export to PDF', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
 		array('label'=>'Export to Excel', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
@@ -59,24 +59,20 @@ $this->endWidget();
 		'nrcourses',
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template' => '{view} {update} {delete}',
 			'buttons' => array(
-			      'view' => array(
-					'label'=> 'View',
-					'options'=>array(
-						'class'=>'btn btn-small view'
-					)
-				),	
+				'view' => array(
+					'visible' => 'false',
+				),
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("traject_update")',
+					'visible' => 'Yii::app()->user->can("traject_update") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small update'
 					)
 				),
 				'delete' => array(
 					'label'=> 'Delete',
-					'visible' => 'Yii::app()->user->can("traject_delete")',
+					'visible' => 'Yii::app()->user->can("traject_delete") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small delete'
 					)
