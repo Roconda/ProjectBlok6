@@ -137,7 +137,8 @@ class CourseofferController extends Controller
 	{
 		$session=new CHttpSession;
 		$session->open();		
-		$criteria = new CDbCriteria();            
+		$criteria = new CDbCriteria(); 
+                $merge = new CDbCriteria();
 
 		$model= Courseoffer::model()->with('user','course','location');
 		$model->unsetAttributes();  // clear any default values
@@ -146,14 +147,22 @@ class CourseofferController extends Controller
 		{
 				$model->attributes=$_GET['Courseoffer'];
 
-			   if (!empty($model->course->description)) $criteria->addCondition('id = "'.$model->id.'"');			 
+			   if (!empty($model->course->description)) $criteria->addCondition('id = "'.$model->id.'"');
 				
 			   if (!empty($model->location->description)) $criteria->addCondition('description = "'.$model->description.'"');
 				
 			   if (!empty($model->course->required)) $criteria->addCondition('required = "'.$model->required.'"');
+                           
+                           if(!empty($_GET['Courseoffer']['course_description'])) $merge->addCondition('course.description LIKE "%'. $_GET['Courseoffer']['course_description'] .'%"');
+                           
+                           if(!empty($_GET['Courseoffer']['location_description'])) $merge->addCondition('location.description LIKE "%'. $_GET['Courseoffer']['location_description'] .'%"');
+                           
+                           if(!empty($_GET['Courseoffer']['course_required'])) $merge->addCondition('course.required = "'. $_GET['Courseoffer']['course_required'] .'"');
 						
 		}
-		 $session['Course_records']=Course::model()->findAll($criteria); 
+		 $session['Course_records']=Course::model()->findAll($criteria);
+                 
+                 $model->getDbCriteria()->mergeWith($merge);
 
 		$this->render('index',array(
 		'model'=>$model,
