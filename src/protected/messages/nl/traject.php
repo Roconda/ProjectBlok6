@@ -1,5 +1,6 @@
 <?php
 return array(
+	'Create Traject' => 'Aanmaken Traject',
 	'Trajects' => 'Trajects',
 	'Description' => 'Omschrijving',
 	'Duration' => 'Aantal jaar',

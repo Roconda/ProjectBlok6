@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Create Traject</h1>
+<h1><?php echo Yii::t('traject','Create Traject'); ?></h1>
 <hr/>
 <?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
