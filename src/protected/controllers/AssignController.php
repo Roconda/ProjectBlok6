@@ -383,7 +383,7 @@ class AssignController extends Controller
 
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
-			$this->renderPartial('excelReport', array(
+			$this->renderPartial('expenseGridtoReport', array(
 				'model'=>$model
 			), true)
 		);
@@ -397,15 +397,12 @@ class AssignController extends Controller
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-
-               if(isset($session['Assign_records']))
-               {
-                $model=$session['Assign_records'];
-               }
-               else
-                 $model = Assign::model()->findAll();
-
-		
+		if(isset($session['Assign_records']))
+		{
+			$model=$session['Assign_records'];
+		}
+		else
+			$model = Assign::model()->findAll();
 
 		$html = $this->renderPartial('expenseGridtoReport', array(
 			'model'=>$model
@@ -419,15 +416,14 @@ class AssignController extends Controller
 		$pdf->SetTitle('Assign Report');
 		$pdf->SetSubject('Assign Report');
 		//$pdf->SetKeywords('example, text, report');
-		$pdf->SetHeaderData('', 0, "Report", '');
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->SetHeaderData('../../../../../../images/logo_Avans.jpg', PDF_HEADER_LOGO_WIDTH, 'Report by '.Yii::app()->name, "");
 		$pdf->setHeaderFont(Array('helvetica', '', 8));
 		$pdf->setFooterFont(Array('helvetica', '', 6));
 		$pdf->SetMargins(15, 18, 15);
 		$pdf->SetHeaderMargin(5);
 		$pdf->SetFooterMargin(10);
 		$pdf->SetAutoPageBreak(TRUE, 0);
-		$pdf->SetFont('dejavusans', '', 7);
+		//$pdf->SetFont('dejavusans', '', 7);
 		$pdf->AddPage();
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->LastPage();

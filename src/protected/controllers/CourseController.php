@@ -247,8 +247,7 @@ class CourseController extends Controller
 		$pdf->SetTitle('Course Report');
 		$pdf->SetSubject('Course Report');
 		//$pdf->SetKeywords('example, text, report');
-		$pdf->SetHeaderData('', 0, "Report", '');
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->SetHeaderData('../../../../../../images/logo_Avans.jpg', PDF_HEADER_LOGO_WIDTH, 'Report by '.Yii::app()->name, "");
 		$pdf->setHeaderFont(Array('helvetica', '', 8));
 		$pdf->setFooterFont(Array('helvetica', '', 6));
 		$pdf->SetMargins(15, 18, 15);

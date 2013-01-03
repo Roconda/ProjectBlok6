@@ -2,30 +2,25 @@
 <table border="1">
 
 	<tr>
-		<th width="80px">
-		      username		</th>
- 		<th width="80px">
-		      traject		</th>
- 		<th width="80px">
-		      traject duration		</th>
- 		<th width="80px">
-		      start date		</th>
-		<th width="80px">
-		      completed		</th>
+		<th width="80px"><?php echo Yii::t('enroll', 'Username'); ?></th>
+ 		<th width="80px"><?php echo Yii::t('enroll', 'Trail'); ?></th>
+ 		<th width="80px"><?php echo Yii::t('traject', 'Duration'); ?></th>
+ 		<th width="80px"><?php echo Yii::t('enroll', 'Start date'); ?></th>
+		<th width="80px"><?php echo Yii::t('enroll', 'Completed'); ?></th>
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
-        		<td>
+		<td>
 			<?php echo $row->user->username; ?>
 		</td>
        		<td>
-			<?php echo $row->traject->description; ?>
+			<?php //echo $row->traject->description; ?>
 		</td>
        		<td>
-			<?php echo $row->traject->duration; ?>
+			<?php //echo $row->traject->duration; ?>
 		</td>
        		<td>
-			<?php echo $row->startdate; ?>
+			<?php //echo $row->startdate; ?>
 		</td>
 		<td>
 			<?php echo $row->completed; ?>

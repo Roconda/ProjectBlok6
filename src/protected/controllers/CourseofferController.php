@@ -264,16 +264,15 @@ class CourseofferController extends Controller
 	
 	public function actionGenerateExcel()
 	{
-            $session=new CHttpSession;
-            $session->open();		
-            
-             if(isset($session['Course_records']))
-               {
-                $model=$session['Course_records'];
-               }
-               else
-                 $model = CourseOffer::model()->findAll();
-
+		$session=new CHttpSession;
+		$session->open();		
+		
+		if(isset($session['Course_records']))
+		{
+			$model=$session['Course_records'];
+		}
+		else
+			$model = CourseOffer::model()->findAll();
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
 			$this->renderPartial('excelReport', array(
@@ -281,23 +280,21 @@ class CourseofferController extends Controller
 			), true)
 		);
 	}
-        public function actionGeneratePdf() 
+	
+	public function actionGeneratePdf() 
 	{
-            $session=new CHttpSession;
-            $session->open();
+		$session=new CHttpSession;
+		$session->open();
 		Yii::import('application.extensions.giiplus.bootstrap.*');
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-
-               if(isset($session['Course_records']))
-               {
-                $model=$session['Course_records'];
-               }
-               else
-                 $model = CourseOffer::model()->findAll();
-
-		
+		if(isset($session['Course_records']))
+		{
+			$model=$session['Course_records'];
+		}
+		else
+			$model = CourseOffer::model()->findAll();
 
 		$html = $this->renderPartial('expenseGridtoReport', array(
 			'model'=>$model
@@ -311,8 +308,7 @@ class CourseofferController extends Controller
 		$pdf->SetTitle('CourseOffer Report');
 		$pdf->SetSubject('CourseOffer Report');
 		//$pdf->SetKeywords('example, text, report');
-		$pdf->SetHeaderData('', 0, "Report", '');
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "Example Report by ".Yii::app()->name, "");
+		$pdf->SetHeaderData('../../../../../../images/logo_Avans.jpg', PDF_HEADER_LOGO_WIDTH, 'Report by '.Yii::app()->name, "");
 		$pdf->setHeaderFont(Array('helvetica', '', 8));
 		$pdf->setFooterFont(Array('helvetica', '', 6));
 		$pdf->SetMargins(15, 18, 15);

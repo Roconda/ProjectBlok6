@@ -2,32 +2,20 @@
 <table border="1">
 
 	<tr>
-		<th width="20px">
-		      id		</th>
- 		<th width="80px">
-		      description		</th>
- 		<th width="80px">
-		      location		</th>
-		<th width="80px">
-		      year		</th>
-		<th width="80px">
-		      block		</th>  
-		<th width="80px">
-		      fysiek		</th>
-		<th width="80px">
-		      blocked		</th> 
-		<th width="80px">
-		      required		</th>  
+ 		<th><?php echo Yii::t('courseoffer','Course'); ?></th>
+ 		<th><?php echo Yii::t('courseoffer','Location'); ?></th>
+		<th><?php echo Yii::t('courseoffer','Year'); ?></th>
+		<th><?php echo Yii::t('courseoffer','Block'); ?></th>  
+		<th><?php echo Yii::t('courseoffer','Physical'); ?></th>
+		<th><?php echo Yii::t('courseoffer','Frozen'); ?></th> 
+		<th><?php echo Yii::t('courseoffer','Required'); ?></th>  
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
-        		<td>
-			<?php echo $row->id; ?>
-		</td>
-       		<td>
+		<td>
 			<?php echo $row->description; ?>
 		</td>
-       		<td>
+		<td>
 			<?php //echo $row->location; ?>
 		</td>
 		<td>
