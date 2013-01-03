@@ -101,7 +101,7 @@ class Courseoffer extends CActiveRecord
 		// should not be searched.
                 
 		$criteria=new CDbCriteria;
-                $criteria->with = array('course', 'location');
+                $merge=new CDbCriteria();
                 
 		$criteria->compare('t.id',$this->id);
 		$criteria->compare('t.course_id',$this->course_id);
@@ -110,9 +110,14 @@ class Courseoffer extends CActiveRecord
 		$criteria->compare('t.block',$this->block);
 		$criteria->compare('t.fysiek',$this->fysiek);
 		$criteria->compare('t.blocked',$this->blocked);
-                $criteria->compare('course_description',$this->course_id,true);
-                $criteria->compare('location_description',$this->location,true);
-                $criteria->compare('course_required',$this->course,true);
+                $merge->join = 'LEFT OUTER JOIN course c ON t.course_id=c.id LEFT OUTER JOIN location l ON t.location_id=l.id';
+                $criteria->mergeWith($merge);
+                
+                $criteria->compare('c.description',$this->course_description,true);
+                $criteria->compare('l.description',$this->location_description,true);
+                $criteria->compare('c.required',$this->course_required,true);
+                
+                
 
                 
                 //$criteria->compare('course.description',$this->course_id, true);
@@ -123,16 +128,16 @@ class Courseoffer extends CActiveRecord
                         'sort'=>array(
                             'attributes'=>array(
                                 'course_description'=>array(
-                                    'asc'=>'course.description',
-                                    'desc'=>'course.description DESC',
+                                    'asc'=>'c.description',
+                                    'desc'=>'c.description DESC',
                                 ),
                                 'location_description'=>array(
-                                    'asc'=>'location.description',
-                                    'desc'=>'location.description DESC',
+                                    'asc'=>'l.description',
+                                    'desc'=>'l.description DESC',
                                 ),
                                 'course_required'=>array(
-                                    'asc'=>'course.required',
-                                    'desc'=>'course.required DESC',
+                                    'asc'=>'c.required',
+                                    'desc'=>'c.required DESC',
                                 ),
                                 '*',
                              ),

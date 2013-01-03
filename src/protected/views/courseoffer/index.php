@@ -46,18 +46,6 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 $this->endWidget();
 ?>
 
-<?php $courseoffer = Courseoffer::model()->findAll();
-            $bob = array();
-            foreach($courseoffer as $cs){
-                $loc = "";
-                if(isset($cs->location->description)){
-                    $loc = $cs->location->description;
-                }
-                $id = md5($cs->id);
-                $polis = $loc;
-                $bob[$id] = $polis;
-            }
-        ?>
 
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
@@ -69,10 +57,11 @@ $this->endWidget();
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'course-grid',
 	'dataProvider'=>$model->search(),
+        'filter'=>$model,
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
 		array('name'=>'course_description', 'type'=>'raw', 'value'=>'$data->course->description'),
-		array('name' => 'location_description', 'type'=>'raw', 'value'=>'1'),
+		array('name' => 'location_description', 'type'=>'raw', 'value'=>'$data->location->description'),
 		array('name' => 'year'),
 		array('name' => 'block'),
 		array('name' => 'fysiek'),
@@ -80,7 +69,7 @@ $this->endWidget();
 		array('name' => 'course_required', 'type'=>'raw', 'value'=>'$data->course->required'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
-			'template' => '{view} {update} {delete}',
+			'template' => '{update} {delete}',
 			'buttons' => array(
 			      'view' => array(
 					'label'=> 'View',

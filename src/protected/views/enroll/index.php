@@ -9,7 +9,7 @@ $('.search-button').click(function(){
     return false;
 });
 $('.search-form form').submit(function(){
-    $.fn.yiiGridView.update('course-grid', {
+    $.fn.yiiGridView.update('enroll-grid', {
         data: $(this).serialize()
     });
     return false;
