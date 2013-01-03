@@ -145,10 +145,6 @@ class CourseofferController extends Controller
 
 		if(isset($_GET['Courseoffer']))
 		{
-                    foreach($_GET['Courseoffer'] as $x=>$y) 
-                    {
-                         
-                    }
 				$model->attributes=$_GET['Courseoffer'];
 
 			   if (!empty($model->course->description)) $criteria->addCondition('id = "'.$model->id.'"');
