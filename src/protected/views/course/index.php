@@ -55,7 +55,7 @@ $this->endWidget();
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
 		'description',
-		'required',
+		'required:boolean',
        array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'buttons' => array(
