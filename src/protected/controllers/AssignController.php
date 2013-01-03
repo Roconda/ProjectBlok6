@@ -272,9 +272,27 @@ class AssignController extends Controller
 	 */
 	public function actionIndex()
 	{
+            $merge = new CDbCriteria();
+            if(isset($_GET['Assign']))
+            {
+				
+				//if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+				
+				//if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+			 
+				//if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 
+                                
+                                if(!empty($_GET['Assign']['user_username'])) $merge->addCondition('user.username LIKE "%'. $_GET['Assign']['user_username'] .'%"');
+                           
+                                if(!empty($_GET['Assign']['traject_description'])) $merge->addCondition('traject.description LIKE "%'. $_GET['Assign']['traject_description'] .'%"');
+                           
+                                if(!empty($_GET['Assign']['traject_duration'])) $merge->addCondition('traject.duration = "'. $_GET['Assign']['traject_duration'] .'"');
+            }
+            
+            
 		if(yii::app()->user->can('assign_read_own'))
 		{
-			$this->actionOwnIndex();
+			$this->actionOwnIndex($merge);
 		}
 		else
 		{
@@ -291,22 +309,17 @@ class AssignController extends Controller
 			//--------------------
 			$session=new CHttpSession;
 			$session->open();		
-			$criteria = new CDbCriteria();            
+			$criteria = new CDbCriteria();
 
 			$model=new Assign('search');
 			$model->unsetAttributes();  // clear any default values
-
-			if(isset($_GET['Assign']))
-			{
-				$model->attributes=$_GET['Assign'];
-				//if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-				
-				//if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-			 
-				//if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
-			}
+                        if(isset($_GET['Assign']))
+                        $model->attributes=$_GET['Assign'];
+			
 			$session['Assign_records']=Assign::model()->findAll($criteria); 
 
+                        $model->getDbCriteria()->mergeWith($merge);
+                        
 			$this->render('index',array(
 			'model'=>$model,
 			));
@@ -354,9 +367,12 @@ class AssignController extends Controller
 		}
 	}
         
-    public function actionOwnIndex()
+    public function actionOwnIndex($merge)
     {
         $assign = Assign::model()->with('user', 'traject');
+        $assign->getDbCriteria()->mergeWith($merge);
+        if(isset($_GET['Assign']))
+            $assign->attributes=$_GET['Assign'];
         $dataProvider=new CActiveDataProvider($assign, array(
             'sort'=>$this->sort,
         ));

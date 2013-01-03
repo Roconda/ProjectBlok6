@@ -195,9 +195,10 @@ DELETE FROM `location`;
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'Den Bosch');
-INSERT INTO `location` VALUES (2,'Breda');
-INSERT INTO `location` VALUES (3,'Tilburg');
+INSERT INTO `location` VALUES (1,'Digital');
+INSERT INTO `location` VALUES (2,'Den Bosch');
+INSERT INTO `location` VALUES (3,'Breda');
+INSERT INTO `location` VALUES (4,'Tilburg');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,11 +223,11 @@ UNLOCK TABLES;
 
 LOCK TABLES `courseoffer` WRITE;
 /*!40000 ALTER TABLE `courseoffer` DISABLE KEYS */;
-INSERT INTO `courseoffer` VALUES (1,1,1,2012,4,1,1);
-INSERT INTO `courseoffer` VALUES (2,2,3,2013,1,1,0);
-INSERT INTO `courseoffer` VALUES (3,3,NULL,2013,1,1,0);
-INSERT INTO `courseoffer` VALUES (4,5,2,2013,2,1,0);
-INSERT INTO `courseoffer` VALUES (5,4,NULL,2013,3,0,0);
+INSERT INTO `courseoffer` VALUES (1,1,2,2012,4,1,1);
+INSERT INTO `courseoffer` VALUES (2,2,4,2013,1,1,0);
+INSERT INTO `courseoffer` VALUES (3,3,1,2013,1,1,0);
+INSERT INTO `courseoffer` VALUES (4,5,3,2013,2,1,0);
+INSERT INTO `courseoffer` VALUES (5,4,1,2013,3,0,0);
 /*!40000 ALTER TABLE `courseoffer` ENABLE KEYS */;
 UNLOCK TABLES;
 
