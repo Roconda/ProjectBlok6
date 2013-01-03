@@ -46,6 +46,6 @@
 			<?php //echo $row->required; ?>
 		</td>
        	</tr>
-     <?php endforeach; ?>
+     <?php var_dump($row); endforeach; ?>
 </table>
 <?php endif; ?>
