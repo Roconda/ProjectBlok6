@@ -101,7 +101,6 @@ class Courseoffer extends CActiveRecord
 		// should not be searched.
                 
 		$criteria=new CDbCriteria;
-                $merge=new CDbCriteria();
                 
 		$criteria->compare('t.id',$this->id);
 		$criteria->compare('t.course_id',$this->course_id);
