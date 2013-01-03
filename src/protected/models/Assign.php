@@ -11,6 +11,23 @@
  */
 class Assign extends CActiveRecord
 {
+    private $sort=array(
+                            'attributes'=>array(
+                                'user.username'=>array(
+                                    'asc'=>'user.username',
+                                    'desc'=>'user.username DESC',
+                                ),
+                                'traject.description'=>array(
+                                    'asc'=>'traject.description',
+                                    'desc'=>'traject.description DESC',
+                                ),
+                                'traject.duration'=>array(
+                                    'asc'=>'traject.duration',
+                                    'desc'=>'traject.duration DESC',
+                                ),
+                                '*',
+                             ),
+                          );
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -86,6 +103,7 @@ class Assign extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+                $criteria->with = array('traject', 'user');
 
 		$criteria->compare('user_id',$this->user_id,true);
 		//$criteria->compare('course_id',$this->course_id);
@@ -94,6 +112,23 @@ class Assign extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+                        'sort'=>array(  
+                            'attributes'=>array(
+                                'user.username'=>array(
+                                    'asc'=>'user.username',
+                                    'desc'=>'user.username DESC',
+                                ),
+                                'traject.description'=>array(
+                                    'asc'=>'traject.description',
+                                    'desc'=>'traject.description DESC',
+                                ),
+                                'traject.duration'=>array(
+                                    'asc'=>'traject.duration',
+                                    'desc'=>'traject.duration DESC',
+                                ),
+                                '*',
+                             ),
+                            )
 		));
 	}
 }

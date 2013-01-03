@@ -17,12 +17,18 @@
         		
    <div class="control-group">		
 			<div class="span4">
+                            
+        <?php $completedList = array('uncompleted' => Yii::t('enroll', 'uncompleted'),
+                                     'failed' => Yii::t('enroll', 'failed'),
+                                     'completed' => Yii::t('enroll', 'completed')) ?>
+                            
+	<?php echo $form->textFieldRow($model,'user_id',array('value'=>$enrollment['username']),array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
+	<?php echo $form->dropDownListRow($model,'courseoffer_id',$this->getCourseOfferList(),
+                array('options' => array($enrollment['courseoffer_id']=>array('selected'=>true)), 'class'=>'span5')); ?>
 
-	<?php echo $form->dropDownListRow($model,'courseoffer_id',$this->getCourseOfferList(),array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'completed',array('class'=>'span5')); ?>
+	<?php echo $form->dropDownListRow($model,'completed',$completedList,
+                array('options' => array($enrollment['completed']=>array('selected'=>true)))); ?>
                         </div>   
   </div>
 
