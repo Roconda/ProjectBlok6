@@ -297,21 +297,32 @@ class EnrollController extends Controller
 		}
 		else
 		{
-            $enroll = Enroll::model();
+            $enroll = new Enroll('search');
             
             $criteria = new CDbCriteria();
-            $criteria->mergeWith($enroll->search());
             $criteria->join = 'LEFT OUTER JOIN `courseoffer` `courseoffer` ON (`t`.`courseoffer_id`=`courseoffer`.`id`) 
                 LEFT OUTER JOIN profile profile ON t.user_id=profile.user_id 
                 LEFT OUTER JOIN `course` `course` ON (`courseoffer`.`course_id`=`course`.`id`)
                 LEFT OUTER JOIN `location` `location` ON (`courseoffer`.`location_id`=`location`.`id`)  
                 LEFT OUTER JOIN `user` `user` ON (`t`.`user_id`=`user`.`id`)';
-            $enroll->setDbCriteria($criteria);
+            
+            $criteria->mergeWith($enroll->search());
+            if(isset($_GET['Enroll'])){
+                foreach($_GET['Enroll'] as $enrollItem=>$input) {
+                    if(isset($enrollItem) && !empty($input)) {
+                        $field = str_replace('_', '.', $enrollItem);
+                        $criteria->addCondition("$field LIKE '%$input%'");
+                    }
+                }
+                $enroll->attributes=$_GET['Enroll'];
+            }
+           
             
 			$dataProvider=new CActiveDataProvider($enroll, array(
                 'criteria'=>$criteria,
                 'sort'=>$this->sort,
             ));
+            
 			$this->render('index',array(
 				'dataProvider'=>$dataProvider,
 			));

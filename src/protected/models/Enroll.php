@@ -11,7 +11,12 @@
  */
 class Enroll extends CActiveRecord
 {
-	/**
+    public $profile_firstname;
+    public $profile_lastname;
+    public $course_description;
+    public $location_description;
+
+    /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Enroll the static model class
@@ -44,7 +49,7 @@ class Enroll extends CActiveRecord
 			array('notes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, courseoffer_id, completed, notes, courseoffer.course_id', 'safe', 'on'=>'search'),
+			array('user_id, courseoffer_id, completed, notes, profile_firstname, profile_lastname, course_description, location_description', 'safe', 'on'=>'search'),
 		);
 	}
 

@@ -4,13 +4,13 @@
 	'method'=>'get',
 ));  ?>
 
-	<?php echo $form->textFieldRow($model,'user',array('class'=>'span5')); //user.profile.firstname ?>
+	<?php echo $form->textFieldRow($model,'profile_firstname',array('class'=>'span5')); //user.profile.firstname ?>
 
-	<?php //echo $form->textFieldRow($model,'user.profile.lastname',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'profile_lastname',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'courseoffer',array('class'=>'span5')); //courseoffer.course.description ?>
+	<?php echo $form->textFieldRow($model,'course_description',array('class'=>'span5')); //courseoffer.course.description ?>
 	
-	<?php //echo $form->textFieldRow($model,'courseoffer.location.description',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'location_description',array('class'=>'span5')); ?>
 	
 	<?php echo $form->textFieldRow($model,'completed',array('class'=>'span5')); ?>
 
