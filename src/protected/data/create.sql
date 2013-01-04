@@ -99,7 +99,6 @@ CREATE  TABLE IF NOT EXISTS `location` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `course_has_traject`
 -- -----------------------------------------------------
@@ -132,7 +131,7 @@ DROP TABLE IF EXISTS `courseoffer` ;
 CREATE  TABLE IF NOT EXISTS `courseoffer` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `course_id` INT NOT NULL ,
-  `location_id` INT NULL ,
+  `location_id` INT NULL DEFAULT 0 ,
   `year` INT NOT NULL ,
   `block` INT NOT NULL ,
   `fysiek` TINYINT(1) NOT NULL ,
@@ -148,7 +147,7 @@ CREATE  TABLE IF NOT EXISTS `courseoffer` (
   CONSTRAINT `fk_CourseOffer_Location1`
     FOREIGN KEY (`location_id` )
     REFERENCES `location` (`id` )
-    ON DELETE SET NULL
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 

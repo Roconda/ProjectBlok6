@@ -119,6 +119,9 @@ class LocationController extends Controller
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
+			
+			Courseoffer::model()->updateAll(array('location_id'=>0),"location_id = $id");
+			
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
@@ -137,29 +140,18 @@ class LocationController extends Controller
 	{
             $session=new CHttpSession;
             $session->open();		
-            $criteria = new CDbCriteria();            
-
-                $model=new Location('search');
-                $model->unsetAttributes();  // clear any default values
-
-                if(isset($_GET['Location']))
-		{
-                        $model->attributes=$_GET['Location'];
-			
-			
-                   	
-                       if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-                     
-                    	
-                       if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-                     
-                    			
-		}
-                 $session['Location_records']=Location::model()->findAll($criteria); 
-
-                $this->render('index',array(
-			'model'=>$model,
-		));
+			$model=new Location('search');
+            $model->unsetAttributes();  // clear any default values
+            $dbcriteria = $model->getDbCriteria();
+			$dbcriteria->addCondition('id >= 1');
+			if(isset($_GET['Location']))
+			{
+                $model->attributes=$_GET['Location'];
+				if (!empty($model->id)) $dbcriteria->addCondition('id = "'.$model->id.'"');
+                if (!empty($model->description)) $dbcriteria->addCondition('description = "'.$model->description.'"');
+            }
+            $session['Location_records']=Location::model()->findAll($dbcriteria); 
+			$this->render('index',array('model'=>$model,));
 
 	}
 

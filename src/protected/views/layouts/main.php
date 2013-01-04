@@ -9,6 +9,8 @@
       	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+    
     <style type="text/css">
     	body{
     		background-image:url('<?php echo Yii::app()->baseUrl; ?>/images/gray_jean.png');

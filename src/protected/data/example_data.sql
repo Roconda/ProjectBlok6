@@ -195,6 +195,7 @@ DELETE FROM `location`;
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (0,'');
 INSERT INTO `location` VALUES (1,'Digital');
 INSERT INTO `location` VALUES (2,'Den Bosch');
 INSERT INTO `location` VALUES (3,'Breda');
