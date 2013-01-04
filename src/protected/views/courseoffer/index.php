@@ -49,7 +49,8 @@ $this->endWidget();
 </div><!-- search-form -->
 
 
-<?php $this->widget('bootstrap.widgets.TbGridView',array(
+<?php 
+	$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'course-grid',
 	'dataProvider'=>$model->search(),
         'filter'=>$model,
