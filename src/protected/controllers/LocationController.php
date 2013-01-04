@@ -119,6 +119,9 @@ class LocationController extends Controller
 	{
 		if(Yii::app()->request->isPostRequest)
 		{
+			
+			Courseoffer::model()->updateAll(array('location_id'=>0),"location_id = $id");
+			
 			// we only allow deletion via POST request
 			$this->loadModel($id)->delete();
 
