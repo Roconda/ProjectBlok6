@@ -1,5 +1,5 @@
 <div class="row">
-		<h3>Enroll overzicht</h3>
+		<h3>Cursus overzicht</h3>
 </div>
 
 <?php
