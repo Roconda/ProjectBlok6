@@ -313,8 +313,7 @@ class EnrollController extends Controller
                         $field = str_replace('_', '.', $enrollItem);
                         $criteria->addCondition("$field LIKE '%$input%'");
                     }
-                }
-                $enroll->attributes=$_GET['Enroll'];
+                }              
             }
            
             

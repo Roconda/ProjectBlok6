@@ -5,7 +5,7 @@
 ));  ?>
 
 
-	<?php echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
+	<?php //echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'course_description',array('class'=>'span5','maxlength'=>45)); ?>
 

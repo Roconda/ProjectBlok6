@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Enroll'=>array('index'),
+	'Assign'=>array('index'),
 	'Create',
 );
 
 ?>
 
-<h1>Create Enroll</h1>
+<h1>Create Assign</h1>
 <hr/>
 <?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
