@@ -1,7 +1,7 @@
 <h1>Dashboard</h1>
 
 <div class="row span6">
-	<div id="ajax_data"></div>
+	<div id="ajax_data"><p>Momenteel geen informatie beschikbaar.</p></div>
 </div>
 
 <script type="text/javascript">
