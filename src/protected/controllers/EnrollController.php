@@ -478,10 +478,9 @@ class EnrollController extends Controller
 	
     public function getCourseOfferList()
     {
-		$model=new Courseoffer('search');
-		$dbcriteria = $model->getDbCriteria();
+        $dbcriteria = new CDbCriteria();
         $dbcriteria->addCondition('blocked = 0');
-        $courseoffer = $model->findAll($dbcriteria);
+        $courseoffer = Courseoffer::model()->findAll($dbcriteria);
         $bob = array();
         foreach($courseoffer as $cs){
             $course= $cs->course->description;
