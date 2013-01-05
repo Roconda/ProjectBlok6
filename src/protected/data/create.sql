@@ -371,7 +371,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `user_group_message`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user_group_message` ;
-CREATE TABLE IF NOT EXISTS `usergroup_messages` (
+CREATE TABLE IF NOT EXISTS `user_group_messages` (
   
 	`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   
