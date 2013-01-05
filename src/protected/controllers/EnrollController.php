@@ -500,6 +500,36 @@ class EnrollController extends Controller
         }
         return $bob;
     }
+	
+	public function getOwnCourseOfferList()
+	{
+		$model=new Courseoffer('search');
+		$userid = Yii::app()->user->getId();
+        $criteria = new CDbCriteria();
+        $criteria->join = '
+                    join course_has_traject course_has_traject  on course_has_traject.course_id = t.id
+                    join traject traject on traject.id = course_has_traject.traject_id
+                    join assign assign on assign.traject_id = traject.id';
+        $criteria->addCondition("assign.user_id=$userid");
+        $courseoffer = $model->findAll($criteria);
+        $bob = array();
+        foreach($courseoffer as $cs){
+            $course= $cs->course->description;
+            $loc = "";
+            if(isset($cs->location->description)){
+                $loc = $cs->location->description;
+            }
+            $fysiek = 'Digitaal';
+            if($cs->fysiek == 1){
+                $fysiek = 'Fysiek';
+            }
+            $year="Year: " . $cs->year;
+            $block="Block: " . $cs->block;
+            $polis = "$course: $fysiek,  $loc, $year, $block";
+            $bob[$cs->id] = $polis;
+        }
+        return $bob;
+	}
     
     public function getCompletedList()
     {

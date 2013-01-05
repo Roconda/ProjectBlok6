@@ -16,7 +16,7 @@
 	<?php echo $form->errorSummary($model); ?>
         
         <?php
-            $bob = $this->getCourseOfferList();
+            $bob = $this->getOwnCourseOfferList();
         ?>
 
        <div class="row">
