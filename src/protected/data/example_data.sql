@@ -100,6 +100,7 @@ INSERT INTO `permission` VALUES (5,0,'role',47,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',48,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',49,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',50,0,'');
+INSERT INTO `permission` VALUES (6,0,'role',16,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',24,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',28,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',34,0,'');

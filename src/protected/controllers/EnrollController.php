@@ -478,23 +478,26 @@ class EnrollController extends Controller
 	
     public function getCourseOfferList()
     {
-        $courseoffer = Courseoffer::model()->findAll();
-            $bob = array();
-            foreach($courseoffer as $cs){
-                $course= $cs->course->description;
-                $loc = "";
-                if(isset($cs->location->description)){
-                    $loc = $cs->location->description;
-                }
-                $fysiek = 'Digitaal';
-                if($cs->fysiek == 1){
-                    $fysiek = 'Fysiek';
-                }
-                $year="Year: " . $cs->year;
-                $block="Block: " . $cs->block;
-                $polis = "$course: $fysiek,  $loc, $year, $block";
-                $bob[$cs->id] = $polis;
+		$model=new Courseoffer('search');
+		$dbcriteria = $model->getDbCriteria();
+        $dbcriteria->addCondition('blocked = 0');
+        $courseoffer = $model->findAll($dbcriteria);
+        $bob = array();
+        foreach($courseoffer as $cs){
+            $course= $cs->course->description;
+            $loc = "";
+            if(isset($cs->location->description)){
+                $loc = $cs->location->description;
             }
+            $fysiek = 'Digitaal';
+            if($cs->fysiek == 1){
+                $fysiek = 'Fysiek';
+            }
+            $year="Year: " . $cs->year;
+            $block="Block: " . $cs->block;
+            $polis = "$course: $fysiek,  $loc, $year, $block";
+            $bob[$cs->id] = $polis;
+        }
         return $bob;
     }
     
