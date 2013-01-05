@@ -333,7 +333,7 @@ class EnrollController extends Controller
 		{
 			$result = $this->actionOwnIndex();
 			
-			$this->renderPartial('teacher/_index_table',array(
+			$this->renderPartial('teacher/dashboard',array(
             	'assignModel' => $result['assign'],
 				'dataProvider'=>$result['dataProvider'],
 			));
