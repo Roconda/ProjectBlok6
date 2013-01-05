@@ -68,7 +68,7 @@ $this->endWidget();
 				),
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("course_update") || Yii::app()->user->isAdmin()',
+					'visible' => 'Yii::app()->user->can("assign_update") || Yii::app()->user->can("assign_update_completed") || Yii::app()->user->isAdmin()',
 					'url'=>'Yii::app()->createUrl("assign/update", array("id"=>$data->user_id, "tid"=>$data->traject_id))',
 					'options'=>array(
 						'class'=>'btn btn-small update'
@@ -76,7 +76,7 @@ $this->endWidget();
 				),
 				'delete' => array(
 					'label'=> 'Delete',
-					'visible' => 'Yii::app()->user->can("course_delete") || Yii::app()->user->isAdmin()',
+					'visible' => 'Yii::app()->user->can("assign_delete") || Yii::app()->user->isAdmin()',
 					'url'=>'Yii::app()->createUrl("assign/delete", array("id"=>$data->user_id, "tid"=>$data->traject_id))',
 					'options'=>array(
 						'class'=>'btn btn-small delete'

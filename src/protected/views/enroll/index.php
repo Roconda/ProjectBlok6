@@ -69,7 +69,7 @@ $this->endWidget();
 				),
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("enroll_update") || Yii::app()->user->isAdmin()',
+					'visible' => 'Yii::app()->user->can("enroll_update") || Yii::app()->user->can("enroll_update_completed") || Yii::app()->user->isAdmin()',
 					'url'=>'Yii::app()->createUrl("enroll/update", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
 					'options'=>array(
 						'class'=>'btn btn-small update'
