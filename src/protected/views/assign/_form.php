@@ -22,9 +22,12 @@
 
 	<?php echo $form->dropDownListRow($model,'traject_id',$this->getTrajectList(),null,array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'startdate',array('class'=>'span5')); ?>
-	
-	<?php echo $form->textFieldRow($model,'completed',array('class'=>'span5','value'=>'1')); ?>
+        <?php echo $form->labelEx($model,'startdate',array('class'=>'span5')); ?>
+	<?php echo $form->dateField($model,'startdate',array('class'=>'span5')); ?>
+	<?php echo $form->error($model,'startdate',array('class'=>'span5')); ?>
+                            
+	<?php echo $form->hiddenField($model,'completed',array('class'=>'span5','value'=>'1')); ?>
+        <?php echo $form->error($model,'completed',array('class'=>'span5')); ?>
 	
                         </div>   
   </div>

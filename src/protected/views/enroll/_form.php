@@ -22,13 +22,13 @@
                                      'failed' => Yii::t('enroll', 'failed'),
                                      'completed' => Yii::t('enroll', 'completed')) ?>
                             
-	<?php echo $form->textFieldRow($model,'user_id',array('value'=>$enrollment['username']),array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
 
 	<?php echo $form->dropDownListRow($model,'courseoffer_id',$this->getCourseOfferList(),
-                array('options' => array($enrollment['courseoffer_id']=>array('selected'=>true)), 'class'=>'span5')); ?>
+                array('class'=>'span5')); ?>
 
-	<?php echo $form->dropDownListRow($model,'completed',$completedList,
-                array('options' => array($enrollment['completed']=>array('selected'=>true)))); ?>
+	<?php echo $form->hiddenField($model,'completed',array('value'=>'1'));?>
+        <?php echo $form->error($model, 'completed'); ?>
                         </div>   
   </div>
 

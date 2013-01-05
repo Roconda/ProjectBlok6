@@ -15,6 +15,8 @@
 
 	<?php echo $form->errorSummary($model); ?>
         
+        <?php $completedList = $this->getCompletedList(); ?>
+        
        <div class="row">
             <?php echo $form->hiddenField($model,'user_id',array('value'=>$assignment['user_id'])); ?>
             <?php echo $form->error($model,'user_id'); ?>
@@ -32,7 +34,8 @@
 
         <div class="row">
             <?php echo $form->labelEx($model,'completed'); ?>
-            <?php echo $form->textField($model,'completed', array('value'=>$assignment['completed'])); ?>
+            <?php echo $form->dropDownList($model,'completed',$completedList,
+                        array('options' => array($assignment['completed']=>array('selected'=>true)))); ?>
             <?php echo $form->error($model,'completed'); ?>
 	</div>
         

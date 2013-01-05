@@ -14,6 +14,8 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+        
+        <?php $completedList = $this->getCompletedList(); ?>
 
        <div class="row">
             <?php echo $form->hiddenField($model,'user_id',array('value'=>$enrollment['user_id'])); ?>
@@ -27,7 +29,8 @@
         
        <div class="row">
                 <?php echo $form->labelEx($model,'completed'); ?>
-		<?php echo $form->textField($model,'completed',array('value'=>$enrollment['completed'])); ?>
+		<?php echo $form->dropDownList($model,'completed',$completedList,
+                        array('options' => array($enrollment['completed']=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'completed'); ?>
 	</div>
 

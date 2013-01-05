@@ -139,19 +139,27 @@ class LocationController extends Controller
 	public function actionIndex()
 	{
             $session=new CHttpSession;
-            $session->open();		
-			$model=new Location('search');
+            $session->open();
+            $criteria = new CDbCriteria();
+            
+            $model=new Location('search');
             $model->unsetAttributes();  // clear any default values
             $dbcriteria = $model->getDbCriteria();
-			$dbcriteria->addCondition('id >= 1');
-			if(isset($_GET['Location']))
-			{
+            $dbcriteria->addCondition('id >= 1');
+            
+            if(isset($_GET['Location']))
+            {
                 $model->attributes=$_GET['Location'];
-				if (!empty($model->id)) $dbcriteria->addCondition('id = "'.$model->id.'"');
-                if (!empty($model->description)) $dbcriteria->addCondition('description = "'.$model->description.'"');
+                
+                if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+                
+                if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
             }
-            $session['Location_records']=Location::model()->findAll($dbcriteria); 
-			$this->render('index',array('model'=>$model,));
+            $session['Location_records']=Location::model()->findAll($criteria); 
+			
+            $model->getDbCriteria()->mergeWith($dbcriteria);
+            
+            $this->render('index',array('model'=>$model,));
 
 	}
 

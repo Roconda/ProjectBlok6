@@ -17,9 +17,7 @@
 	<?php echo $form->errorSummary($model); ?>
         
         <?php $courseofferList = $this->getCourseOfferList(); ?>
-        <?php $completedList = array('uncompleted' => Yii::t('enroll', 'uncompleted'),
-                                     'failed' => Yii::t('enroll', 'failed'),
-                                     'completed' => Yii::t('enroll', 'completed')) ?>
+        <?php $completedList = $this->getCompletedList(); ?>
 
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>

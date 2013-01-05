@@ -16,9 +16,7 @@
 	<?php echo $form->errorSummary($model); ?>
         
         <?php $trajectList = $this->getTrajectList(); ?>
-        <?php $completedList = array('uncompleted' => Yii::t('assign', 'uncompleted'),
-                                     'failed' => Yii::t('assign', 'failed'),
-                                     'completed' => Yii::t('assign', 'completed')) ?>
+        <?php $completedList = $this->getCompletedList() ?>
         
        <div class="row">
             <?php echo $form->labelEx($model,'user_id'); ?>
