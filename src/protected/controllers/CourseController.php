@@ -76,8 +76,20 @@ class CourseController extends Controller
 
 		if(isset($_POST['Course']))
 		{
-			$model->attributes=$_POST['Course'];
+                    $model->attributes=$_POST['Course'];
+                    
+			
 			if($model->save())
+                            $cid = $model->id;
+                        foreach(Relation::retrieveValues($_POST) as $trajectid) {
+                            $connection=Yii::app()->db;
+                            $sql="INSERT INTO course_has_traject (traject_id, course_id)
+                                VALUES(:traject_id,:course_id)";
+                            $command = $connection->createCommand($sql);
+                            $command->bindParam(":traject_id", $trajectid, PDO::PARAM_STR);
+                            $command->bindParam(":course_id", $cid, PDO::PARAM_STR);
+                            $command->execute();
+                        }
 				$this->redirect(array('view','id'=>$model->id));
 		}
 

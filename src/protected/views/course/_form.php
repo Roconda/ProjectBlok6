@@ -22,6 +22,15 @@
 
 	<?php echo $form->textFieldRow($model,'required',array('class'=>'span5')); ?>
 
+        <?php echo $form->labelEx($model, 'traject'); ?>
+        <?php $this->widget('YumModule.components.Relation', array(
+                                'model' => $model,
+                                'relation' => 'traject',
+                                'style' => 'dropdownlist',
+                                'fields' => 'description',
+                                'showAddButton' => false
+                            ));
+                            ?>
                         </div>   
   </div>
 
