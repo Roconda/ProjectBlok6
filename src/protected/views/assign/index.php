@@ -54,7 +54,7 @@ $this->endWidget();
 	'dataProvider'=>$model->search(),
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		array('name' => 'user.username', 'header' => Yii::t('assign', 'Username')),
+		array('name' => 'user.username', 'header' => Yii::t('assign', 'Username'), 'type' => 'raw', 'value' => 'CHtml::link($data->user->username, array("/enroll?Enroll%5Busername%5D=".$data->user->username))'),
 		array('name' => 'traject.description', 'header' => Yii::t('assign', 'Trail')),
 		array('name' => 'traject.duration', 'header' => Yii::t('assign', 'Duration')),
 		array('name' => 'startdate'),
