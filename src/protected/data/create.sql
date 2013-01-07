@@ -113,12 +113,12 @@ CREATE  TABLE IF NOT EXISTS `course_has_traject` (
   CONSTRAINT `fk_Course_has_Traject_Course1`
     FOREIGN KEY (`course_id` )
     REFERENCES `course` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Course_has_Traject_Traject1`
     FOREIGN KEY (`traject_id` )
     REFERENCES `traject` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
