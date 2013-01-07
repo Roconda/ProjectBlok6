@@ -112,10 +112,47 @@ class CourseController extends Controller
 
 		if(isset($_POST['Course']))
 		{
+			
+			$connection=Yii::app()->db;
 			$model->attributes=$_POST['Course'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				$trajectids = array();
+				foreach(Relation::retrieveValues($_POST) as $trajectid) {
+					$trajectids[] = $trajectid;
+				}
+				
+				//deletes non-existing course/traject links
+				$sql="DELETE FROM course_has_traject
+                      WHERE course_id = $id AND traject_id NOT IN (";
+				foreach($trajectids as $trajectid) {
+					$sql .= $trajectid . ',' ;
+				}
+				$sql = substr_replace($sql ,")",-1);
+                $command = $connection->createCommand($sql);
+				$command->execute();
+				
+				//inserts new course/traject links
+				$criteria = new CDbCriteria();
+				$criteria->addCondition("course_id = $id");
+				$result = CourseHasTraject::model()->findAll($criteria);
+				foreach($trajectids as $trajectid) {
+					$found = false;
+					foreach($result as $ct){
+						if($trajectid == $ct['traject_id'])
+							$found = true;
+					}
+					if(!$found) {
+						$sql="INSERT INTO course_has_traject
+							  VALUES ($id , $trajectid)";
+						$command = $connection->createCommand($sql);
+						$command->execute();
+					}
+				}
+			}
+			$this->redirect(array('view','id'=>$model->id));
 		}
+		
 
 		$this->render('update',array(
 			'model'=>$model,
@@ -163,7 +200,7 @@ class CourseController extends Controller
 		 
 			if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
 		}
-		$session['Course_records']=Course::model()->findAll($criteria); 
+		$session['Course_records']=Course::model()->findAll($criteria);
 
 		$this->render('index',array(
 		'model'=>$model,
