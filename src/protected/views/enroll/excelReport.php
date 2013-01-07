@@ -18,7 +18,7 @@
 			<?php echo ($row->courseoffer->location == null ? '' : $row->courseoffer->location->description); ?>
 		</td>
 		<td>
-			<?php echo $row->completed; ?>
+			<?php echo Enroll::model()->getCompleted($row->completed); ?>
 		</td>
 	</tr>
     <?php endforeach; ?>
