@@ -534,9 +534,9 @@ class EnrollController extends Controller
     
     public function getCompletedList()
     {
-        return array('uncompleted' => Yii::t('enroll', 'uncompleted'),
-                     'failed' => Yii::t('enroll', 'failed'),
-                     'completed' => Yii::t('enroll', 'completed'));
+        return array('uncompleted' => Yii::t('enroll', 'n/a'),
+                     'failed' => Yii::t('enroll', 'Failed'),
+                     'completed' => Yii::t('enroll', 'Succeeded'));
     }
         
     public function testCourseOfferFullPrint()
