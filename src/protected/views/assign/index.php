@@ -58,7 +58,7 @@ $this->endWidget();
 		array('name' => 'traject.description', 'header' => Yii::t('assign', 'Trail')),
 		array('name' => 'traject.duration', 'header' => Yii::t('assign', 'Duration')),
 		array('name' => 'startdate'),
-		array('name' => 'completed'),
+		array('name' => 'completed', 'type' => 'raw', 'value' => 'Enroll::model()->getCompleted($data->completed)'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			//'template' => '{view} {update} {delete}',

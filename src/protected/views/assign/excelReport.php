@@ -22,7 +22,7 @@
 			<?php echo $row->startdate; ?>
 		</td>
 		<td>
-			<?php echo $row->completed; ?>
+			<?php echo Enroll::model()->getCompleted($row->completed); ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
