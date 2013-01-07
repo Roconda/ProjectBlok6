@@ -55,7 +55,7 @@ $this->endWidget();
 		array('name' => 'user.profile.lastname', 'header' => Yii::t('enroll', 'Lastname')),
 		array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
 		array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
-		array('name' => 'completed'),
+		array('name' => 'completed', 'type' => 'raw', 'value' => 'Enroll::model()->getCompleted($data->completed)'),
 		array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
 			'template' => '{update} {delete}',

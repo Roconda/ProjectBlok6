@@ -10,7 +10,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'columns' => array(
                 array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
                 array('name' => 'courseoffer.course.required', 'type' => 'boolean', 'header' => Yii::t('enroll', 'Required')),
-                array('name' => 'completed'),
+                array('name' => 'completed', 'type' => 'raw', 'value' => 'Enroll::model()->getCompleted($data->completed)'),
 	)
 
 )); 
