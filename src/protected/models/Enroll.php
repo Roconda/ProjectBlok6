@@ -80,6 +80,17 @@ class Enroll extends CActiveRecord
 			'notes' => Yii::t('enroll', 'Notes'),
 		);
 	}
+	
+	public function getCompleted($data) {
+		switch($data):
+			case('uncompleted'):
+				return Yii::t('enroll', 'n/a');
+			case('completed'):
+				return Yii::t('enroll', 'Succeeded');
+			default:
+				return Yii::t('enroll', 'Failed');
+		endswitch;
+	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
