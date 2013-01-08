@@ -9,13 +9,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Courseoffer', 'url'=>array('index')),
-	array('label'=>'Create Courseoffer', 'url'=>array('create')),
-	array('label'=>'View Courseoffer', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Courseoffer', 'url'=>array('admin')),
+	array('label'=>Yii::t('courseOffer','List course offer'), 'url'=>array('index')),
+	array('label'=>Yii::t('courseOffer','Create course'), 'url'=>array('create')),
+	array('label'=>Yii::t('courseOffer','View course'), 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>Yii::t('courseOffer','Manage course offer'), 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Courseoffer <?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('courseOffer','Update course offer'), $model->id ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
