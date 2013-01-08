@@ -2773,6 +2773,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Message count', 'Aantal berichten', 'nl', 'yum'),
 ('Message from ', 'Bericht van', 'nl', 'yum'),
 ('My memberships', 'Mijn lidmaatschappen', 'nl', 'yum'),
+('Name',  'Naam',  'nl',  'yum'),
 ('New friendship request from {username}', 'Nieuw vriendschap verzoek van {username}', 'nl', 'yum'),
 ('New messages', 'Nieuwe berichten', 'nl', 'yum'),
 ('New password', 'Nieuw wachtwoord', 'nl', 'yum'),
