@@ -2,6 +2,7 @@
 return array(
 	'Description' => 'Omschrijving',
     'Required' => 'Verplicht',
-	'Course' => 'Cursus'
+	'Course' => 'Cursus',
+	'Create Course' => 'Cursus aanmaken'
 );
 ?>

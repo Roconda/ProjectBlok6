@@ -19,6 +19,7 @@ foreach($model as $value)
     $assignment['traject_id'] = $value->traject_id;
     $assignment['startdate'] = $value->startdate;
     $assignment['completed'] = $value->completed;
+    $assignment['notes'] = $value->notes;
 }
 ?>
 

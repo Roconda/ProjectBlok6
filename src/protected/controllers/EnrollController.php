@@ -134,12 +134,13 @@ class EnrollController extends Controller
                     }
                     $_POST['Enroll']['user_id']=$userid;
                     $connection=Yii::app()->db;
-			$sql="INSERT INTO enroll (user_id,courseoffer_id,completed)
-                            VALUES(:user_id,:courseoffer_id,:completed)";
+			$sql="INSERT INTO enroll (user_id,courseoffer_id,completed,notes)
+                            VALUES(:user_id,:courseoffer_id,:completed,:notes)";
                         $command = $connection->createCommand($sql);
                         $command->bindParam(":user_id", $_POST['Enroll']['user_id'], PDO::PARAM_STR);
                         $command->bindParam(":courseoffer_id", $_POST['Enroll']['courseoffer_id'], PDO::PARAM_STR);
                         $command->bindParam(":completed", $_POST['Enroll']['completed'], PDO::PARAM_STR);
+                        $command->bindParam(":notes", $_POST['Enroll']['notes'], PDO::PARAM_STR);
                         $command->execute();
                         $this->redirect(array('index'));
                     }
@@ -198,6 +199,7 @@ class EnrollController extends Controller
                         $enrollment['user_id'] = $value->user_id;
                         $enrollment['courseoffer_id'] = $value->courseoffer_id;
                         $enrollment['completed'] = $value->completed;
+                        $enrollment['notes'] = $value->notes;
                     }
                 }
 		
@@ -218,7 +220,8 @@ class EnrollController extends Controller
 			Enroll::model()->updateAll(array(
                             'user_id'=>$enrollment['user_id'],
                             'courseoffer_id'=>$enrollment['courseoffer_id'],
-                            'completed'=>$enrollment['completed']),
+                            'completed'=>$enrollment['completed'],
+                            'notes'=>$enrollment['notes']),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
 		}
@@ -245,6 +248,7 @@ class EnrollController extends Controller
                 foreach($model as $value)
                     {
                         $enrollment['completed'] = $value->completed;
+                        $enrollment['notes'] = $value->notes;
                     }
             }
 		// Uncomment the following line if AJAX validation is needed
@@ -253,7 +257,9 @@ class EnrollController extends Controller
 		if(isset($_POST['Enroll']))
 		{
 			$assignment['completed']=$_POST['Enroll']['completed'];
-			Enroll::model()->updateAll(array('completed'=>$assignment['completed']),
+                        $enrollment['notes']=$_POST['Enroll']['notes'];
+			Enroll::model()->updateAll(array('completed'=>$assignment['completed'],
+                                                'notes'=>$enrollment['notes']),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
 		}
