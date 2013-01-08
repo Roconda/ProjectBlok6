@@ -4,15 +4,15 @@ $items = array(
         array(
             'class'=>'bootstrap.widgets.TbMenu',
             'items'=>array(
-                array('label'=>'Home', 'url'=> Yii::app()->getHomeUrl()),
+                array('label'=>Yii::t('Layouts','Home'), 'url'=> Yii::app()->getHomeUrl()),
             ),
         ),
     );
 
 if(!Yii::app()->user->isGuest) {
 	array_push($items, '<ul class="nav pull-right">');
-	array_push($items, '<li>'.CHtml::link('Settings',array('/profile/profile/view')).'</li>');//TODO: verander deze url naar dynamisch
-	array_push($items, '<li><a class="disabled">Logged in as '. Yii::app()->user->name .'</a></li>');
+	array_push($items, '<li>'.CHtml::link(Yii::t('Layouts','Settings'),array('/profile/profile/view')).'</li>');//TODO: verander deze url naar dynamisch
+	array_push($items, '<li><a class="disabled">'.Yii::t('layouts', 'Logged in as '), Yii::app()->user->name .'</a></li>');
 	array_push($items, '</ul>');
 }
 
