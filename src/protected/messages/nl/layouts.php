@@ -12,10 +12,10 @@ return array(
 	'Location' => 'Locatie',
 	'My Enrolls' => 'Mijn Trajecten',
 	'My Assings' => 'Mijn Toewijzingen',
-	'User management' => 'Gebruikers administratie',	
-	'User Management' => 'Gebruikers Administratie',
-	'Enrolled' => 'Ingeschreven',	
-	'Assigned' => 'Toegewezen',
+	'User management' => 'gebruikersbeheer',	
+	'User Management' => 'Gebruikersbeheer',
+	'Enrolled' => 'Enrolled',	
+	'Assigned' => 'Assinged',
 	'Login' => 'Aanmelden',
 	'Logout' => 'Afmelden'
 );
