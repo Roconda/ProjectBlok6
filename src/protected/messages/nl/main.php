@@ -9,5 +9,7 @@ return array(
 	'Search' => 'Zoeken',
 	'Export to PDF' => 'Exporteren naar PDF',
 	'Export to Excel' => 'Exporteren naar Excel',
+	'For questions' => 'Voor vragen',
+	'mail us' => 'mail ons'
 );
 ?>

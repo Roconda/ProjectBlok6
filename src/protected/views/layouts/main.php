@@ -73,7 +73,7 @@
 		<div class="row span12">
 			<footer>
 				<hr>
-				<p class="pagination-centered muted">Voor vragen <a href="mailto:ddcd@avans.nl">mail ons</a></p>
+				<p class="pagination-centered muted"> <?php echo Yii::t('main', 'For questions') ?> <a href="mailto:ddcd@avans.nl"> <?php echo Yii::t('main', 'mail us') ?> </a></p>
 			</footer>
 		</div>
 	</div><!-- container -->
