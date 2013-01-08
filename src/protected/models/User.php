@@ -21,6 +21,8 @@ class User extends YumUser{
             'enroll(user_id, courseoffer_id');
         $relations['assign'] = array(self::HAS_MANY, 'Assign',
                         'user_id');
+        $relations['group'] = array(self::HAS_MANY, 'YumGroupParticipation',
+            'user_id');
         return $relations;
     }
 }

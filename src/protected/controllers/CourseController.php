@@ -79,7 +79,7 @@ class CourseController extends Controller
                     $model->attributes=$_POST['Course'];
                     
 			
-			if($model->save())
+			if($model->save()) {
                             $cid = $model->id;
                         foreach(Relation::retrieveValues($_POST) as $trajectid) {
                             $connection=Yii::app()->db;
@@ -91,6 +91,7 @@ class CourseController extends Controller
                             $command->execute();
                         }
 				$this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(
