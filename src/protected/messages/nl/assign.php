@@ -8,6 +8,7 @@ return array(
         'Notes' => 'Aantekeningen',
         'completed' => 'behaald',
         'failed' => 'niet behaald',
+		'Assing Course' => 'Cusus Toewijzen',
         'uncompleted' => 'niet gedaan',
 );
 ?>

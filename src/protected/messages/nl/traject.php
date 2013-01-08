@@ -1,7 +1,7 @@
 <?php
 return array(
 	'Create Traject' => 'Aanmaken Traject',
-	'Trajects' => 'Trajects',
+	'Trails' => 'Trajecten',
 	'Description' => 'Omschrijving',
 	'Duration' => 'Aantal jaar',
 	'Number of courses' => 'Aantal cursussen',

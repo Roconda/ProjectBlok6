@@ -18,7 +18,7 @@ $('.search-form form').submit(function(){
 
 ?>
 
-<h1>Courses</h1>
+<h1><?php echo Yii::t('course', 'Course'); ?></h1>
 <hr />
 
 <?php 
@@ -30,11 +30,11 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
 	'type'=>'pills',
 	'items'=>array(
-		array('label'=>'Create', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('course_create') || Yii::app()->user->isAdmin()),
-                array('label'=>'List', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
-		array('label'=>'Search', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
-		array('label'=>'Export to PDF', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
-		array('label'=>'Export to Excel', 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
+		array('label'=>Yii::t('main','Create'), 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'), 'linkOptions'=>array(), 'visible' => Yii::app()->user->can('course_create') || Yii::app()->user->isAdmin()),
+        array('label'=>Yii::t('main','List'), 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl('index'),'active'=>true, 'linkOptions'=>array()),
+		array('label'=>Yii::t('main','Search'), 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
+		array('label'=>Yii::t('main','Export to PDF'), 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
+		array('label'=>Yii::t('main','Export to Excel'), 'icon'=>'icon-download', 'url'=>Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions'=>array('target'=>'_blank'), 'visible'=>true),
 	),
 ));
 $this->endWidget();
@@ -63,14 +63,14 @@ $this->endWidget();
 					'visible' => 'false',
 				),	
 				'update' => array(
-					'label'=> 'Update',
+					'label'=> Yii::t('zii','Update'),
 					'visible' => 'Yii::app()->user->can("course_update") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small update'
 					)
 				),
 				'delete' => array(
-					'label'=> 'Delete',
+					'label'=> Yii::t('zii','Delete'),
 					'visible' => 'Yii::app()->user->can("course_delete") || Yii::app()->user->isAdmin()',
 					'options'=>array(
 						'class'=>'btn btn-small delete'

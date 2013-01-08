@@ -1,6 +1,7 @@
 <?php
 return array(
 	'Description' => 'Omschrijving',
-        'Required' => 'Verplicht',
+    'Required' => 'Verplicht',
+	'Course' => 'Cursus'
 );
 ?>
