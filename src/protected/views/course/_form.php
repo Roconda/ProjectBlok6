@@ -10,7 +10,7 @@
 )); ?>
      	<fieldset>
 		<legend>
-			<p class="note">Fields with <span class="required">*</span> are required.</p>
+			<p class="note"><?php echo Yii::t('main', 'Fields with <span class="required">*</span> are required.'); ?></p>
 		</legend>
 
 	<?php echo $form->errorSummary($model,'Opps!!!', null,array('class'=>'alert alert-error span12')); ?>
@@ -39,12 +39,12 @@
 			'buttonType'=>'submit',
 			'type'=>'primary',
                         'icon'=>'ok white',  
-			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+			'label'=>$model->isNewRecord ? Yii::t('main','Create') : Yii::t('main','Save'),
 		)); ?>
               <?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'reset',
                         'icon'=>'remove',  
-			'label'=>'Reset',
+			'label'=>Yii::t('main','Reset'),
 		)); ?>
 	</div>
 </fieldset>

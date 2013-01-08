@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Update Traject <?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('traject', 'Update Trail'), $model->id ?></h1>
 <hr/>
 
 <?php 

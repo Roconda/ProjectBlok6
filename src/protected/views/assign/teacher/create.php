@@ -12,5 +12,5 @@ $this->menu=array(
 );
 ?>
 
-<h1>Assign Traject</h1>
+<h1><?php echo Yii::t('enroll', 'Assing Traject'); ?></h1>
 <?php echo $this->renderPartial('teacher/_form', array('model'=>$model)); ?>

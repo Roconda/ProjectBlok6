@@ -17,7 +17,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1><?php echo Yii::t('traject', 'Trajects'); ?></h1>
+<h1><?php echo Yii::t('traject', 'Trails'); ?></h1>
 <hr />
 
 <?php 

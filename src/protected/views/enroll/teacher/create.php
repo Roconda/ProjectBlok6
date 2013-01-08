@@ -12,5 +12,5 @@ $this->menu=array(
 );
 ?>
 
-<h1>Enroll course</h1>
+<h1><?php echo Yii::t('assing', 'Assing Course'); ?></h1>
 <?php echo $this->renderPartial('teacher/_form', array('model'=>$model)); ?>

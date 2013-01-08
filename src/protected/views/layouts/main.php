@@ -53,7 +53,7 @@
 			</div>
 			
 
-			<div id="contentContainer" class="span8 offset1">
+			<div id="contentContainer" class="span9">
 				<div style="margin-left:10px;margin-right:10px;">
 					<?php if(isset($this->breadcrumbs)):?>
 						<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -73,7 +73,7 @@
 		<div class="row span12">
 			<footer>
 				<hr>
-				<p class="pagination-centered muted">Voor vragen <a href="mailto:ddcd@avans.nl">mail ons</a></p>
+				<p class="pagination-centered muted"> <?php echo Yii::t('main', 'For questions') ?> <a href="mailto:ddcd@avans.nl"> <?php echo Yii::t('main', 'mail us') ?> </a></p>
 			</footer>
 		</div>
 	</div><!-- container -->

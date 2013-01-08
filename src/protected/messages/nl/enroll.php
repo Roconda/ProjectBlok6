@@ -13,6 +13,7 @@ return array(
         'completed' => 'behaald',
         'failed' => 'niet behaald',
         'uncompleted' => 'niet gedaan',
+		'Assing Trail' => 'Trail Toewijzen',
 		'Start date' => 'Start datum',
 );
 ?>
