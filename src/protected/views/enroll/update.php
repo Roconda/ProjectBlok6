@@ -23,7 +23,7 @@ foreach($model as $value)
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
-		'class'=>''
+		'class'=>'' 
 	)
 ));
 $this->widget('bootstrap.widgets.TbMenu', array(
