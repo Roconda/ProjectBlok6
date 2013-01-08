@@ -13,6 +13,6 @@ $(function() {
 			 	'update' => '#ajax_data'
 			 )); 
 		 }
-		 ?>
+		 ?> 
 });
 </script>
