@@ -29,6 +29,8 @@
 
 	<?php echo $form->hiddenField($model,'completed',array('value'=>'1'));?>
         <?php echo $form->error($model, 'completed'); ?>
+                            
+        <?php echo $form->textFieldRow($model,'notes',array('class'=>'span5')); ?>
                         </div>   
   </div>
 

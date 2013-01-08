@@ -124,6 +124,7 @@ class CourseController extends Controller
 				}
 				
 				//deletes non-existing course/traject links
+                                if(!empty($trajectids)) {
 				$sql="DELETE FROM course_has_traject
                       WHERE course_id = $id AND traject_id NOT IN (";
 				foreach($trajectids as $trajectid) {
@@ -132,6 +133,7 @@ class CourseController extends Controller
 				$sql = substr_replace($sql ,")",-1);
                 $command = $connection->createCommand($sql);
 				$command->execute();
+                                }
 				
 				//inserts new course/traject links
 				$criteria = new CDbCriteria();

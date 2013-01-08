@@ -115,13 +115,14 @@ class AssignController extends Controller
                     }
                     $_POST['Assign']['user_id']=$userid;
                     $connection=Yii::app()->db;
-			$sql="INSERT INTO assign (user_id, traject_id, startdate, completed)
-                            VALUES(:user_id,:traject_id,:startdate,:completed)";
+			$sql="INSERT INTO assign (user_id, traject_id, startdate, completed, notes)
+                            VALUES(:user_id,:traject_id,:startdate,:completed,:notes)";
                         $command = $connection->createCommand($sql);
                         $command->bindParam(":user_id", $_POST['Assign']['user_id'], PDO::PARAM_STR);
                         $command->bindParam(":traject_id", $_POST['Assign']['traject_id'], PDO::PARAM_STR);
                         $command->bindParam(":startdate", $_POST['Assign']['startdate'], PDO::PARAM_STR);
                         $command->bindParam(":completed", $_POST['Assign']['completed'], PDO::PARAM_STR);
+                        $command->bindParam(":notes", $_POST['Assign']['notes'], PDO::PARAM_STR);
                         $command->execute();
                         $this->redirect(array('index'));
                     }
@@ -183,6 +184,7 @@ class AssignController extends Controller
                             $assignment['traject_id'] = $value->traject_id;
                             $assignment['startdate'] = $value->startdate;
                             $assignment['completed'] = $value->completed;
+                            $assignment['notes'] = $value->notes;
                         }
                 }
 
@@ -202,7 +204,8 @@ class AssignController extends Controller
                             'user_id'=>$assignment['user_id'],
                             'traject_id'=>$assignment['traject_id'],
                             'startdate'=>$assignment['startdate'],
-                            'completed'=>$assignment['completed']
+                            'completed'=>$assignment['completed'],
+                            'notes'=>$assignment['notes'],
                             )
                                 ,"user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
@@ -230,6 +233,7 @@ class AssignController extends Controller
                 foreach($model as $value)
                     {
                         $assignment['completed'] = $value->completed;
+                        $assignment['notes'] = $value->notes;
                     }
             }
 
@@ -239,7 +243,9 @@ class AssignController extends Controller
 		if(isset($_POST['Assign']))
 		{
 			$assignment['completed']=$_POST['Assign']['completed'];
-                        Assign::model()->updateAll(array('completed'=>$assignment['completed']),
+                        $assignment['notes']=$_POST['Assign']['notes'];
+                        Assign::model()->updateAll(array('completed'=>$assignment['completed'],
+                                        'notes'=>$assignment['notes']),
                                 "user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
 		}
@@ -458,9 +464,9 @@ class AssignController extends Controller
     
     public function getCompletedList()
     {
-        return array('uncompleted' => Yii::t('enroll', 'uncompleted'),
-                     'failed' => Yii::t('enroll', 'failed'),
-                     'completed' => Yii::t('enroll', 'completed'));
+        return array('uncompleted' => Yii::t('enroll', 'n/a'),
+                     'failed' => Yii::t('enroll', 'Failed'),
+                     'completed' => Yii::t('enroll', 'Succeeded'));
     }
         
     public function testCourseOfferFullPrint()

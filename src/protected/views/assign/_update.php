@@ -44,6 +44,12 @@
             <?php echo $form->error($model,'completed'); ?>
 	</div>
         
+        <div class="row">
+            <?php echo $form->labelEx($model,'notes'); ?>
+            <?php echo $form->textField($model,'notes',array('value'=>$assignment['notes'])); ?>
+            <?php echo $form->error($model,'notes'); ?>
+	</div>
+        
 	<div class="row buttons">
 		<?php
                     echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); 

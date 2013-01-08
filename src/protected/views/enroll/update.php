@@ -16,6 +16,7 @@ foreach($model as $value)
     $enrollment['user_id'] = $value->user_id;
     $enrollment['courseoffer_id'] = $value->courseoffer_id;
     $enrollment['completed'] = $value->completed;
+    $enrollment['notes'] = $value->notes;
 }
 ?>
 <h1>Update Enroll <?php echo $name; ?></h1>

@@ -28,6 +28,8 @@
                             
 	<?php echo $form->hiddenField($model,'completed',array('class'=>'span5','value'=>'1')); ?>
         <?php echo $form->error($model,'completed',array('class'=>'span5')); ?>
+                            
+        <?php echo $form->textFieldRow($model,'notes',array('class'=>'span5')); ?>
 	
                         </div>   
   </div>

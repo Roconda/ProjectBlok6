@@ -38,6 +38,12 @@
                         array('options' => array($enrollment['completed']=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'completed'); ?>
 	</div>
+        
+        <div class="row">
+                <?php echo $form->labelEx($model,'notes'); ?>
+		<?php echo $form->textField($model,'notes',array('value'=>$enrollment['notes'])); ?>
+		<?php echo $form->error($model,'notes'); ?>
+	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
