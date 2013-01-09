@@ -185,7 +185,7 @@ class EnrollController extends Controller
             {
                 $this->actionUpdateCompleted($id);
             } else if(yii::app()->user->can('enroll_update_own')) {
-                $this->actionUpdateOwn($id);
+                $this->actionUpdateOwn();
             }
             else if(yii::app()->user->can('enroll_update') 
                     || (yii::app()->user->getName() == 'admin'))
@@ -271,8 +271,9 @@ class EnrollController extends Controller
 		));
 	}
         
-        public function actionUpdateOwn($id)
+        public function actionUpdateOwn()
 	{
+            $id=yii::app()->user->getId();
             if(isset($_GET['cid']))
             {
                 $cid=$_GET['cid'];
