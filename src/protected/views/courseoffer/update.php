@@ -16,6 +16,6 @@ $this->menu=array(
 );
 ?>
 
-<h1><?php echo Yii::t('courseOffer','Update course offer'), $model->id ?></h1>
+<h1><?php echo Yii::t('courseOffer','Update course offer')?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

@@ -1,4 +1,4 @@
-<?php
+ <?php
 /* @var $this EnrollController */
 /* @var $model Enroll */
 

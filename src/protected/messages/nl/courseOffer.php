@@ -13,6 +13,7 @@ return array(
 	'Create course' => 'Cursus aanmaken',
 	'View course' => 'Cursus bekijken',
 	'Manage course offer' => 'Cursus aanbod bewerken',
-	'Update course offer' => 'Cursus bewerken'
+	'Update course offer' => 'Cursus aanpassen',
+	'Description' => 'Omschrijving'	
 	);
 ?>

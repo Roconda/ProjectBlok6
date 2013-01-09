@@ -19,12 +19,12 @@ foreach($model as $value)
     $enrollment['notes'] = $value->notes;
 }
 ?>
-<h1>Update Enroll <?php echo $name; ?></h1>
+<h1><?php echo Yii::t('enroll', 'Update Enroll')?></h1>
 <hr />
 <?php
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
-		'class'=>''
+		'class'=>'' 
 	)
 ));
 $this->widget('bootstrap.widgets.TbMenu', array(
