@@ -38,7 +38,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 				),
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("enroll_update_own") || Yii::app()->user->can("enroll_update_completed") || Yii::app()->user->isAdmin()',
+					'visible' => 'Yii::app()->user->can("enroll_update_own") || Yii::app()->user->can("enroll_update_completed")',
 					'url'=>'Yii::app()->createUrl("enroll/update", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
 					'options'=>array(
 						'class'=>'btn btn-small update'
@@ -46,7 +46,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 				),
 				'delete' => array(
 					'label'=> 'Delete',
-					'visible' => 'Yii::app()->user->can("enroll_delete_own") || Yii::app()->user->isAdmin()',
+					'visible' => 'Yii::app()->user->can("enroll_delete_own")',
 					'url'=>'Yii::app()->createUrl("enroll/delete", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
 					'options'=>array(
 						'class'=>'btn btn-small delete'
