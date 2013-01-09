@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Teacher Assignment</h1>
+<h1><?php echo Yii::t('assign','My Assigns') ?></h1>
 
 
 
