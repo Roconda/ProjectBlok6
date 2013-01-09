@@ -256,9 +256,9 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-			$assignment['completed']=$_POST['Enroll']['completed'];
+			$enrollment['completed']=$_POST['Enroll']['completed'];
                         $enrollment['notes']=$_POST['Enroll']['notes'];
-			Enroll::model()->updateAll(array('completed'=>$assignment['completed'],
+			Enroll::model()->updateAll(array('completed'=>$enrollment['completed'],
                                                 'notes'=>$enrollment['notes']),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
