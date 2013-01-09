@@ -1,7 +1,8 @@
-<h1>Dashboard</h1>
+
 
 <div class="row span6">
-	<div id="ajax_data"><p> <?php echo Yii::t('Main','There is no information available at the moment') ?> </p></div>
+	<h1><?php echo Yii::t('dashboard','Dashboard') ?></h1>
+	<div id="ajax_data"><p> <?php echo Yii::t('dashboard','There is no information available at the moment.') ?> </p></div>
 </div>
 
 <script type="text/javascript">
