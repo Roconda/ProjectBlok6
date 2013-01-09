@@ -48,5 +48,8 @@ else if(yii::app()->user->can('enroll_update')
         || (yii::app()->user->isAdmin())) {
     echo $this->renderPartial('_update', array('model'=>$model,
                                                     'enrollment'=>$enrollment,));
+} else if(yii::app()->user->can('enroll_update_own')) {
+    echo $this->renderPartial('teacher/_form', array('model'=>$model,
+                                                    'enrollment'=>$enrollment,));
 }
 ?>

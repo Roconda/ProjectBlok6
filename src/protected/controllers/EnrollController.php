@@ -92,7 +92,7 @@ class EnrollController extends Controller
 			),
                         array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update'),
-				'expression'=> "yii::app()->user->can('enroll_update_completed')",
+				'expression'=> "yii::app()->user->can('enroll_update_completed') || yii::app()->user->can('enroll_update_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
@@ -184,6 +184,8 @@ class EnrollController extends Controller
             if(yii::app()->user->can('enroll_update_completed'))
             {
                 $this->actionUpdateCompleted($id);
+            } else if(yii::app()->user->can('enroll_update_own')) {
+                $this->actionUpdateOwn($id);
             }
             else if(yii::app()->user->can('enroll_update') 
                     || (yii::app()->user->getName() == 'admin'))
@@ -260,6 +262,35 @@ class EnrollController extends Controller
                         $enrollment['notes']=$_POST['Enroll']['notes'];
 			Enroll::model()->updateAll(array('completed'=>$enrollment['completed'],
                                                 'notes'=>$enrollment['notes']),
+                                "user_id=$id AND courseoffer_id=$cid");
+                        $this->redirect(array('index'));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+        
+        public function actionUpdateOwn($id)
+	{
+            if(isset($_GET['cid']))
+            {
+                $cid=$_GET['cid'];
+                $model=$this->loadModel($id, $cid);
+                
+                $enrollment = array();
+                foreach($model as $value)
+                    {
+                        $enrollment['courseoffer_id'] = $value->courseoffer_id;
+                    }
+            }
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Enroll']))
+		{
+                        $enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
+			Enroll::model()->updateAll(array('courseoffer_id'=>$enrollment['courseoffer_id'],),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
 		}
