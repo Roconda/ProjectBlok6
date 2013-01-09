@@ -10,6 +10,6 @@ return array(
 	'Export to PDF' => 'Exporteren naar PDF',
 	'Export to Excel' => 'Exporteren naar Excel',
 	'For questions' => 'Voor vragen',
-	'mail us' => 'mail ons',
+	'mail us' => 'mail ons'
 );
 ?>

@@ -1,15 +1,18 @@
 <?php
 return array(
-	'Username' => 'Gebruikersnaam',
+	    'Username' => 'Gebruikersnaam',
         'Trail' => 'Traject',
-        'Duration' => 'Lengte',
+        'Duration' => 'Jaar',
         'Startdate' => 'Startdatum',
-        'Completed' => 'Behaald',
+        'Completed' => 'Voltooid',
         'Notes' => 'Aantekeningen',
-        'completed' => 'behaald',
-        'failed' => 'niet behaald',
-		'Assing Course' => 'Cusus Toewijzen',
-        'uncompleted' => 'niet gedaan',
-		'Update Assign' => 'Assing Aanpassen',
+        'completed' => 'voltooid',
+        'failed' => 'gefaald',
+		'Assign Course' => 'Cursus vaststellen',
+        'uncompleted' => 'niet voltooid',
+		'Update Assign' => 'Assign Aanpassen',
+		'Assign Trail' => 'Traject vaststellen',
+		'My Assigns' => 'Mijn Aanmeldingen',
+		'Assign' => 'Aanmelden'
 );
 ?>

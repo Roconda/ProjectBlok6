@@ -1,6 +1,6 @@
 <?php
 return array(
-	'Completed' => 'Behaald',
+	    'Completed' => 'Voltooid',
         'Firstname' => 'Voornaam',
         'Lastname' => 'Achternaam',
 		'Username' => 'Gebruikersnaam',
@@ -10,12 +10,15 @@ return array(
         'Trail' => 'Traject',
         'Required' => 'Verplicht',
         'Year' => 'Jaar',
-        'completed' => 'behaald',
-        'failed' => 'niet behaald',
+        'completed' => 'voltooid',
+        'failed' => 'niet voltooid',
         'uncompleted' => 'niet gedaan',
-		'Assing Trail' => 'Trail Toewijzen',
+		'Assing Trail' => 'Traject Toewijzen',
 		'Start date' => 'Start datum',
-		'Update Enroll' => 'Enroll Aanpassen'
+		'Update Enroll' => 'Enroll Aanpassen',
+		'My Enrollments' => 'Mijn Inschrijvingen',
+		'Enroll course' => 'Inschrijven voor cursus',
+		'Enroll' => 'Inschrijven'
 );
 ?>
 

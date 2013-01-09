@@ -7,15 +7,15 @@ return array(
 	
 // nav_vertical.php
 	'Trails' => 'Trajecten',
-	'Course' => 'Cusus',
-	'Course offer' => 'Cusus aanbod',
+	'Course' => 'Cursus',
+	'Course offer' => 'Cursus aanbod',
 	'Location' => 'Locatie',
-	'My Enrolls' => 'Mijn Enrolls',
-	'My Assigns' => 'Mijn Assings',
+	'My Enrolls' => 'Mijn Inschrijvingen',
+	'My Assigns' => 'Mijn Aanmeldingen',
 	'User management' => 'gebruikersbeheer',	
 	'User Management' => 'Gebruikersbeheer',
-	'Enrolled' => 'Enrolled',	
-	'Assigned' => 'Assinged',
+	'Enrolled' => 'Inschrijvingen',	
+	'Assigned' => 'Aanmeldingen',
 	'Login' => 'Aanmelden',
 	'Logout' => 'Afmelden'
 );
