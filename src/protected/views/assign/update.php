@@ -23,7 +23,7 @@ foreach($model as $value)
 }
 ?>
 
-<h1>Update Assign <?php echo $name; ?></h1>
+<h1><?php echo Yii::t('assign', 'Update Assign')?></h1>
 
 <?php 
 if(yii::app()->user->can('assign_update_completed')) {

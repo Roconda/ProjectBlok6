@@ -10,5 +10,6 @@ return array(
         'failed' => 'niet behaald',
 		'Assing Course' => 'Cusus Toewijzen',
         'uncompleted' => 'niet gedaan',
+		'Update Assign' => 'Assing Aanpassen',
 );
 ?>

@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Update Course <?php echo $model->id; ?></h1>
+<h1><?php echo Yii::t('course', 'Update Course')?></h1>
 <hr/>
 
 <?php 

@@ -15,6 +15,7 @@ return array(
         'uncompleted' => 'niet gedaan',
 		'Assing Trail' => 'Trail Toewijzen',
 		'Start date' => 'Start datum',
+		'Update Enroll' => 'Enroll Aanpassen'
 );
 ?>
 
