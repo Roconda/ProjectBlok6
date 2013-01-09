@@ -1,6 +1,4 @@
-<div class="row">
-		<h3>Cursus overzicht</h3>
-</div>
+<h3><?php echo Yii::t('dashboard','Course overview') ?></h3>
 
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
