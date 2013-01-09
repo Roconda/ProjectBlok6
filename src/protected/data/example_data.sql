@@ -80,6 +80,8 @@ INSERT INTO `action` VALUES (49,'user_profile_read_own',NULL,NULL);
 INSERT INTO `action` VALUES (50,'user_profile_update_own',NULL,NULL);
 INSERT INTO `action` VALUES (51,'assign_update_completed',NULL,NULL);
 INSERT INTO `action` VALUES (52,'enroll_update_completed',NULL,NULL);
+INSERT INTO `action` VALUES (53,'enroll_delete_own',NULL,NULL);
+INSERT INTO `action` VALUES (54,'assign_delete_own',NULL,NULL);
 /*!40000 ALTER TABLE `action` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,6 +102,8 @@ INSERT INTO `permission` VALUES (5,0,'role',47,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',48,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',49,0,'');
 INSERT INTO `permission` VALUES (5,0,'role',50,0,'');
+INSERT INTO `permission` VALUES (5,0,'role',53,0,'');
+INSERT INTO `permission` VALUES (5,0,'role',54,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',16,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',24,0,'');
 INSERT INTO `permission` VALUES (6,0,'role',28,0,'');
