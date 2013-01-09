@@ -25,11 +25,38 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 array('name' => 'courseoffer.course.required','type'=>'boolean', 'header' => Yii::t('enroll', 'Required')),
                 array('name' => 'completed', 'type' => 'raw', 'value' => 'Enroll::model()->getCompleted($data->completed)'),
                 array('name' => 'notes'),
-	)
-
-)); 
-
-?>
+                		array(
+            'class'=>'bootstrap.widgets.TbButtonColumn',
+			'template' => '{update} {delete}',
+			'buttons' => array(
+			      'view' => array(
+					'label'=> 'View',
+					'url'=>'Yii::app()->createUrl("enroll/view", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+					'options'=>array(
+						'class'=>'btn btn-small view'
+					)
+				),
+				'update' => array(
+					'label'=> 'Update',
+					'visible' => 'Yii::app()->user->can("enroll_update_own") || Yii::app()->user->can("enroll_update_completed") || Yii::app()->user->isAdmin()',
+					'url'=>'Yii::app()->createUrl("enroll/update", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+					'options'=>array(
+						'class'=>'btn btn-small update'
+					)
+				),
+				'delete' => array(
+					'label'=> 'Delete',
+					'visible' => 'Yii::app()->user->can("enroll_delete_own") || Yii::app()->user->isAdmin()',
+					'url'=>'Yii::app()->createUrl("enroll/delete", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+					'options'=>array(
+						'class'=>'btn btn-small delete'
+					)
+				)
+			),
+            'htmlOptions'=>array('style'=>'width: 125px'),
+           )
+	),
+)); ?>
     
 <?php 
 $id = Yii::app()->user->getId();
