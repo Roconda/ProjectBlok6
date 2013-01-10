@@ -1,8 +1,8 @@
 <?php
 return array(
-	'Locations' => 'Locaties'
+	'Locations' => 'Locaties',
 	'Description' => 'Omschrijving',	
 	'Create Location' => ' Locatie Aanmaken',
-	'Update Location' => 'Locatie Aanpassen'
+	'Update Location' => 'Locatie Aanpassen',
 );
 ?>
