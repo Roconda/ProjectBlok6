@@ -100,7 +100,7 @@ class EnrollController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'expression'=> "yii::app()->user->can('enroll_delete')",
+				'expression'=> "yii::app()->user->can('enroll_delete') || yii::app()->user->can('enroll_delete_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','create','view','index','update','delete','owncreate','ownindex','generatepdf','generateexcel'),
@@ -311,8 +311,14 @@ class EnrollController extends Controller
 	{
             if(isset($_GET['cid']))
             {
-                $cid=$_GET['cid'];
-		Enroll::model()->deleteAll("user_id=$id AND courseoffer_id=$cid");
+                if(yii::app()->user->can('enroll_delete')) {
+                    $cid=$_GET['cid'];
+                    Enroll::model()->deleteAll("user_id=$id AND courseoffer_id=$cid");
+                } else if (yii::app()->user->can('enroll_delete_own')) {
+                    $cid=$_GET['cid'];
+                    $id=yii::app()->user->getId();
+                    Enroll::model()->deleteAll("user_id=$id AND courseoffer_id=$cid");
+                }
             }
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
