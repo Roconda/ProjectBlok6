@@ -91,6 +91,36 @@ class Enroll extends CActiveRecord
 				return Yii::t('enroll', 'Failed');
 		endswitch;
 	}
+        
+        public function getTeacherButtonItem($data, $field) {
+                switch($data):
+			case(0):
+                                if($field == 'update') {
+                                    return array(
+                                        'label' => 'Update',
+                                        'visible' => 'Yii::app()->user->can("enroll_update_own") || Yii::app()->user->can("enroll_update_completed")',
+                                        'url' => 'Yii::app()->createUrl("enroll/update", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+                                        'options' => array(
+                                            'class' => 'btn btn-small update'
+                                        )
+                                    );
+                                } else if($field == 'delete') {
+                                    return array(
+                                         'label' => 'Delete',
+                                         'visible' => 'Yii::app()->user->can("enroll_delete_own")',
+                                         'url' => 'Yii::app()->createUrl("enroll/delete", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
+                                         'options' => array(
+                                            'class' => 'btn btn-small delete'
+                                         )
+                                    );
+                                }
+                        break;
+			default:
+				return array(
+                                        'visible'=> 'false',
+                                ); 
+		endswitch;
+        }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

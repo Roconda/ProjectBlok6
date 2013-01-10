@@ -9,7 +9,18 @@ $this->breadcrumbs = array(
 
 <h1><?php echo Yii::t('enroll', 'My Enrollments') ?></h1>
 
+<?php
 
+$buttonData = array();
+foreach($dataProvider->data as $x) {
+    $buttonData[$x->courseoffer_id] = $x->courseoffer->blocked;
+    
+}
+
+//$model = $dataProvider->data;
+//$buttonData = $model->courseoffer->blocked;
+    
+?>
 
 <div class="row">
     <?php
@@ -35,22 +46,8 @@ $this->breadcrumbs = array(
                             'class' => 'btn btn-small view'
                         )
                     ),
-                    'update' => array(
-                        'label' => 'Update',
-                        'visible' => 'Yii::app()->user->can("enroll_update_own") || Yii::app()->user->can("enroll_update_completed")',
-                        'url' => 'Yii::app()->createUrl("enroll/update", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
-                        'options' => array(
-                            'class' => 'btn btn-small update'
-                        )
-                    ),
-                    'delete' => array(
-                        'label' => 'Delete',
-                        'visible' => 'Yii::app()->user->can("enroll_delete_own")',
-                        'url' => 'Yii::app()->createUrl("enroll/delete", array("id"=>$data->user_id, "cid"=>$data->courseoffer_id))',
-                        'options' => array(
-                            'class' => 'btn btn-small delete'
-                        )
-                    )
+                    'update' => Enroll::model()->getTeacherButtonItem(0, 'update'),
+                    'delete' => Enroll::model()->getTeacherButtonItem(0, 'delete'),   
                 ),
                 'htmlOptions' => array('style' => 'width: 125px'),
             )
