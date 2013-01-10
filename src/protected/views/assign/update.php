@@ -13,6 +13,7 @@ $this->menu=array(
 $assignment = array();
 foreach($model as $value)
 {
+    $model = $value;
     $name = $value->user->username;
     $assignment['username'] = $name;
     $assignment['user_id'] = $value->user_id;
@@ -33,6 +34,9 @@ if(yii::app()->user->can('assign_update_completed')) {
 else if(yii::app()->user->can('assign_update')
         || (yii::app()->user->getName() == 'admin')) {
     echo $this->renderPartial('_update', array('model'=>Assign::model(),
+                                                    'assignment'=>$assignment,));
+} else if(yii::app()->user->can('assign_update_own')) {
+    echo $this->renderPartial('teacher/_form', array('model'=>$model,
                                                     'assignment'=>$assignment,));
 }
 

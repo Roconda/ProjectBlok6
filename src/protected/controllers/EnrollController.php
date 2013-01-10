@@ -184,7 +184,8 @@ class EnrollController extends Controller
             if(yii::app()->user->can('enroll_update_completed'))
             {
                 $this->actionUpdateCompleted($id);
-            } else if(yii::app()->user->can('enroll_update_own')) {
+            } 
+            else if(yii::app()->user->can('enroll_update_own')) {
                 $this->actionUpdateOwn();
             }
             else if(yii::app()->user->can('enroll_update') 

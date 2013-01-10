@@ -62,7 +62,7 @@ class AssignController extends Controller
 			),
                         array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update'),
-				'expression'=> "Yii::app()->user->can('assign_update_completed')",
+				'expression'=> "Yii::app()->user->can('assign_update_completed') || Yii::app()->user->can('assign_update_own')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','update'),
@@ -169,6 +169,9 @@ class AssignController extends Controller
             {
                 $this->actionUpdateCompleted($id);
             }
+            else if(yii::app()->user->can('assign_update_own')) {
+                $this->actionUpdateOwn();
+            }
             else if(yii::app()->user->can('assign_update') 
                     || (yii::app()->user->isAdmin()))
             {
@@ -246,6 +249,37 @@ class AssignController extends Controller
                         $assignment['notes']=$_POST['Assign']['notes'];
                         Assign::model()->updateAll(array('completed'=>$assignment['completed'],
                                         'notes'=>$assignment['notes']),
+                                "user_id=$id AND traject_id=$tid");
+                        $this->redirect(array('index'));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+        
+        public function actionUpdateOwn()
+	{
+            $id=yii::app()->user->getId();
+            if(isset($_GET['tid']))
+            {
+                $tid = $_GET['tid'];
+		$model=$this->loadModel($id, $tid);
+                
+                $assignment = array();
+                foreach($model as $value)
+                    {
+                        $assignment['traject_id'] = $value->traject_id;
+                    }
+            }
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Assign']))
+		{
+			$assignment['traject_id']=$_POST['Assign']['traject_id'];
+                        Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],),
                                 "user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
 		}
