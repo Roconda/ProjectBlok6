@@ -39,7 +39,7 @@
 			'buttonType'=>'submit',
 			'type'=>'primary',
                         'icon'=>'ok white',  
-			'label'=>$model->isNewRecord ? Yii::t('main','Create') : Yii::t('main','Save'),,
+			'label'=>$model->isNewRecord ? Yii::t('main','Create') : Yii::t('main','Save'),
 		)); ?>
               <?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'reset',
