@@ -1,5 +1,6 @@
 <?php
-return array(	
+return array(
+	'traject' => 'traject',
 	'Trails' => 'Trajecten',
 	'Description' => 'Omschrijving',
 	'Duration' => 'Loop tijd',
