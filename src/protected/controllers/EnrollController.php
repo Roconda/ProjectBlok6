@@ -171,7 +171,7 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer'])) {
+			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
 				$model->attributes=$_POST['Enroll'];
 				if($model->save())
 				{
@@ -583,9 +583,12 @@ class EnrollController extends Controller
         $criteria = new CDbCriteria();
         $criteria->with = 'course';
         $criteria->join = '
+                    join enroll enroll on enroll.courseoffer_id = t.id
                     join course_has_traject course_has_traject  on course_has_traject.course_id = t.course_id
                     join assign assign on assign.traject_id = course_has_traject.traject_id';
         $criteria->addCondition("assign.user_id=$userid");
+        $criteria->addCondition("t.blocked=0");
+        $criteria->addCondition("t.id NOT IN (SELECT courseoffer_id FROM enroll WHERE user_id=$userid)");
         $criteria->order = 'course.description';
         $courseoffer = Courseoffer::model()->findAll($criteria);
         $bob = array();
@@ -620,6 +623,22 @@ class EnrollController extends Controller
             return true;
         }
         return false;
+    }
+    
+    public function isMaxEnrolled($trajectid) {
+        $userid=yii::app()->user->getId();
+        $traject=Traject::model()->findAll("id=$trajectid");
+        $criteria = Enroll::model()->getDbCriteria();
+        $criteria->join = '';
+        $criteria->addCondition("user_id=$userid");
+        $enrollCount=Enroll::model()->count($criteria);
+        foreach($traject as $t) {
+            if($t->nrcourses <= $enrollCount) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
         
     public function testCourseOfferFullPrint()
