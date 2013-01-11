@@ -56,12 +56,13 @@ class CourseController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+/**	public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
+*/
 
 	/**
 	 * Creates a new model.
@@ -80,18 +81,25 @@ class CourseController extends Controller
                     
 			
 			if($model->save()) {
-                            $cid = $model->id;
-                        foreach(Relation::retrieveValues($_POST) as $trajectid) {
-                            $connection=Yii::app()->db;
-                            $sql="INSERT INTO course_has_traject (traject_id, course_id)
-                                VALUES(:traject_id,:course_id)";
-                            $command = $connection->createCommand($sql);
-                            $command->bindParam(":traject_id", $trajectid, PDO::PARAM_STR);
-                            $command->bindParam(":course_id", $cid, PDO::PARAM_STR);
-                            $command->execute();
-                        }
-				$this->redirect(array('view','id'=>$model->id));
-                        }
+				$cid = $model->id;
+				foreach(Relation::retrieveValues($_POST) as $trajectid) {
+					$connection=Yii::app()->db;
+					$sql="INSERT INTO course_has_traject (traject_id, course_id)
+						VALUES(:traject_id,:course_id)";
+					$command = $connection->createCommand($sql);
+					$command->bindParam(":traject_id", $trajectid, PDO::PARAM_STR);
+					$command->bindParam(":course_id", $cid, PDO::PARAM_STR);
+					$command->execute();
+				}
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('course', 'course') )) );
+				$this->redirect(array('index'));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('course', 'course') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -152,11 +160,18 @@ class CourseController extends Controller
 						$command->execute();
 					}
 				}
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('course', 'course') )) );
+				$this->redirect(array('index'));
 			}
-			$this->redirect(array('view','id'=>$model->id));
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to updated', array('{model}' => Yii::t('course', 'course') )) );
+				$this->redirect(array('index'));
+			}			
+			
 		}
 		
-
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -172,14 +187,20 @@ class CourseController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			if( $this->loadModel($id)->delete() )
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('course', 'course') )) );
+				
+				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+				if(!isset($_GET['ajax']))
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		{
+			Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to delete', array('{model}' => Yii::t('course', 'course') )) );
+			$this->redirect(array('index'));
+		}
 	}
 
 	/**
@@ -269,21 +290,20 @@ class CourseController extends Controller
 			), true)
 		);
 	}
-        public function actionGeneratePdf() 
+	public function actionGeneratePdf() 
 	{
-            $session=new CHttpSession;
-            $session->open();
+		$session=new CHttpSession;
+		$session->open();
 		Yii::import('application.extensions.giiplus.bootstrap.*');
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-
-               if(isset($session['Course_records']))
-               {
-                $model=$session['Course_records'];
-               }
-               else
-                 $model = Course::model()->findAll();
+		   if(isset($session['Course_records']))
+		   {
+			$model=$session['Course_records'];
+		   }
+		   else
+			 $model = Course::model()->findAll();
 
 		
 

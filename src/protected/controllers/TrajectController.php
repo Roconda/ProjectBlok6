@@ -56,12 +56,13 @@ class TrajectController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+/**	public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
+*/
 
 	/**
 	 * Creates a new model.
@@ -78,7 +79,15 @@ class TrajectController extends Controller
 		{
 			$model->attributes=$_POST['Traject'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('traject', 'traject') )) );
+				$this->redirect(array('index'));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('traject', 'traject') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -102,7 +111,15 @@ class TrajectController extends Controller
 		{
 			$model->attributes=$_POST['Traject'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('traject', 'traject') )) );
+				$this->redirect(array('index'));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to updated', array('{model}' => Yii::t('traject', 'traject') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -117,17 +134,24 @@ class TrajectController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isGetRequest)
+		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			if( $this->loadModel($id)->delete() )
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('traject', 'traject') )) );
+				
+				// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+				if(!isset($_GET['ajax']))
+					$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			}
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		{
+			Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to delete', array('{model}' => Yii::t('traject', 'traject') )) );
+			$this->redirect(array('index'));
+		}
+			
 	}
 
 	/**
