@@ -222,7 +222,9 @@ class CourseController extends Controller
 			
 			if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
 		 
-			if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 			
+			if (!empty($model->required_0)) $criteria->addCondition('required = "'.$model->required_0.'"'); 
+			
+			if (!empty($model->required_1)) $criteria->addCondition('required = "'.$model->required_1.'"'); 
 		}
 		$session['Course_records']=Course::model()->findAll($criteria);
 
