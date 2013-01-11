@@ -166,7 +166,7 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer'])) {
+                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
 				$this->redirect(array('index','id'=>$model->user_id));
