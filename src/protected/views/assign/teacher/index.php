@@ -13,6 +13,13 @@ $this->breadcrumbs=array(
 
 <div class="row">
 <?php
+$enrollCount=$this->getUserEnrollCount();
+if(yii::app()->user->can('assign_update_own') && $enrollCount > 0) {
+    $isVisible=false;
+} else if(yii::app()->user->can('assign_update_own') && $enrollCount == 0) {
+    $isVisible=true;
+}
+
 /* 
 $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
@@ -37,7 +44,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
 			'buttons' => array(	
 				'update' => array(
 					'label'=> 'Update',
-					'visible' => 'Yii::app()->user->can("assign_update_own")',
+					'visible' => "$isVisible",
 					'url'=>'Yii::app()->createUrl("assign/update", array("id"=>$data->user_id, "tid"=>$data->traject_id))',
 					'options'=>array(
 						'class'=>'btn btn-small update'

@@ -517,6 +517,11 @@ class AssignController extends Controller
         }
         return false;
     }
+    
+    public function getUserEnrollCount() {
+        $userid=yii::app()->user->getId();
+        return Enroll::model()->count("user_id=$userid");
+    }
         
     public function testCourseOfferFullPrint()
     {
