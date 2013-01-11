@@ -125,14 +125,14 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-                    if(isset($_POST['Enroll']))
-                    {
+                    
                     $userid=$_POST['Enroll']['user_id'];
                     $user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
                     foreach($user as $uid){
                         $userid=$uid->id;
                     }
                     $_POST['Enroll']['user_id']=$userid;
+                    if(!$this->checkDuplicate($userid, $_POST['Enroll']['courseoffer'])) {
                     $connection=Yii::app()->db;
 			$sql="INSERT INTO enroll (user_id,courseoffer_id,completed,notes)
                             VALUES(:user_id,:courseoffer_id,:completed,:notes)";
@@ -144,6 +144,7 @@ class EnrollController extends Controller
                         $command->execute();
                         $this->redirect(array('index'));
                     }
+                    
                     /*
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
@@ -165,9 +166,11 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer'])) {
 			$model->attributes=$_POST['Enroll'];
 			if($model->save())
 				$this->redirect(array('index','id'=>$model->user_id));
+                    }
 		}
 
 		$this->render('teacher/create',array(
@@ -213,6 +216,7 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    
                     $userid=$_POST['Enroll']['user_id'];
                     $user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
                     foreach($user as $uid){
@@ -220,6 +224,7 @@ class EnrollController extends Controller
                     }
                     $_POST['Enroll']['user_id']=$userid;
 			$enrollment=$_POST['Enroll'];
+                    if(!$this->checkDuplicate($userid, $_POST['Enroll']['courseoffer_id'])) {
 			Enroll::model()->updateAll(array(
                             'user_id'=>$enrollment['user_id'],
                             'courseoffer_id'=>$enrollment['courseoffer_id'],
@@ -227,6 +232,7 @@ class EnrollController extends Controller
                             'notes'=>$enrollment['notes']),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -259,12 +265,14 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
 			$enrollment['completed']=$_POST['Enroll']['completed'];
                         $enrollment['notes']=$_POST['Enroll']['notes'];
 			Enroll::model()->updateAll(array('completed'=>$enrollment['completed'],
                                                 'notes'=>$enrollment['notes']),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -291,10 +299,12 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(!$this->checkDuplicate($id, $_POST['Enroll']['courseoffer_id'])) {
                         $enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
 			Enroll::model()->updateAll(array('courseoffer_id'=>$enrollment['courseoffer_id'],),
                                 "user_id=$id AND courseoffer_id=$cid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -582,6 +592,14 @@ class EnrollController extends Controller
         return array('uncompleted' => Yii::t('enroll', 'n/a'),
                      'failed' => Yii::t('enroll', 'Failed'),
                      'completed' => Yii::t('enroll', 'Succeeded'));
+    }
+    
+    public function checkDuplicate($id, $cid) {
+        if(Enroll::model()->count("user_id=$id AND courseoffer_id=$cid") == 1) {
+            throw new CHttpException('',Yii::t('enroll','This user is already enrolled to this courseoffer'));
+            return true;
+        }
+        return false;
     }
         
     public function testCourseOfferFullPrint()

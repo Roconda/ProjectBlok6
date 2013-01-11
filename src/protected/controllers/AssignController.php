@@ -106,14 +106,13 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-                    if(isset($_POST['Assign']))
-                    {
                     $userid=$_POST['Assign']['user_id'];
                     $user=User::model()->findAll("username='" . $_POST['Assign']['user_id'] . "'");
                     foreach($user as $uid){
                         $userid=$uid->id;
                     }
                     $_POST['Assign']['user_id']=$userid;
+                    if(!$this->checkDuplicate($userid, $_POST['Assign']['traject_id'])) {
                     $connection=Yii::app()->db;
 			$sql="INSERT INTO assign (user_id, traject_id, startdate, completed, notes)
                             VALUES(:user_id,:traject_id,:startdate,:completed,:notes)";
@@ -148,9 +147,11 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
 			$model->attributes=$_POST['Assign'];
 			if($model->save())
 				$this->redirect(array('index','id'=>$model->user_id));
+                    }
 		}
 
 		$this->render('teacher/create',array(
@@ -203,6 +204,7 @@ class AssignController extends Controller
                     }
                     $_POST['Assign']['user_id']=$userid;
 			$assignment=$_POST['Assign'];
+                    if(!$this->checkDuplicate($userid, $_POST['Assign']['traject_id'])) {
                         Assign::model()->updateAll(array(
                             'user_id'=>$assignment['user_id'],
                             'traject_id'=>$assignment['traject_id'],
@@ -212,6 +214,7 @@ class AssignController extends Controller
                             )
                                 ,"user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -245,12 +248,14 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
 			$assignment['completed']=$_POST['Assign']['completed'];
                         $assignment['notes']=$_POST['Assign']['notes'];
                         Assign::model()->updateAll(array('completed'=>$assignment['completed'],
                                         'notes'=>$assignment['notes']),
                                 "user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -278,10 +283,12 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    if(!$this->checkDuplicate($id, $_POST['Assign']['traject_id'])) {
 			$assignment['traject_id']=$_POST['Assign']['traject_id'];
                         Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],),
                                 "user_id=$id AND traject_id=$tid");
                         $this->redirect(array('index'));
+                    }
 		}
 
 		$this->render('update',array(
@@ -501,6 +508,14 @@ class AssignController extends Controller
         return array('uncompleted' => Yii::t('enroll', 'n/a'),
                      'failed' => Yii::t('enroll', 'Failed'),
                      'completed' => Yii::t('enroll', 'Succeeded'));
+    }
+    
+    public function checkDuplicate($id, $tid) {
+        if(Assign::model()->count("user_id=$id AND traject_id=$tid") == 1) {
+            throw new CHttpException('',Yii::t('assign','This user is already assigned to this traject'));
+            return true;
+        }
+        return false;
     }
         
     public function testCourseOfferFullPrint()
