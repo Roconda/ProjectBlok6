@@ -86,12 +86,13 @@ class AssignController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+/**	public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
+*/
 
 	/**
 	 * Creates a new model.
@@ -127,10 +128,19 @@ class AssignController extends Controller
                     }
                     
                     /*
-			$model->attributes=$_POST['Assign'];
+			$model->attributes=$_POST['Assign'];*/
+			
 			if($model->save())
-				$this->redirect(array('index','id'=>$model->user_id));
-                     */
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('assign', 'Assign') )) );
+				$this->redirect(array('index'));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('assign', 'Assign') )) );
+				$this->redirect(array('index'));
+			}
+                     
 		}
 
 		$this->render('create',array(
@@ -147,11 +157,14 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-                    if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
-			$model->attributes=$_POST['Assign'];
-			if($model->save())
-				$this->redirect(array('index','id'=>$model->user_id));
-                    }
+			if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
+				$model->attributes=$_POST['Assign'];
+				if($model->save())
+				{
+					Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('assign', 'Assign') )) );
+					$this->redirect(array('index'));
+				}
+			}
 		}
 
 		$this->render('teacher/create',array(
@@ -213,7 +226,9 @@ class AssignController extends Controller
                             'notes'=>$assignment['notes'],
                             )
                                 ,"user_id=$id AND traject_id=$tid");
-                        $this->redirect(array('index'));
+                        
+						Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
+						$this->redirect(array('index'));
                     }
 		}
 
@@ -248,14 +263,16 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-                    if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
-			$assignment['completed']=$_POST['Assign']['completed'];
-                        $assignment['notes']=$_POST['Assign']['notes'];
-                        Assign::model()->updateAll(array('completed'=>$assignment['completed'],
-                                        'notes'=>$assignment['notes']),
-                                "user_id=$id AND traject_id=$tid");
-                        $this->redirect(array('index'));
-                    }
+			if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
+				$assignment['completed']=$_POST['Assign']['completed'];
+				$assignment['notes']=$_POST['Assign']['notes'];
+				Assign::model()->updateAll(array('completed'=>$assignment['completed'],
+								'notes'=>$assignment['notes']),
+						"user_id=$id AND traject_id=$tid");
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -269,7 +286,7 @@ class AssignController extends Controller
             if(isset($_GET['tid']))
             {
                 $tid = $_GET['tid'];
-		$model=$this->loadModel($id, $tid);
+				$model=$this->loadModel($id, $tid);
                 
                 $assignment = array();
                 foreach($model as $value)
@@ -283,12 +300,14 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-                    if(!$this->checkDuplicate($id, $_POST['Assign']['traject_id'])) {
-			$assignment['traject_id']=$_POST['Assign']['traject_id'];
-                        Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],),
-                                "user_id=$id AND traject_id=$tid");
-                        $this->redirect(array('index'));
-                    }
+			if(!$this->checkDuplicate($id, $_POST['Assign']['traject_id'])) {
+				$assignment['traject_id']=$_POST['Assign']['traject_id'];
+				Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],),
+						"user_id=$id AND traject_id=$tid");
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -306,7 +325,8 @@ class AssignController extends Controller
             if(isset($_GET['tid']))
             {
                 $tid = $_GET['tid'];
-		Assign::model()->deleteAll("user_id=$id AND traject_id=$tid");
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('assign', 'Assign') )) );
+				Assign::model()->deleteAll("user_id=$id AND traject_id=$tid");
             }
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
