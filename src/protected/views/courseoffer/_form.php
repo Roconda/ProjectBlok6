@@ -28,9 +28,9 @@
 	
 	<?php echo $form->textFieldRow($model,'block',array('class'=>'span5')); ?>
 	
-	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
+	<?php echo $form->checkboxRow($model,'fysiek'); ?>
 	
-	<?php echo $form->textFieldRow($model,'blocked',array('class'=>'span5')); ?>
+	<?php echo $form->checkboxRow($model,'blocked'); ?>
 
                         </div>   
   </div>
