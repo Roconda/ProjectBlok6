@@ -1,5 +1,6 @@
 <?php
 return array(
+	'course' => 'curses',
 	'Description' => 'Omschrijving',
     'Required' => 'Verplicht',
 	'Course' => 'Cursus',
