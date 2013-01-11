@@ -20,8 +20,8 @@
 
 	<?php echo $form->textFieldRow($model,'description',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'required',array('class'=>'span5')); ?>
-                            
+	<?php echo $form->checkboxRow($model,'required'); ?>
+				
         <?php echo $form->labelEx($model, 'traject'); ?>
         <?php $this->widget('YumModule.components.Relation', array(
                                 'model' => $model,
