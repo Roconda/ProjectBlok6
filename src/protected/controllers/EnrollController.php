@@ -172,17 +172,20 @@ class EnrollController extends Controller
 		if(isset($_POST['Enroll']))
 		{
 			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
+                            if(!$this->isFrozen($_POST['Enroll']['courseoffer_id'])) {
 				$model->attributes=$_POST['Enroll'];
 				if($model->save())
 				{
 					Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('enroll', 'Enroll') )) );
 					$this->redirect(array('index'));
 				}
+                            }
 				else
 				{
 					Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('enroll', 'Enroll') )) );
 					$this->redirect(array('index'));
 				}
+                            
 			}
 		}
 
@@ -316,12 +319,14 @@ class EnrollController extends Controller
 		if(isset($_POST['Enroll']))
 		{
 			if(!$this->checkDuplicate($id, $_POST['Enroll']['courseoffer_id'])) {
+                            if(!$this->isFrozen($_POST['Enroll']['courseoffer_id'])) {
 				$enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
 				Enroll::model()->updateAll(array('courseoffer_id'=>$enrollment['courseoffer_id'],),
 						"user_id=$id AND courseoffer_id=$cid");
 				
 				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('enroll', 'Enroll') )) );
 				$this->redirect(array('index'));
+                            }
 			}
 		}
 
@@ -339,7 +344,7 @@ class EnrollController extends Controller
 	{
             if(isset($_GET['cid']))
             {
-                if(yii::app()->user->can('enroll_delete')) {
+                if(yii::app()->user->can('enroll_delete') || yii::app()->user->isAdmin()) {
                     $cid=$_GET['cid'];
                     Enroll::model()->deleteAll("user_id=$id AND courseoffer_id=$cid");
                 } else if (yii::app()->user->can('enroll_delete_own')) {
@@ -623,6 +628,16 @@ class EnrollController extends Controller
             return true;
         }
         return false;
+    }
+    
+    public function isFrozen($cid) {
+        $co=Courseoffer::model()->findAll("id=$cid");
+        $isFrozen=true;
+        foreach($co as $c) {
+            if($c->blocked==0)
+                $isFrozen=false;
+        }
+        return $isFrozen;
     }
     
     public function isMaxEnrolled($trajectid) {
