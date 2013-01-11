@@ -19,3 +19,4 @@ src/protected/config/sql.inc.php
 
 #SASS
 src/assets/*/
+/src/protected/runtime/application.log.1
