@@ -10,7 +10,8 @@
     <![endif]-->
     
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
-    
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/flash.css" />
+	
     <style type="text/css">
     	body{
     		background-image:url('<?php echo Yii::app()->baseUrl; ?>/images/gray_jean.png');
@@ -54,6 +55,23 @@
 			
 
 			<div id="contentContainer" class="span9">
+			
+			<?php if(Yii::app()->user->hasFlash('success')):?>
+				<div class="flash-success">
+					<?php echo Yii::app()->user->getFlash('success'); ?>
+				</div>
+			<?php endif; ?>
+			<?php if(Yii::app()->user->hasFlash('error')):?>
+				<div class="flash-error">
+					<?php echo Yii::app()->user->getFlash('error'); ?>
+				</div>
+			<?php endif; ?>
+			<?php if(Yii::app()->user->hasFlash('notice')):?>
+				<div class="flash-notice">
+					<?php echo Yii::app()->user->getFlash('notice'); ?>
+				</div>
+			<?php endif; ?>
+			
 				<div style="margin-left:10px;margin-right:10px;">
 					<?php if(isset($this->breadcrumbs)):?>
 						<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
