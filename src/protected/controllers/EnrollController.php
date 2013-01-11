@@ -145,11 +145,16 @@ class EnrollController extends Controller
                         $this->redirect(array('index'));
                     }
                     
-                    /*
-			$model->attributes=$_POST['Enroll'];
 			if($model->save())
-				$this->redirect(array('index','id'=>$model->user_id));
-                     */
+			{
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+			}
+			else
+			{
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('create',array(
@@ -166,11 +171,19 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer'])) {
-			$model->attributes=$_POST['Enroll'];
-			if($model->save())
-				$this->redirect(array('index','id'=>$model->user_id));
-                    }
+			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer'])) {
+				$model->attributes=$_POST['Enroll'];
+				if($model->save())
+				{
+					Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+					$this->redirect(array('index'));
+				}
+				else
+				{
+					Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+					$this->redirect(array('index'));
+				}
+			}
 		}
 
 		$this->render('teacher/create',array(
@@ -215,24 +228,25 @@ class EnrollController extends Controller
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Enroll']))
-		{
-                    
-                    $userid=$_POST['Enroll']['user_id'];
-                    $user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
-                    foreach($user as $uid){
-                        $userid=$uid->id;
-                    }
-                    $_POST['Enroll']['user_id']=$userid;
+		{    
+			$userid=$_POST['Enroll']['user_id'];
+			$user=User::model()->findAll("username='" . $_POST['Enroll']['user_id'] . "'");
+			foreach($user as $uid){
+				$userid=$uid->id;
+			}
+			$_POST['Enroll']['user_id']=$userid;
 			$enrollment=$_POST['Enroll'];
-                    if(!$this->checkDuplicate($userid, $_POST['Enroll']['courseoffer_id'])) {
-			Enroll::model()->updateAll(array(
-                            'user_id'=>$enrollment['user_id'],
-                            'courseoffer_id'=>$enrollment['courseoffer_id'],
-                            'completed'=>$enrollment['completed'],
-                            'notes'=>$enrollment['notes']),
-                                "user_id=$id AND courseoffer_id=$cid");
-                        $this->redirect(array('index'));
-                    }
+			if(!$this->checkDuplicate($userid, $_POST['Enroll']['courseoffer_id'])) {
+				Enroll::model()->updateAll(array(
+					'user_id'=>$enrollment['user_id'],
+					'courseoffer_id'=>$enrollment['courseoffer_id'],
+					'completed'=>$enrollment['completed'],
+					'notes'=>$enrollment['notes']),
+						"user_id=$id AND courseoffer_id=$cid");
+			
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -265,14 +279,16 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-                    if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
-			$enrollment['completed']=$_POST['Enroll']['completed'];
-                        $enrollment['notes']=$_POST['Enroll']['notes'];
-			Enroll::model()->updateAll(array('completed'=>$enrollment['completed'],
-                                                'notes'=>$enrollment['notes']),
-                                "user_id=$id AND courseoffer_id=$cid");
-                        $this->redirect(array('index'));
-                    }
+			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
+				$enrollment['completed']=$_POST['Enroll']['completed'];
+				$enrollment['notes']=$_POST['Enroll']['notes'];
+				Enroll::model()->updateAll(array('completed'=>$enrollment['completed'],
+					'notes'=>$enrollment['notes']),
+					"user_id=$id AND courseoffer_id=$cid");
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -280,7 +296,7 @@ class EnrollController extends Controller
 		));
 	}
         
-        public function actionUpdateOwn()
+	public function actionUpdateOwn()
 	{
             $id=yii::app()->user->getId();
             if(isset($_GET['cid']))
@@ -299,12 +315,14 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
-                    if(!$this->checkDuplicate($id, $_POST['Enroll']['courseoffer_id'])) {
-                        $enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
-			Enroll::model()->updateAll(array('courseoffer_id'=>$enrollment['courseoffer_id'],),
-                                "user_id=$id AND courseoffer_id=$cid");
-                        $this->redirect(array('index'));
-                    }
+			if(!$this->checkDuplicate($id, $_POST['Enroll']['courseoffer_id'])) {
+				$enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
+				Enroll::model()->updateAll(array('courseoffer_id'=>$enrollment['courseoffer_id'],),
+						"user_id=$id AND courseoffer_id=$cid");
+				
+				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+			}
 		}
 
 		$this->render('update',array(
@@ -331,6 +349,8 @@ class EnrollController extends Controller
                 }
             }
 
+		Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+			
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
