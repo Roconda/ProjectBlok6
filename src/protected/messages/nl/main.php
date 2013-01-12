@@ -14,9 +14,9 @@ return array(
 	'{model} added' => '{model} toegevoegd',
 	'{model} updated' => '{model} aangepast',
 	'{model} deleted' => '{model} verwijderd',
-	'{model} failed to add' => '{model} mistlukt te toevoegen',
-	'{model} failed to update' => '{model} mislukt te verwijderen',
-	'{model} failed to delete' => '{model} verwijderd te verwijderen',
+	'{model} failed to add' => '{model} toevoegen mislukt',
+	'{model} failed to update' => '{model} updaten mislukt',
+	'{model} failed to delete' => '{model} verwijderen mislukt',
 	'Yes' => 'Ja',
 	'No' => 'Nee',
 );
