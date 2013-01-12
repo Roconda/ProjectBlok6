@@ -626,14 +626,24 @@ class EnrollController extends Controller
         return false;
     }
     
-    public function isFrozen($cid) {
-        $co=Courseoffer::model()->findAll("id=$cid");
-        $isFrozen=true;
-        foreach($co as $c) {
-            if($c->blocked==0)
-                $isFrozen=false;
+    public function isFrozen($cid=null) {
+        $coid=null;
+        if(isset($_GET['cid'])) {
+            $coid=$_GET['cid'];
         }
-        return $isFrozen;
+        if(isset($cid)) 
+            $coid=$cid;
+        if(isset($coid)) {
+        $co=Courseoffer::model()->findAll("id=$coid");
+        foreach($co as $c) {
+            if($c->blocked==1) {
+                throw new CHttpException('Frozen',Yii::t('enroll','This courseoffer is frozen'));
+                return true;
+            }  
+        }
+            return false;
+        }
+        return true;
     }
     
     public function isMaxEnrolled($trajectid) {

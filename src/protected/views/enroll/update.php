@@ -1,6 +1,9 @@
 <?php
 /* @var $this CourseofferController */
 /* @var $model Courseoffer */
+if(Yii::app()->user->can('enroll_update_own')) {
+    $this->isFrozen();
+}
 
 $this->breadcrumbs=array(
 	'Enroll'=>array('index'),
