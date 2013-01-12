@@ -1,9 +1,24 @@
+-- -----------------------------------------------------
+-- Table `translation`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `translation` ;
+
+CREATE  TABLE IF NOT EXISTS `translation` (
+  `message` VARBINARY(255) NOT NULL ,
+  `translation` VARCHAR(255) NOT NULL ,
+  `language` VARCHAR(5) NOT NULL ,
+  `category` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`message`, `language`, `category`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET @OLD_SQL_MODE=@@SQL_MODE, time_zone = "+00:00";
 
 INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
-  ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
+ ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
 ('Time left', 'Zeit übrig', 'de', 'yum'),
 ('Create new Translation', 'Neue Übersetzung erstellen', 'de', 'yum'),
 ('Expired', 'Abgelaufen', 'de', 'yum'),
@@ -2426,13 +2441,13 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('List roles', 'Lijst rollen', 'nl', 'yum'),
 ('List user', 'Lijst gebruiker', 'nl', 'yum'),
 ('List users', 'Lijst gebruikers', 'nl', 'yum'),
-('Login', 'Login', 'nl', 'yum'),
+('Login', 'Aanmelden', 'nl', 'yum'),
 ('Login Type', 'Login type', 'nl', 'yum'),
 ('Login allowed by Email and Username', 'Login toegestaan per e-mail en gebruikersnaam', 'nl', 'yum'),
 ('Login allowed only by Email', 'Login alleen toegestaan per e-mail', 'nl', 'yum'),
 ('Login allowed only by Username', 'Login alleen toegestaan per gebruikersnaam', 'nl', 'yum'),
 ('Logout', 'Log uit', 'nl', 'yum'),
-('Lost password?', 'Wachtwoord kwijt?', 'nl', 'yum'),
+('Lost password?', 'Wachtwoord vergeten?', 'nl', 'yum'),
 ('Mail send method', 'Mail verstuur methode', 'nl', 'yum'),
 ('Manage', 'Beheer', 'nl', 'yum'),
 ('Manage Profile Field', 'Beheer Profiel veld', 'nl', 'yum'),
@@ -2498,7 +2513,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Please enter the letters as they are shown in the image above.', 'Toets de letters in zoals ze worden getoont op het plaatje hierboven.', 'nl', 'yum'),
 ('Please enter your login or email address.', 'Toets in uw login of e-mail adres:', 'nl', 'yum'),
 ('Please enter your password to confirm deletion:', 'Toets uw wachtwoord in om verwijdering te bevestigen:', 'nl', 'yum'),
-('Please fill out the following form with your login credentials:', 'Vul dit formulier in met uw login referenties:', 'nl', 'yum'),
+('Please fill out the following form with your login credentials:', 'Vul dit formulier in met uw login gegevens:', 'nl', 'yum'),
 ('Please log in into the application.', 'Log eerst in bij de applicatie.', 'nl', 'yum'),
 ('Please verify your E-Mail address', 'Verifier uw e-mail adres', 'nl', 'yum'),
 ('Position', 'Positie', 'nl', 'yum'),
@@ -2528,7 +2543,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Registration', 'Registratie ', 'nl', 'yum'),
 ('Registration date', 'Registratie datum', 'nl', 'yum'),
 ('Regular expression (example:  ''/^[A-Za-z0-9s,]+$/u'').', 'Reguliere expressie (voorbeeld: ''/^[A-Za-z0-9s,]+$/u'').', 'nl', 'yum'),
-('Remember me next time', 'Onthoud mij volgende keer', 'nl', 'yum'),
+('Remember me next time', 'Onthoud mij', 'nl', 'yum'),
 ('Remove Avatar', 'Verwijder Avatar', 'nl', 'yum'),
 ('Remove comment', 'Verwijder bericht', 'nl', 'yum'),
 ('Remove friend', 'Verwijder vriend', 'nl', 'yum'),
@@ -2755,7 +2770,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Log profile visits', 'Hou profiel bezoeken bij', 'nl', 'yum'),
 ('Logged in as', 'ingelogd als', 'nl', 'yum'),
 ('Login is not possible with the given credentials', 'Login is niet mogelijk met de gegeven informatie', 'nl', 'yum'),
-('Lost Password?', 'Wachtwoord Kwijt?', 'nl', 'yum'),
+('Lost Password?', 'Wachtwoord Vergeten?', 'nl', 'yum'),
 ('Make {field} public available', 'Maak {field} openbaar beschikbaar', 'nl', 'yum'),
 ('Manage Actions', 'Beheer Acties', 'nl', 'yum'),
 ('Manage payments', 'Beheer betalingen', 'nl', 'yum'),
