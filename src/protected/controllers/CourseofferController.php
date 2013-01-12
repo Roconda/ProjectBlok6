@@ -169,31 +169,33 @@ class CourseofferController extends Controller
 		if(isset($_GET['Courseoffer']))
 		{
 			$model->attributes=$_GET['Courseoffer'];
-
+                           
 			if (!empty($model->course->description)) $criteria->addCondition('id = "'.$model->id.'"');
 			
 			if (!empty($model->location->description)) $criteria->addCondition('description = "'.$model->description.'"');
 			
-			//if (!empty($model->fysiek_0)) $criteria->addCondition('fysiek = "'.$model->fysiek_0.'"');
-			//if (!empty($model->fysiek_1)) $criteria->addCondition('fysiek = "'.$model->fysiek_1.'"');
+			//if (!empty($_GET['Courseoffer']['fysiek'][0])) $merge->addCondition('fysiek = "'.$_GET['Courseoffer']['fysiek'][0].'"');
+			//if (!empty($_GET['Courseoffer']['fysiek'][1])) $merge->addCondition('fysiek = "'.$_GET['Courseoffer']['fysiek'][1].'"');
 			
-			//if (!empty($model->blocked_0)) $criteria->addCondition('blocked = "'.$model->blocked_0.'"');
-			//if (!empty($model->blocked_1)) $criteria->addCondition('blocked = "'.$model->blocked_1.'"');
+			//if (!empty($model->blocked)) $merge->addCondition('blocked = "'.$model->blocked_0.'"');
+			//if (!empty($model->blocked)) $merge->addCondition('blocked = "'.$model->blocked_1.'"');
 			
 			//if (!empty($model->course->required_0)) $criteria->addCondition('course.required = "'.$model->course->required_0.'"');
 			//if (!empty($model->course->required_1)) $criteria->addCondition('course.required = "'.$model->course->required_1.'"');
 					   
-			//if(!empty($_GET['Courseoffer']['course_description'])) $merge->addCondition('course.description LIKE "%'. $_GET['Courseoffer']['course_description'] .'%"');
+			if(!empty($_GET['Courseoffer']['course_description'])) $merge->addCondition('course.description LIKE "%'. $_GET['Courseoffer']['course_description'] .'%"');
 		   
-			//if(!empty($_GET['Courseoffer']['location_description'])) $merge->addCondition('location.description LIKE "%'. $_GET['Courseoffer']['location_description'] .'%"');
+			if(!empty($_GET['Courseoffer']['location_description'])) $merge->addCondition('location.description LIKE "%'. $_GET['Courseoffer']['location_description'] .'%"');
 		   
-			//if(!empty($_GET['Courseoffer']['course_required'])) $merge->addCondition('course.required = "'. $_GET['Courseoffer']['course_required'] .'"');
+			if(!empty($_GET['Courseoffer']['course_required']['0'])) $merge->addCondition('course.required = "'. $_GET['Courseoffer']['course_required']['0'] .'"');
+                        
+                        if(!empty($_GET['Courseoffer']['course_required']['1'])) $merge->addCondition('course.required = "'. $_GET['Courseoffer']['course_required']['1'] .'"');
 					
 		}
 		 $session['Course_records']=Course::model()->findAll($criteria);
                  
 		 $model->getDbCriteria()->mergeWith($merge);
-
+    
 		$this->render('index',array(
 		'model'=>$model,
 		));
