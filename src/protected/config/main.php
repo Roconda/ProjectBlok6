@@ -65,7 +65,7 @@ return array(
 					'Password' => 'ditiseenwachtwoord',
 				)
 			),
-			'returnUrl' => 'index.php/dashboard/index',
+			'returnUrl' => 'profile/profile/view',
 			'usergroupTable' => 'user_group',
 			'usergroupMessagesTable' => 'user_group_message',
 			'controllerMap' => array(
