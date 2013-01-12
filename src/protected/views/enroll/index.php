@@ -51,8 +51,7 @@ $this->endWidget();
 	'dataProvider'=>$dataProvider,
         //'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		array('name' => 'user.profile.firstname', 'header' => Yii::t('enroll', 'Firstname')),
-		array('name' => 'user.profile.lastname', 'header' => Yii::t('enroll', 'Lastname')),
+		array('name' => 'user.username', 'header' => Yii::t('enroll', 'Username')),
 		array('name' => 'courseoffer.course.description', 'header' => Yii::t('enroll', 'Course')),
 		array('name' => 'courseoffer.location.description', 'header' => Yii::t('enroll', 'Location')),
 		array('name' => 'completed', 'type' => 'raw', 'value' => 'Enroll::model()->getCompleted($data->completed)'),

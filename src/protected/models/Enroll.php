@@ -11,8 +11,7 @@
  */
 class Enroll extends CActiveRecord
 {
-    public $profile_firstname;
-    public $profile_lastname;
+    public $user_username;
     public $course_description;
     public $location_description;
 
@@ -49,7 +48,7 @@ class Enroll extends CActiveRecord
 			array('notes', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, courseoffer_id, completed, notes, profile_firstname, profile_lastname, course_description, location_description', 'safe', 'on'=>'search'),
+			array('user_id, courseoffer_id, completed, notes, user_username, course_description, location_description', 'safe', 'on'=>'search'),
 		);
 	}
 

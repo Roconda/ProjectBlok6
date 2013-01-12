@@ -9,7 +9,7 @@
 
 	<?php echo $form->textFieldRow($model,'description',array('maxlength'=>45)); ?>
 
-	<?php echo $form->checkBoxListInlineRow($model,'required',array(0 => Yii::t('main','does not'), 1 => Yii::t('main','does'))); ?>
+	<?php echo $form->checkBoxListInlineRow($model,'required',array(1 => Yii::t('main','Yes'), 0 => Yii::t('main','No'))); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>

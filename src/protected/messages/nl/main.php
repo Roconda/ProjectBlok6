@@ -17,7 +17,7 @@ return array(
 	'{model} failed to add' => '{model} mistlukt te toevoegen',
 	'{model} failed to update' => '{model} mislukt te verwijderen',
 	'{model} failed to delete' => '{model} verwijderd te verwijderen',
-	'does' => 'wel',
-	'does not' => 'niet',
+	'Yes' => 'Ja',
+	'No' => 'Nee',
 );
 ?>

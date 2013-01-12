@@ -53,7 +53,6 @@ $this->endWidget();
 	$this->widget('bootstrap.widgets.TbGridView',array(
 	'id'=>'course-grid',
 	'dataProvider'=>$model->search(),
-        'filter'=>$model,
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
 		array('name'=>'course_description', 'value'=>'$data->course->description'),

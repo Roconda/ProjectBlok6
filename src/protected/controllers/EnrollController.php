@@ -4,13 +4,9 @@ class EnrollController extends Controller
 {
         private $sort=array(
                             'attributes'=>array(
-                                'user.profile.firstname'=>array(
+                                'user.username'=>array(
                                     'asc'=>'profile.firstname',
                                     'desc'=>'profile.firstname DESC',
-                                ),
-                                'user.profile.lastname'=>array(
-                                    'asc'=>'profile.lastname',
-                                    'desc'=>'profile.lastname DESC',
                                 ),
                                 'courseoffer.course.description'=>array(
                                     'asc'=>'course.description',
