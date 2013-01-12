@@ -86,13 +86,15 @@ class AssignController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-/**	public function actionView($id)
-	{
+        
+        /**	
+         * public function actionView($id)
+           {
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
-	}
-*/
+           }
+         */
 
 	/**
 	 * Creates a new model.
@@ -127,8 +129,9 @@ class AssignController extends Controller
                         $this->redirect(array('index'));
                     }
                     
-                    /*
-			$model->attributes=$_POST['Assign'];*/
+                       /*
+			$model->attributes=$_POST['Assign'];
+                        */
 			
 			if($model->save())
 			{
@@ -232,8 +235,8 @@ class AssignController extends Controller
                             )
                                 ,"user_id=$id AND traject_id=$tid");
                         
-						Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
-						$this->redirect(array('index'));
+                                        Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
+					$this->redirect(array('index'));
                     }
 		}
 
@@ -335,8 +338,8 @@ class AssignController extends Controller
             if(isset($_GET['tid']))
             {
                 $tid = $_GET['tid'];
-				Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('assign', 'Assign') )) );
-				Assign::model()->deleteAll("user_id=$id AND traject_id=$tid");
+                    Yii::app()->user->setFlash('success', Yii::t('main', '{model} deleted', array('{model}' => Yii::t('assign', 'Assign') )) );
+                    Assign::model()->deleteAll("user_id=$id AND traject_id=$tid");
             }
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -353,17 +356,17 @@ class AssignController extends Controller
             if(isset($_GET['Assign']))
             {
 				
-				//if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
-				
-				//if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
-			 
-				//if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 
-                                
-                                if(!empty($_GET['Assign']['user_username'])) $merge->addCondition('user.username LIKE "%'. $_GET['Assign']['user_username'] .'%"');
-                           
-                                if(!empty($_GET['Assign']['traject_description'])) $merge->addCondition('traject.description LIKE "%'. $_GET['Assign']['traject_description'] .'%"');
-                           
-                                if(!empty($_GET['Assign']['traject_duration'])) $merge->addCondition('traject.duration = "'. $_GET['Assign']['traject_duration'] .'"');
+                //if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
+            
+                //if (!empty($model->description)) $criteria->addCondition('description = "'.$model->description.'"');
+
+                //if (!empty($model->required)) $criteria->addCondition('required = "'.$model->required.'"'); 
+
+                if(!empty($_GET['Assign']['user_username'])) $merge->addCondition('user.username LIKE "%'. $_GET['Assign']['user_username'] .'%"');
+            
+                if(!empty($_GET['Assign']['traject_description'])) $merge->addCondition('traject.description LIKE "%'. $_GET['Assign']['traject_description'] .'%"');
+            
+                if(!empty($_GET['Assign']['traject_duration'])) $merge->addCondition('traject.duration = "'. $_GET['Assign']['traject_duration'] .'"');
             }
             
             
@@ -373,17 +376,18 @@ class AssignController extends Controller
 		}
 		else
 		{
-		/*
-            $assign=Assign::model()->with('traject', 'user');
-			$dataProvider=new CActiveDataProvider($assign, array(
-                    'sort'=>$this->sort,
-            ));
+                    
+                        /*
+                        $assign=Assign::model()->with('traject', 'user');
+                        $dataProvider=new CActiveDataProvider($assign, array(
+                        'sort'=>$this->sort,
+                        ));
 			$this->render('index',array(
 				'dataProvider'=>$dataProvider,
 				'model'=>$assign,
 			));
-		*/
-			//--------------------
+                        */
+			
 			$session=new CHttpSession;
 			$session->open();		
 			$criteria = new CDbCriteria();
@@ -468,11 +472,11 @@ class AssignController extends Controller
 		$session->open();		
 		
 		 if(isset($session['Assign_records']))
-		   {
-			$model=$session['Assign_records'];
-		   }
-		   else
-			 $model = Assign::model()->findAll();
+		 {
+                    $model=$session['Assign_records'];
+		 }
+		 else
+                    $model = Assign::model()->findAll();
 
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
@@ -581,8 +585,7 @@ class AssignController extends Controller
             {
                 echo "Username : " . $us->username . "<br>";
             }
-            echo "<br>";
-                
+            echo "<br>";    
         }
     }
 }

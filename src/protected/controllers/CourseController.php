@@ -56,13 +56,15 @@ class CourseController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-/**	public function actionView($id)
+        
+        /**	
+        public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
-*/
+        */
 
 	/**
 	 * Creates a new model.
@@ -134,12 +136,12 @@ class CourseController extends Controller
 				//deletes non-existing course/traject links
                                 if(!empty($trajectids)) {
 				$sql="DELETE FROM course_has_traject
-                      WHERE course_id = $id AND traject_id NOT IN (";
+                                WHERE course_id = $id AND traject_id NOT IN (";
 				foreach($trajectids as $trajectid) {
 					$sql .= $trajectid . ',' ;
 				}
 				$sql = substr_replace($sql ,")",-1);
-                $command = $connection->createCommand($sql);
+                                $command = $connection->createCommand($sql);
 				$command->execute();
                                 }
 				

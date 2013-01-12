@@ -172,15 +172,15 @@ class EnrollController extends Controller
 				$model->attributes=$_POST['Enroll'];
 				if($model->save())
 				{
-					Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('enroll', 'Enroll') )) );
-					$this->redirect(array('index'));
+                                    Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+                                    $this->redirect(array('index'));
 				}
                             }
-				else
-				{
-					Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('enroll', 'Enroll') )) );
-					$this->redirect(array('index'));
-				}
+                            else
+                            {
+				Yii::app()->user->setFlash('warning', Yii::t('main', '{model} failed to add', array('{model}' => Yii::t('enroll', 'Enroll') )) );
+				$this->redirect(array('index'));
+                            }
                             
 			}
 		}
@@ -367,8 +367,8 @@ class EnrollController extends Controller
 			$result = $this->actionOwnIndex();
 			
 			$this->render('teacher/index',array(
-            	'assignModel' => $result['assign'],
-				'dataProvider'=>$result['dataProvider'],
+                        'assignModel' => $result['assign'],
+                            'dataProvider'=>$result['dataProvider'],
 			));
 		}
 		else
@@ -393,9 +393,9 @@ class EnrollController extends Controller
             }
            
             
-			$dataProvider=new CActiveDataProvider($enroll, array(
-                'criteria'=>$criteria,
-                'sort'=>$this->sort,
+		$dataProvider=new CActiveDataProvider($enroll, array(
+                    'criteria'=>$criteria,
+                    'sort'=>$this->sort,
             ));
             
 			$this->render('index',array(
@@ -410,7 +410,7 @@ class EnrollController extends Controller
 			$result = $this->actionOwnIndex();
 			
 			$this->renderPartial('teacher/dashboard',array(
-            	'assignModel' => $result['assign'],
+                            'assignModel' => $result['assign'],
 				'dataProvider'=>$result['dataProvider'],
 			));
 		}
@@ -418,10 +418,10 @@ class EnrollController extends Controller
 		{
             $enroll = Enroll::model()->with('user', 'courseoffer');
 			$dataProvider=new CActiveDataProvider($enroll, array(
-                'sort'=>$this->sort,
+                            'sort'=>$this->sort,
             ));
 			$this->renderPartial('index',array(
-				'dataProvider'=>$dataProvider, false, true
+                            'dataProvider'=>$dataProvider, false, true
 			));
 		}		
 	}
@@ -437,7 +437,7 @@ class EnrollController extends Controller
 			$model->attributes=$_GET['Enroll'];
 
 		$this->render('admin',array(
-			'model'=>$model,
+                    'model'=>$model,
 		));
 	}
 
@@ -487,7 +487,7 @@ class EnrollController extends Controller
             $dataProvider->setCriteria($x);
            
 		
-			return array('assign' => $assign, 'dataProvider' => $dataProvider); 
+            return array('assign' => $assign, 'dataProvider' => $dataProvider); 
     }
     
 	public function actionGenerateExcel()
@@ -501,7 +501,6 @@ class EnrollController extends Controller
 		   }
 		   else
 			 $model = Enroll::model()->findAll();
-
 		
 		Yii::app()->request->sendFile(date('YmdHis').'.xls',
 			$this->renderPartial('excelReport', array(
@@ -519,12 +518,12 @@ class EnrollController extends Controller
 		require_once('tcpdf/config/lang/eng.php');
 
 
-               if(isset($session['Enroll_records']))
-               {
-                $model=$session['Enroll_records'];
-               }
-               else
-                 $model = Enroll::model()->findAll();
+                if(isset($session['Enroll_records']))
+                {
+                    $model=$session['Enroll_records'];
+                }
+                else
+                    $model = Enroll::model()->findAll();
 
 		
 

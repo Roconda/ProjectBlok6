@@ -56,13 +56,15 @@ class TrajectController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-/**	public function actionView($id)
+        
+        /**	
+        public function actionView($id)
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
-*/
+        */
 
 	/**
 	 * Creates a new model.
@@ -169,8 +171,6 @@ class TrajectController extends Controller
                 if(isset($_GET['Traject']))
 		{
                         $model->attributes=$_GET['Traject'];
-			
-			
                    	
                        if (!empty($model->id)) $criteria->addCondition('id = "'.$model->id.'"');
                      
@@ -182,7 +182,6 @@ class TrajectController extends Controller
                      
                     	
                        if (!empty($model->nrcourses)) $criteria->addCondition('nrcourses = "'.$model->nrcourses.'"');
-                     
                     			
 		}
                  $session['Traject_records']=Traject::model()->findAll($criteria); 
@@ -190,7 +189,6 @@ class TrajectController extends Controller
                 $this->render('index',array(
 			'model'=>$model,
 		));
-
 	}
 
 	/**
@@ -262,13 +260,12 @@ class TrajectController extends Controller
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-
                if(isset($session['Traject_records']))
                {
-                $model=$session['Traject_records'];
+                    $model=$session['Traject_records'];
                }
                else
-                 $model = Traject::model()->findAll();
+                    $model = Traject::model()->findAll();
 
 		
 
