@@ -20,10 +20,14 @@
 
 	<?php echo $form->textFieldRow($model,'description',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'duration',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'nrcourses',array('class'=>'span5')); ?>
-
+        <?php echo $form->labelEx($model,'duration'); ?>
+	<?php echo $form->numberField($model,'duration',array('class'=>'span5')); ?>
+        <?php echo $form->error($model,'duration'); ?>                    
+                            
+        <?php echo $form->labelEx($model,'nrcourses'); ?>                       
+	<?php echo $form->numberField($model,'nrcourses',array('class'=>'span5')); ?>
+        <?php echo $form->error($model,'nrcourses'); ?>                       
+                            
                         </div>   
   </div>
 

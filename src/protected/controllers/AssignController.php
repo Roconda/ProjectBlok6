@@ -157,14 +157,19 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    
 			if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
+                            if($this->getUserEnrollCount()==0) {
 				$model->attributes=$_POST['Assign'];
 				if($model->save())
 				{
 					Yii::app()->user->setFlash('success', Yii::t('main', '{model} added', array('{model}' => Yii::t('assign', 'Assign') )) );
 					$this->redirect(array('index'));
 				}
-			}
+                            } else {
+                                throw new CHttpException('invalid assign','Already enrolled to courses of existing traject');
+                            }
+                        }
 		}
 
 		$this->render('teacher/create',array(
@@ -300,7 +305,7 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-			
+			if($this->getUserEnrollCount()==0) {
 				$assignment['traject_id']=$_POST['Assign']['traject_id'];
                                 $assignment['startdate']=$_POST['Assign']['startdate'];
 				Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],
@@ -309,6 +314,9 @@ class AssignController extends Controller
 				
 				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
 				$this->redirect(array('index'));
+                        } else {
+                            throw new CHttpException('invalid assign','Already enrolled to courses of current assigned traject');
+                        }
 			
 		}
 

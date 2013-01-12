@@ -2,7 +2,9 @@
         'id'=>'search-courseoffer-form',
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
-));  ?>
+));  
+$checkBoxRow=array(1 => Yii::t('main','Yes'), 0 => Yii::t('main','No'));
+?>
 
 
 	<?php //echo $form->textFieldRow($model,'id',array('class'=>'span5')); ?>
@@ -15,11 +17,11 @@
 	
 	<?php echo $form->textFieldRow($model,'block',array('class'=>'span5')); ?>
 	
-	<?php echo $form->checkBoxListInlineRow($model,'fysiek',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
+	<?php //echo $form->checkBoxListInlineRow($model,'fysiek',$checkBoxRow); ?>
 	
-	<?php echo $form->checkBoxListInlineRow($model,'blocked',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
+	<?php //echo $form->checkBoxListInlineRow($model,'blocked',$checkBoxRow); ?>
 
-	<?php echo $form->checkBoxListInlineRow($model,'course_required',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
+	<?php //echo $form->checkBoxListInlineRow($model,'course_required',$checkBoxRow); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>

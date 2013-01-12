@@ -16,8 +16,8 @@
     	body{
     		background-image:url('<?php echo Yii::app()->baseUrl; ?>/images/gray_jean.png');
     	}
-    	#paddingContent{
-    		margin-top: 60px;
+    	.ddcdcontent{
+    		margin-top: 75px;
     	}
     	.avans-text{
     		color: #C6002A;
@@ -40,21 +40,20 @@
 
 <body>
 
-	<div class="container" id="page">
+	<div class="container-fluid" id="page">
 
 
-		<div class="row" id="paddingContent">
-
-			<?php require_once('nav_horizontal.php'); ?>
-
+			<header>
+				<?php require_once('nav_horizontal.php'); ?>
+			</header>
 
 	
-			<div class="span3">
+			<div class="span3 ddcdcontent">
 				<?php require_once('nav_vertical.php'); ?>
 			</div>
 			
 
-			<div id="contentContainer" class="span9">
+			<div id="contentContainer" class="span12 ddcdcontent">
 			
 			<?php if(Yii::app()->user->hasFlash('success')):?>
 				<div class="flash-success">
@@ -85,15 +84,6 @@
 		
 			<div class="clear"></div>
 		
-
-		</div>
-		
-		<div class="row span12">
-			<footer>
-				<hr>
-				<p class="pagination-centered muted"> <?php echo Yii::t('main', 'For questions') ?> <a href="mailto:ddcd@avans.nl"> <?php echo Yii::t('main', 'mail us') ?> </a></p>
-			</footer>
-		</div>
 	</div><!-- container -->
 
 </body>
