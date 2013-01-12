@@ -15,11 +15,11 @@
 	
 	<?php echo $form->textFieldRow($model,'block',array('class'=>'span5')); ?>
 	
-	<?php echo $form->textFieldRow($model,'fysiek',array('class'=>'span5')); ?>
+	<?php echo $form->checkBoxListInlineRow($model,'fysiek',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
 	
-	<?php echo $form->textFieldRow($model,'blocked',array('class'=>'span5')); ?>
+	<?php echo $form->checkBoxListInlineRow($model,'blocked',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
 
-        <?php echo $form->textFieldRow($model,'course_required',array('class'=>'span5')); ?>
+	<?php echo $form->checkBoxListInlineRow($model,'course_required',array(0 => Yii::t('main','does'), 1 => Yii::t('main','does not'))); ?>
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'icon'=>'search white', 'label'=>'Search')); ?>
