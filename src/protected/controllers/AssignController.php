@@ -300,14 +300,16 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-			if(!$this->checkDuplicate($id, $_POST['Assign']['traject_id'])) {
+			
 				$assignment['traject_id']=$_POST['Assign']['traject_id'];
-				Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],),
+                                $assignment['startdate']=$_POST['Assign']['startdate'];
+				Assign::model()->updateAll(array('traject_id'=>$assignment['traject_id'],
+                                                'startdate'=>$assignment['startdate']),
 						"user_id=$id AND traject_id=$tid");
 				
 				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
 				$this->redirect(array('index'));
-			}
+			
 		}
 
 		$this->render('update',array(
@@ -536,6 +538,11 @@ class AssignController extends Controller
             return true;
         }
         return false;
+    }
+    
+    public function getUserEnrollCount() {
+        $userid=yii::app()->user->getId();
+        return Enroll::model()->count("user_id=$userid");
     }
         
     public function testCourseOfferFullPrint()
