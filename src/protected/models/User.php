@@ -20,7 +20,7 @@ class User extends YumUser{
         $relations['courseoffer'] = array(self::MANY_MANY, 'Courseoffer',
             'enroll(user_id, courseoffer_id');
         $relations['assign'] = array(self::HAS_MANY, 'Assign',
-                        'user_id');
+            'user_id');
         $relations['group'] = array(self::HAS_MANY, 'YumGroupParticipation',
             'user_id');
         return $relations;

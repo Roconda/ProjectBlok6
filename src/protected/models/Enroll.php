@@ -15,7 +15,7 @@ class Enroll extends CActiveRecord
     public $course_description;
     public $location_description;
 
-    /**
+        /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Enroll the static model class
@@ -102,17 +102,17 @@ class Enroll extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('courseoffer_id',$this->courseoffer_id);
 		$criteria->compare('completed',$this->completed,true);
 		$criteria->compare('notes',$this->notes,true);
                 
                 return $criteria;
-                 /*
+                
+               /*
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-                  */
+                */
 	}
 }

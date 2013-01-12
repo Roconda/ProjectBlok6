@@ -131,8 +131,8 @@ class Assign extends CActiveRecord
                                     'desc'=>'traject.duration DESC',
                                 ),
                                 '*',
-                             ),
-                            )
+                            ),
+                        )
 		));
 	}
 }

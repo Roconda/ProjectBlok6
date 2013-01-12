@@ -110,11 +110,7 @@ class Courseoffer extends CActiveRecord
 		$criteria->compare('t.fysiek',$this->fysiek);
 		$criteria->compare('t.blocked',$this->blocked);
                 
-                $criteria->with = array('course', 'location');
-                
-                
-                
-
+                $criteria->with = array('course', 'location');          
                 
                 //$criteria->compare('course.description',$this->course_id, true);
                 //$criteria->compare('course.required',$this->course_id, true);
@@ -136,8 +132,8 @@ class Courseoffer extends CActiveRecord
                                     'desc'=>'course.required DESC',
                                 ),
                                 '*',
-                             ),
-                          )
+                            ),
+                        )
 		));
 	}
 }
