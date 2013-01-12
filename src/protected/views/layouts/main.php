@@ -40,7 +40,7 @@
 
 <body>
 
-	<div class="container-fluid" id="page">
+	<div class="container" style="width:1050px;">
 
 
 			<header>
@@ -53,7 +53,7 @@
 			</div>
 			
 
-			<div id="contentContainer" class="span12 ddcdcontent">
+			<div id="contentContainer" class="span10 ddcdcontent">
 			
 			<?php if(Yii::app()->user->hasFlash('success')):?>
 				<div class="flash-success">
