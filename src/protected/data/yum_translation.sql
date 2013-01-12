@@ -1,9 +1,24 @@
+-- -----------------------------------------------------
+-- Table `translation`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `translation` ;
+
+CREATE  TABLE IF NOT EXISTS `translation` (
+  `message` VARBINARY(255) NOT NULL ,
+  `translation` VARCHAR(255) NOT NULL ,
+  `language` VARCHAR(5) NOT NULL ,
+  `category` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`message`, `language`, `category`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET @OLD_SQL_MODE=@@SQL_MODE, time_zone = "+00:00";
 
 INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
-  ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
+ ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
 ('Time left', 'Zeit übrig', 'de', 'yum'),
 ('Create new Translation', 'Neue Übersetzung erstellen', 'de', 'yum'),
 ('Expired', 'Abgelaufen', 'de', 'yum'),

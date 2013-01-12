@@ -334,22 +334,6 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8;
 
-
--- -----------------------------------------------------
--- Table `translation`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `translation` ;
-
-CREATE  TABLE IF NOT EXISTS `translation` (
-  `message` VARBINARY(255) NOT NULL ,
-  `translation` VARCHAR(255) NOT NULL ,
-  `language` VARCHAR(5) NOT NULL ,
-  `category` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`message`, `language`, `category`) )
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
 -- -----------------------------------------------------
 -- Table `user_group`
 -- -----------------------------------------------------
