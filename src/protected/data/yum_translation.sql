@@ -9,7 +9,7 @@ CREATE  TABLE IF NOT EXISTS `translation` (
   `translation` VARCHAR(255) NOT NULL ,
   `language` VARCHAR(5) NOT NULL ,
   `category` VARCHAR(255) NOT NULL ,
-  PRIMARY KEY (`message`, `language`, `category`) )
+PRIMARY KEY (`message`, `language`, `category`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -18,7 +18,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET @OLD_SQL_MODE=@@SQL_MODE, time_zone = "+00:00";
 
 INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `category`) VALUES
- ('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
+('Fields with <span class=\"required\">*</span> are required.', 'Felder mit <span class=\"required\">*</span> sind Pflichtfelder.', 'de', 'yum'),
 ('Time left', 'Zeit übrig', 'de', 'yum'),
 ('Create new Translation', 'Neue Übersetzung erstellen', 'de', 'yum'),
 ('Expired', 'Abgelaufen', 'de', 'yum'),
@@ -2309,7 +2309,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Action', 'Actie', 'nl', 'yum'),
 ('Actions', 'Acties', 'nl', 'yum'),
 ('Active', 'Actief', 'nl', 'yum'),
-('Active users', 'Active Gebruiker', 'nl', 'yum'),
+('Active users', 'Actieve Gebruikers', 'nl', 'yum'),
 ('Activities', 'Activiteiten', 'nl', 'yum'),
 ('Add as a friend', 'Voeg toe als vriend', 'nl', 'yum'),
 ('Admin inbox', 'Admin inbox', 'nl', 'yum'),
@@ -2321,17 +2321,17 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Allowed roles', 'Toegestaande rollen', 'nl', 'yum'),
 ('Allowed users', 'Toegestaande gebruikers', 'nl', 'yum'),
 ('Already exists.', 'Bestaat al.', 'nl', 'yum'),
-('An error occured while saving your changes', 'Er is een fout opgetreden tijdens het opslaan van uw wijzigingen.', 'nl', 'yum'),
+('An error occured while saving your changes', 'Er is een fout opgetreden tijdens het opslaan van uw wijzigingen', 'nl', 'yum'),
 ('Are you really sure you want to delete your Account?', 'Weet u zeker dat u uw account wilt verwijderen?', 'nl', 'yum'),
 ('Are you sure to delete this item?', 'Weet u zeker dat u dit item wilt wissen?', 'nl', 'yum'),
-('Are you sure to remove this comment from your profile?', 'Weet u zeker  dat u deze reactie wilt verwijderen van uw profiel?', 'nl', 'yum'),
+('Are you sure to remove this comment from your profile?', 'Weet u zeker dat u deze reactie wilt verwijderen van uw profiel?', 'nl', 'yum'),
 ('Avatar image', 'Avatar afbeelding', 'nl', 'yum'),
 ('Back', 'Terug', 'nl', 'yum'),
 ('Back to inbox', 'Terug naar inbox', 'nl', 'yum'),
 ('Back to my Profile', 'Terug naar mijn Profiel', 'nl', 'yum'),
 ('Back to profile', 'Terug naar profiel', 'nl', 'yum'),
 ('Banned', 'Geblokkeerd', 'nl', 'yum'),
-('Banned users', 'Geblokkeerde gebruiker', 'nl', 'yum'),
+('Banned users', 'Geblokkeerde gebruikers', 'nl', 'yum'),
 ('Browse groups', 'Doorzoek groepen ', 'nl', 'yum'),
 ('Browse logged user activities', 'Doorzoek geregistreerde activiteiten van de gebruiker', 'nl', 'yum'),
 ('Browse user groups', 'Doorzoek gebruikersgroepen', 'nl', 'yum'),
@@ -2346,12 +2346,12 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Changes is saved.', 'Wijzigingen worden opgeslagen.', 'nl', 'yum'),
 ('Choose All', 'kies alle', 'nl', 'yum'),
 ('City', 'Stad', 'nl', 'yum'),
-('Column Field type in the database.', 'Kolom Veldtype in de database.', 'nl', 'yum'),
+('Column Field type in the database.', 'Kolom Veld type in de database.', 'nl', 'yum'),
 ('Comment', 'Bericht', 'nl', 'yum'),
 ('Compose new message', 'Nieuw bericht opstellen.', 'nl', 'yum'),
 ('Composing new message', 'Nieuw bericht samenstellen', 'nl', 'yum'),
 ('Confirm', 'Bevestigen', 'nl', 'yum'),
-('Confirm deletion', 'Bevesig de verwijdering', 'nl', 'yum'),
+('Confirm deletion', 'Bevestig de verwijdering', 'nl', 'yum'),
 ('Confirmation pending', 'In afwachting van bevestiging', 'nl', 'yum'),
 ('Create', 'Creëren', 'nl', 'yum'),
 ('Create Profile Field', 'Maak profiel Veld', 'nl', 'yum'),
