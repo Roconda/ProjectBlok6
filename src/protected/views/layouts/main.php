@@ -43,9 +43,9 @@
 	<div class="container-fluid" id="page">
 
 
-
-			<?php require_once('nav_horizontal.php'); ?>
-
+			<header>
+				<?php require_once('nav_horizontal.php'); ?>
+			</header>
 
 	
 			<div class="span3 ddcdcontent">
@@ -84,14 +84,6 @@
 		
 			<div class="clear"></div>
 		
-
-		
-		<div class="row span12">
-			<footer>
-				<hr>
-				<p class="pagination-centered muted"> <?php echo Yii::t('main', 'For questions') ?> <a href="mailto:ddcd@avans.nl"> <?php echo Yii::t('main', 'mail us') ?> </a></p>
-			</footer>
-		</div>
 	</div><!-- container -->
 
 </body>
