@@ -31,7 +31,7 @@ class LocationController extends Controller
 				'expression'=> "yii::app()->user->can('location_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view', 'generatepdf', 'generateexcel'),
+				'actions'=>array('index','view','generatepdf','generateexcel'),
 				'expression'=> "yii::app()->user->can('location_read')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -281,7 +281,7 @@ class LocationController extends Controller
 		$pdf->SetHeaderMargin(5);
 		$pdf->SetFooterMargin(10);
 		$pdf->SetAutoPageBreak(TRUE, 0);
-		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->SetFont('dejavusans', '', 9);
 		$pdf->AddPage();
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->LastPage();

@@ -31,7 +31,7 @@ class CourseofferController extends Controller
 				'expression'=> "yii::app()->user->can('courseoffer_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','generatepdf','generateexcel'),
 				'expression'=> "yii::app()->user->can('courseoffer_read')",
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -323,12 +323,12 @@ class CourseofferController extends Controller
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-		if(isset($session['Course_records']))
-		{
-			$model=$session['Course_records'];
-		}
-		else
-			$model = CourseOffer::model()->findAll();
+		//if(isset($session['Course_records']))
+		//{
+		//	$model=$session['Course_records'];
+		//}
+		//else
+		$model = CourseOffer::model()->findAll();
 
 		$html = $this->renderPartial('expenseGridtoReport', array(
 			'model'=>$model
@@ -349,7 +349,7 @@ class CourseofferController extends Controller
 		$pdf->SetHeaderMargin(5);
 		$pdf->SetFooterMargin(10);
 		$pdf->SetAutoPageBreak(TRUE, 0);
-		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->SetFont('dejavusans', '', 9);
 		$pdf->AddPage();
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->LastPage();
