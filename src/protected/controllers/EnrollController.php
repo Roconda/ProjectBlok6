@@ -75,18 +75,18 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','generatepdf','generateexcel'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index', 'indexajax'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "yii::app()->user->can('enroll_create_own')",
 			),
-                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update'),
 				'expression'=> "yii::app()->user->can('enroll_update_completed') || yii::app()->user->can('enroll_update_own')",
 			),
@@ -522,12 +522,12 @@ class EnrollController extends Controller
 		require_once('tcpdf/config/lang/eng.php');
 
 
-                if(isset($session['Enroll_records']))
-                {
-                    $model=$session['Enroll_records'];
-                }
-                else
-                    $model = Enroll::model()->findAll();
+		if(isset($session['Enroll_records']))
+		{
+			$model=$session['Enroll_records'];
+		}
+		else
+			$model = Enroll::model()->findAll();
 
 		
 
@@ -548,7 +548,7 @@ class EnrollController extends Controller
 		$pdf->SetHeaderMargin(5);
 		$pdf->SetFooterMargin(10);
 		$pdf->SetAutoPageBreak(TRUE, 0);
-		$pdf->SetFont('dejavusans', '', 7);
+		$pdf->SetFont('dejavusans', '', 9);
 		$pdf->AddPage();
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->LastPage();

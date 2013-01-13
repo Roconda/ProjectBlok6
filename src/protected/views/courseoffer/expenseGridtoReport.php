@@ -13,25 +13,25 @@
 	<?php foreach($model as $row): ?>
 	<tr>
 		<td>
-			<?php echo $row->description; ?>
+			<?php echo $row->course->description; ?>
 		</td>
 		<td>
-			<?php //echo $row->location; ?>
+			<?php echo $row->location->description; ?>
 		</td>
 		<td>
-			<?php //echo $row->year; ?>
+			<?php echo $row->year; ?>
 		</td>
 		<td>
-			<?php //echo $row->block; ?>
+			<?php echo $row->block; ?>
 		</td>
 		<td>
-			<?php //echo $row->fysiek; ?>
+			<?php echo $row->fysiek; ?>
 		</td>
 		<td>
-			<?php //echo $row->blocked; ?>
+			<?php echo $row->blocked; ?>
 		</td>
 		<td>
-			<?php //echo $row->required; ?>
+			<?php echo $row->course->required; ?>
 		</td>
        	</tr>
      <?php endforeach; ?>
