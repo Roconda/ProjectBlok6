@@ -49,18 +49,18 @@ class AssignController extends Controller
 				'expression'=> "Yii::app()->user->can('assign_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','generatepdf','generateexcel'),
 				'expression'=> "Yii::app()->user->can('assign_read')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index'),
 				'expression'=> "Yii::app()->user->can('assign_read_own')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "Yii::app()->user->can('assign_create_own')",
 			),
-                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update'),
 				'expression'=> "Yii::app()->user->can('assign_update_completed') || Yii::app()->user->can('assign_update_own')",
 			),

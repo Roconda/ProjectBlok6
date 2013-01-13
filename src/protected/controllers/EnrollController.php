@@ -75,18 +75,18 @@ class EnrollController extends Controller
 				'expression'=> "yii::app()->user->can('enroll_create')",
 			),
 			array('allow', // allow authenticated user to perform the following
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','generatepdf','generateexcel'),
 				'expression'=> "yii::app()->user->can('enroll_read')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('ownindex','index', 'indexajax'),
 				'expression'=> "yii::app()->user->can('enroll_read_own')",
 			),
-                        array('allow', // allow authenticated user to perform the following
+			array('allow', // allow authenticated user to perform the following
 				'actions'=>array('owncreate'),
 				'expression'=> "yii::app()->user->can('enroll_create_own')",
 			),
-                        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('update'),
 				'expression'=> "yii::app()->user->can('enroll_update_completed') || yii::app()->user->can('enroll_update_own')",
 			),
