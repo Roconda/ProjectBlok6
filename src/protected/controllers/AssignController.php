@@ -520,7 +520,7 @@ class AssignController extends Controller
 		$pdf->SetHeaderMargin(5);
 		$pdf->SetFooterMargin(10);
 		$pdf->SetAutoPageBreak(TRUE, 0);
-		//$pdf->SetFont('dejavusans', '', 7);
+		$pdf->SetFont('dejavusans', '', 9);
 		$pdf->AddPage();
 		$pdf->writeHTML($html, true, false, true, false, '');
 		$pdf->LastPage();
