@@ -149,15 +149,8 @@ INSERT INTO `permission` VALUES (8,0,'role',52,0,'');
 INSERT INTO `permission` VALUES (9,0,'role',24,0,'');
 INSERT INTO `permission` VALUES (9,0,'role',28,0,'');
 INSERT INTO `permission` VALUES (9,0,'role',34,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',8,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',12,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',16,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',20,0,'');
 INSERT INTO `permission` VALUES (10,0,'role',24,0,'');
 INSERT INTO `permission` VALUES (10,0,'role',28,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',34,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',38,0,'');
-INSERT INTO `permission` VALUES (10,0,'role',40,0,'');
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
