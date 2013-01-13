@@ -218,6 +218,7 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
+                    $isAllowed=false;
                     $userid=$_POST['Assign']['user_id'];
                     $user=User::model()->findAll("username='" . $_POST['Assign']['user_id'] . "'");
                     foreach($user as $uid){
@@ -225,7 +226,12 @@ class AssignController extends Controller
                     }
                     $_POST['Assign']['user_id']=$userid;
 			$assignment=$_POST['Assign'];
-                    if(!$this->checkDuplicate($userid, $_POST['Assign']['traject_id'])) {
+                    if(isset($_GET['tid'])) {
+                        if($tid==$_POST['Assign']['traject_id']) {
+                            $isAllowed=true;
+                        }
+                    }
+                    if(!$this->checkDuplicate($userid, $_POST['Assign']['traject_id'],$isAllowed)) {
                         Assign::model()->updateAll(array(
                             'user_id'=>$assignment['user_id'],
                             'traject_id'=>$assignment['traject_id'],
@@ -271,7 +277,6 @@ class AssignController extends Controller
 
 		if(isset($_POST['Assign']))
 		{
-			if(!$this->checkDuplicate($_POST['Assign']['user_id'], $_POST['Assign']['traject_id'])) {
 				$assignment['completed']=$_POST['Assign']['completed'];
 				$assignment['notes']=$_POST['Assign']['notes'];
 				Assign::model()->updateAll(array('completed'=>$assignment['completed'],
@@ -280,7 +285,6 @@ class AssignController extends Controller
 				
 				Yii::app()->user->setFlash('success', Yii::t('main', '{model} updated', array('{model}' => Yii::t('assign', 'Assign') )) );
 				$this->redirect(array('index'));
-			}
 		}
 
 		$this->render('update',array(
@@ -544,10 +548,12 @@ class AssignController extends Controller
                      'completed' => Yii::t('enroll', 'Succeeded'));
     }
     
-    public function checkDuplicate($id, $tid) {
-        if(Assign::model()->count("user_id=$id AND traject_id=$tid") == 1) {
-            throw new CHttpException('',Yii::t('assign','This user is already assigned to this traject'));
-            return true;
+    public function checkDuplicate($id, $tid,$isAllowed=false) {
+        if(!$isAllowed) {
+            if(Assign::model()->count("user_id=$id AND traject_id=$tid") == 1) {
+                throw new CHttpException('',Yii::t('assign','This user is already assigned to this traject'));
+                return true;
+            }
         }
         return false;
     }
