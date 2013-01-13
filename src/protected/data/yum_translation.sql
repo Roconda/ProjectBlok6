@@ -2554,7 +2554,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Required', 'Verplicht', 'nl', 'yum'),
 ('Restore', 'Herstel', 'nl', 'yum'),
 ('Retype password', ' Herhaal wachtwoord', 'nl', 'yum'),
-('Retype password is incorrect.', 'Nogmaals wachtwoord is incorrect', 'nl', 'yum'),
+('Retype password is incorrect.', 'Herhaalde wachtwoord is incorrect', 'nl', 'yum'),
 ('Role Administration', 'Rol Administratie', 'nl', 'yum'),
 ('Misc', 'Overig', 'nl', 'yum'),
 ('Usermenu', 'Gebruikersmenu', 'nl', 'yum'),
