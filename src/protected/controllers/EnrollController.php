@@ -167,6 +167,7 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(isset($_POST['Enroll']['courseoffer_id'])) {
 			if(!$this->checkDuplicate($_POST['Enroll']['user_id'], $_POST['Enroll']['courseoffer_id'])) {
                             if(!$this->isFrozen($_POST['Enroll']['courseoffer_id'])) {
 				$model->attributes=$_POST['Enroll'];
@@ -183,6 +184,7 @@ class EnrollController extends Controller
                             }
                             
 			}
+                    }
 		}
 
 		$this->render('teacher/create',array(
@@ -314,6 +316,7 @@ class EnrollController extends Controller
 
 		if(isset($_POST['Enroll']))
 		{
+                    if(isset($_POST['Enroll']['courseoffer_id'])) {
 			if(!$this->checkDuplicate($id, $_POST['Enroll']['courseoffer_id'])) {
                             if(!$this->isFrozen($_POST['Enroll']['courseoffer_id'])) {
 				$enrollment['courseoffer_id']=$_POST['Enroll']['courseoffer_id'];
@@ -324,6 +327,7 @@ class EnrollController extends Controller
 				$this->redirect(array('index'));
                             }
 			}
+                    }
 		}
 
 		$this->render('update',array(
