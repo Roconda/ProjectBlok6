@@ -2553,7 +2553,7 @@ INSERT IGNORE INTO `translation` (`message`, `translation`, `language`, `categor
 ('Request friendship for user {username}', 'Verzoek vriendschap voor gebruiker {username}', 'nl', 'yum'),
 ('Required', 'Verplicht', 'nl', 'yum'),
 ('Restore', 'Herstel', 'nl', 'yum'),
-('Retype password', ' wachtwoord', 'nl', 'yum'),
+('Retype password', ' Herhaal wachtwoord', 'nl', 'yum'),
 ('Retype password is incorrect.', 'Nogmaals wachtwoord is incorrect', 'nl', 'yum'),
 ('Role Administration', 'Rol Administratie', 'nl', 'yum'),
 ('Misc', 'Overig', 'nl', 'yum'),
