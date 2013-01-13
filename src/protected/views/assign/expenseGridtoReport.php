@@ -6,6 +6,7 @@
  		<th><?php echo Yii::t('assign', 'Duration'); ?></th>
  		<th><?php echo Yii::t('assign', 'Startdate'); ?></th>
 		<th><?php echo Yii::t('assign', 'completed'); ?></th>
+		<th><?php echo Yii::t('assign', 'Notes'); ?></th>
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
@@ -23,6 +24,9 @@
 		</td>
 		<td>
 			<?php echo Enroll::model()->getCompleted($row->completed); ?>
+		</td>
+		<td>
+			<?php echo $row->notes; ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
