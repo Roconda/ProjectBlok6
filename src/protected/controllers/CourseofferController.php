@@ -323,12 +323,12 @@ class CourseofferController extends Controller
 		require_once('tcpdf/tcpdf.php');
 		require_once('tcpdf/config/lang/eng.php');
 
-		if(isset($session['Course_records']))
-		{
-			$model=$session['Course_records'];
-		}
-		else
-			$model = CourseOffer::model()->findAll();
+		//if(isset($session['Course_records']))
+		//{
+		//	$model=$session['Course_records'];
+		//}
+		//else
+		$model = CourseOffer::model()->findAll();
 
 		$html = $this->renderPartial('expenseGridtoReport', array(
 			'model'=>$model
