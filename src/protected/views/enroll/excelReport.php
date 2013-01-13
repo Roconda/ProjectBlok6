@@ -5,6 +5,7 @@
  		<th width="80px"><?php echo Yii::t('traject', 'Trail'); ?></th>
  		<th width="80px"><?php echo Yii::t('enroll', 'Location'); ?></th>
 		<th width="80px"><?php echo Yii::t('enroll', 'Completed'); ?></th>
+		<th width="80px"><?php echo Yii::t('enroll', 'Notes'); ?></th>
  	</tr>
 	<?php foreach($model as $row): ?>
 	<tr>
@@ -19,6 +20,9 @@
 		</td>
 		<td>
 			<?php echo Enroll::model()->getCompleted($row->completed); ?>
+		</td>
+		<td>
+			<?php echo $row->notes; ?>
 		</td>
 	</tr>
     <?php endforeach; ?>
