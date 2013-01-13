@@ -518,12 +518,12 @@ class EnrollController extends Controller
 		require_once('tcpdf/config/lang/eng.php');
 
 
-                if(isset($session['Enroll_records']))
-                {
-                    $model=$session['Enroll_records'];
-                }
-                else
-                    $model = Enroll::model()->findAll();
+		if(isset($session['Enroll_records']))
+		{
+			$model=$session['Enroll_records'];
+		}
+		else
+			$model = Enroll::model()->findAll();
 
 		
 
